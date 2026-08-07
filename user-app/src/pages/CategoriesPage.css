@@ -1,0 +1,77 @@
+.cp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.cp-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-top: 3px solid;
+    border-radius: 12px;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.cp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cp-card.active {
+    border-top-color: transparent;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.cp-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+.cp-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1d29;
+}
+
+.cp-label-white {
+    color: #fff;
+}
+
+.cp-count {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.cp-count-white {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.cp-events-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cp-events-header h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a1d29;
+}
+
+/* reuse ep-card styles from EventsPage.css */

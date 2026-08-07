@@ -1,0 +1,252 @@
+.dashboard {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.dashboard-body {
+    padding: 24px 32px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+/* Section Card */
+.section-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.section-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.view-all-btn {
+    padding: 6px 14px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.view-all-btn:hover {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.primary-btn {
+    padding: 8px 18px;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.primary-btn:hover {
+    background: #4f46e5;
+    transform: translateY(-1px);
+}
+
+/* Quick Actions */
+.quick-actions-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Two Column Layout */
+.two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+/* Data Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead {
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    padding: 14px;
+    font-size: 13px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.text-bold {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.text-muted {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* Cell User */
+.cell-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.cell-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-badge.active,
+.status-badge.completed,
+.status-badge.paid,
+.status-badge.confirmed,
+.status-badge.valid,
+.status-badge.accepted {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status-badge.pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status-badge.review,
+.status-badge.upcoming,
+.status-badge.draft {
+    background: #dbeafe;
+    color: #0284c7;
+}
+
+.status-badge.failed,
+.status-badge.rejected,
+.status-badge.duplicate {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Role Tag */
+.role-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* Ticket Code */
+.ticket-code {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #6366f1;
+    font-size: 12px;
+}
+
+/* Action Icon Button */
+.action-icon-btn {
+    background: #f1f5f9;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 4px;
+    transition: all 0.2s;
+}
+
+.action-icon-btn:hover {
+    background: #e2e8f0;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-body {
+        padding: 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .data-table {
+        font-size: 12px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 8px;
+    }
+}

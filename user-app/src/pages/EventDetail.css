@@ -1,0 +1,685 @@
+/* Event Details Page */
+.event-details {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 40px 0;
+}
+
+.event-details-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Back Button */
+.back-button {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-button:hover {
+    color: #111827;
+}
+
+/* Grid Layout */
+.event-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Image */
+.event-details-image {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.event-details-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.event-details-category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 24px;
+    background: rgba(139, 92, 246, 0.9);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+}
+
+/* Info Section */
+.event-details-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.event-details-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Meta Items */
+.event-details-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 16px 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.event-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #4b5563;
+    font-size: 15px;
+}
+
+.event-meta-item svg {
+    width: 20px;
+    height: 20px;
+    color: #8b5cf6;
+}
+
+/* Price */
+.event-details-price-section {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 16px 0;
+}
+
+.event-details-price {
+    font-size: 36px;
+    font-weight: 800;
+    color: #8b5cf6;
+}
+
+.event-details-price-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+}
+
+/* Description */
+.event-details-description h3 {
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+}
+
+.event-details-description p {
+    color: #4b5563;
+    line-height: 1.8;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+/* Additional Details */
+.event-details-additional {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.event-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-label {
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Booking Section */
+.event-details-booking {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quantity-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(139, 92, 246, 0.2);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    background: #8b5cf6;
+    transform: scale(1.05);
+}
+
+.quantity-number {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    min-width: 24px;
+    text-align: center;
+}
+
+.book-ticket-btn {
+    flex: 1;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.book-ticket-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+}
+
+/* Loading */
+.event-details-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 20px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.event-details-loading p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+/* Not Found */
+.event-details-not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    gap: 16px;
+}
+
+.event-details-not-found h2 {
+    color: #111827;
+    font-size: 36px;
+    margin: 0;
+}
+
+.event-details-not-found p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.back-home-btn {
+    padding: 12px 32px;
+    background: #8b5cf6;
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-home-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .event-details-grid {
+        gap: 40px;
+    }
+
+    .event-details-image img {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .event-details {
+        padding: 20px 0;
+    }
+
+    .event-details-container {
+        padding: 0 20px;
+    }
+
+    .event-details-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .event-details-image img {
+        height: 300px;
+    }
+
+    .event-details-title {
+        font-size: 30px;
+    }
+
+    .event-details-meta {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .event-details-additional {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .event-details-booking {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .book-ticket-btn {
+        width: 100%;
+    }
+
+    .quantity-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-details-image img {
+        height: 220px;
+    }
+
+    .event-details-title {
+        font-size: 24px;
+    }
+
+    .event-details-price {
+        font-size: 28px;
+    }
+
+    .event-details-additional {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* ── Modal backdrop ── */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.modal-box {
+    background: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h3 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.modal-close,
+.modal-back {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s;
+}
+
+.modal-close:hover,
+.modal-back:hover {
+    color: #fff;
+}
+
+.modal-event-name {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+}
+
+.modal-section-label {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Ticket type buttons */
+.modal-ticket-types {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-ticket-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #fff;
+}
+
+.modal-ticket-type:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    background: rgba(139, 92, 246, 0.08);
+}
+
+.modal-ticket-type.selected {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.15);
+}
+
+.ttype-label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.ttype-price {
+    font-size: 14px;
+    color: #8b5cf6;
+    font-weight: 700;
+}
+
+/* Quantity */
+.modal-quantity {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.qty-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.qty-btn:hover {
+    background: #8b5cf6;
+    border-color: #8b5cf6;
+}
+
+.qty-num {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 32px;
+    text-align: center;
+}
+
+/* Total */
+.modal-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modal-total span:first-child {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.modal-total-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: #8b5cf6;
+}
+
+/* Proceed button */
+.modal-proceed-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.modal-proceed-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+}
+
+.modal-proceed-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Payment summary */
+.pay-summary {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pay-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.pay-summary-row span:last-child {
+    color: #fff;
+    font-weight: 600;
+}
+
+.pay-summary-total {
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+}
+
+.pay-summary-total span:first-child {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+}
+
+.pay-summary-total span:last-child {
+    color: #8b5cf6;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* Payment method */
+.pay-method-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(139, 92, 246, 0.5);
+    border-radius: 12px;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.pay-method-logo {
+    height: 28px;
+    object-fit: contain;
+}
+
+.pay-method-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.pay-method-desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 2px;
+}
+
+.pay-method-check {
+    margin-left: auto;
+    color: #8b5cf6;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pay-login-note {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 14px;
+    margin: 0;
+}
+
+.pay-login-link {
+    color: #8b5cf6;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pay-error {
+    color: #f87171;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    background: rgba(248, 113, 113, 0.1);
+    border-radius: 8px;
+}

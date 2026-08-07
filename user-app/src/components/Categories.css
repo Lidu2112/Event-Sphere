@@ -1,0 +1,158 @@
+.categories {
+    padding: 48px 0 56px;
+    background: linear-gradient(
+        90deg,
+        #f96332 0%,
+        #e0247d 45%,
+        #9c1cb8 75%,
+        #5b17a0 100%
+    );
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.cat-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.cat-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.2px;
+}
+
+.cat-view-all {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 8px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.cat-view-all:hover {
+    background: rgba(255, 255, 255, 0.32);
+    transform: translateY(-1px);
+}
+
+/* ── Horizontal Infinite Track Setup ── */
+.cat-scroll-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+.cat-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: infiniteScroll 25s linear infinite;
+}
+
+.cat-scroll-wrapper:hover .cat-track {
+    animation-play-state: paused;
+}
+
+@keyframes infiniteScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ── Category Cards ── */
+.cat-card {
+    text-decoration: none;
+    color: inherit;
+    background: #ffffff;
+    border: none;
+    border-top: 4px solid;
+    border-radius: 16px;
+    padding: 18px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 110px;
+    height: 110px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+}
+
+.cat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.cat-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .categories {
+        padding: 36px 0;
+    }
+
+    .cat-container {
+        padding: 0 16px;
+    }
+
+    .cat-title {
+        font-size: 22px;
+    }
+
+    .cat-card {
+        width: 100px;
+        height: 100px;
+        padding: 14px 8px 10px;
+        gap: 8px;
+    }
+
+    .cat-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+        border-radius: 10px;
+    }
+
+    .cat-label {
+        font-size: 12px;
+    }
+}
