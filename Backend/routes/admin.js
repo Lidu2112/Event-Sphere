@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('../models/user');
 const SupportRequest = require('../models/SupportRequest');
 const Ticket = require('../models/Ticket');
 const Notification = require('../models/Notification');
