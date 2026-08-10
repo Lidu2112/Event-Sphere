@@ -261,27 +261,23 @@ connectDB();
 // Server
 // ===============================
 
-const PORT =
-    process.env.PORT || 5000;
+// ===============================
+// Server
+// ===============================
+const PORT = process.env.PORT || 5000;
 
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
 
-
-const server =
-    app.listen(
-        PORT,
-        () => {
-
-            console.log(
-                `🚀 Server running on port ${PORT}`
-            );
-
-        }
-    );
+module.exports = app;
 
 
 
 // Keep alive timeout
 
-server.keepAliveTimeout = 65000;
+// server.keepAliveTimeout = 65000;
 
-server.headersTimeout = 66000;
+// server.headersTimeout = 66000;
