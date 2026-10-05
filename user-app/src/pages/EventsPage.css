@@ -1,0 +1,137 @@
+.ep-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.ep-pill {
+    padding: 7px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ep-pill.active,
+.ep-pill:hover {
+    background: #6366f1;
+    color: #fff;
+    border-color: #6366f1;
+}
+
+.ep-count {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 20px;
+}
+
+.ep-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.25s;
+}
+
+.ep-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.ep-img-wrap {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.ep-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.ep-card:hover .ep-img-wrap img {
+    transform: scale(1.05);
+}
+
+.ep-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.ep-content {
+    padding: 14px;
+}
+
+.ep-content h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1d29;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.ep-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.ep-meta span {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.ep-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 10px;
+}
+
+.ep-price {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1a1d29;
+}
+
+.ep-arrow {
+    font-size: 16px;
+    color: #6366f1;
+    font-weight: 700;
+}
+
+.ep-empty {
+    text-align: center;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.ep-empty div {
+    font-size: 48px;
+}
+
+.ep-empty p {
+    font-size: 14px;
+    color: #9ca3af;
+}

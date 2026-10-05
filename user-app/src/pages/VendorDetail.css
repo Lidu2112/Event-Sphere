@@ -1,0 +1,141 @@
+.vd-body {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+    align-items: start;
+}
+
+.vd-img-wrap {
+    border-radius: 14px;
+    overflow: hidden;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.vd-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vd-section {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 16px;
+}
+
+.vd-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1d29;
+    margin-bottom: 12px;
+}
+
+.vd-section p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.8;
+}
+
+.vd-services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.vd-service {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Sidebar */
+.vd-contact-box {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid;
+    border-radius: 14px;
+    padding: 22px;
+    position: sticky;
+    top: 80px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+.vd-cb-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.vd-cb-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.vd-cb-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1d29;
+}
+
+.vd-cb-cat {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+.vd-stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.vd-stat {
+    flex: 1;
+    text-align: center;
+}
+
+.vd-stat-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1d29;
+}
+
+.vd-stat-lbl {
+    font-size: 10px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+.vd-price-tag {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a1d29;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+    .vd-body {
+        grid-template-columns: 1fr;
+    }
+
+    .vd-services {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,338 @@
+/* ── Section Container ── */
+.vd-section {
+    padding: 60px 24px;
+    background-color: #0b0813;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.vd-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.vd-state-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    color: #9ca3af;
+    gap: 12px;
+}
+
+.vd-spinner {
+    font-size: 28px;
+    color: #a855f7;
+}
+
+/* ── Section Header ── */
+.vd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.vd-badge {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vd-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 8px 0 0 0;
+}
+
+.vd-view-all {
+    font-size: 14px;
+    font-weight: 600;
+    color: #a855f7;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.vd-view-all:hover {
+    color: #c084fc;
+}
+/* ── Category Dropdown Filter ── */
+/* ── Category Dropdown Filter ── */
+.vd-filter-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.vd-filter-label {
+    font-size: 18px;
+    font-family: 'Georgia', serif, system-ui;
+    color: #0d233a; /* Dark navy color so it's clearly visible on light backgrounds */
+    font-weight: 600;
+}
+
+.vd-filter-select {
+    padding: 8px 36px 8px 16px;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #000000;
+    background-color: #ffffff;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.vd-filter-select:focus {
+    border-color: #9ca3af;
+}
+
+/* ── Vendor Grid ── */
+.vd-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* ── Dark Card Styling ── */
+.vendor-card {
+    background: #151026;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.vendor-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.vc-avatar-wrapper {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0f0c20;
+}
+
+.vendor-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vc-category-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(11, 8, 19, 0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.vc-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.vc-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vc-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.vc-rating {
+    font-size: 13px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.star-icon {
+    color: #f59e0b;
+    font-size: 12px;
+}
+
+.vc-reviews {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.vc-price {
+    font-size: 13px;
+    font-weight: 800;
+    color: #c084fc;
+}
+
+.vd-empty-card {
+    background: #151026;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    color: #9ca3af;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+/* Container Grid */
+.vendor-grid,
+.pg-grid-3,
+.pg-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 16px 0;
+}
+
+/* Vendor Card Style */
+.vendor-card,
+.vp-card {
+    background: #ffffff;
+    border: 1px solid #ff7a59; /* Crisp orange border matching reference */
+    border-radius: 12px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.vendor-card:hover,
+.vp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 122, 89, 0.12);
+}
+
+/* Icon / Badge Container Style */
+.vendor-icon-wrap,
+.vendor-badge-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #fff1ed; /* Soft orange/peach background */
+    color: #ff7a59;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+/* Image Banner Style Fix for View All Vendors Page */
+.vendor-img-wrap {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8fafc;
+    margin-bottom: 16px;
+}
+
+.vendor-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents stretching and crops cleanly */
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.vendor-card:hover .vendor-img-wrap img {
+    transform: scale(1.03);
+}
+
+/* Typography & Content Sizing */
+.vendor-card h3,
+.vp-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0d233a; /* Dark navy text matching reference */
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+}
+
+.vendor-card p,
+.vp-card p {
+    font-size: 0.92rem;
+    color: #516f90; /* Soft dark gray text for description */
+    line-height: 1.5;
+    margin: 0;
+}
+/* ── Responsive Rules ── */
+@media (max-width: 1024px) {
+    .vd-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .vd-section {
+        padding: 40px 16px;
+    }
+
+    .vd-title {
+        font-size: 22px;
+    }
+
+    .vd-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .vc-avatar-wrapper {
+        height: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vd-grid {
+        grid-template-columns: 1fr;
+    }
+}
