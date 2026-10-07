@@ -278,12 +278,10 @@ initializeDatabase()
     .then(() => {
         console.log("✅ MySQL database connected");
     })
-    .catch((error) => {
-        console.error(
-            "❌ MySQL database connection failed:",
-            error.message
-        );
-    });
+   .catch((error) => {
+    console.error("❌ MySQL database connection failed:");
+    console.error(error);
+});
 if (require.main === module) {
 
     app.listen(PORT, () => {
