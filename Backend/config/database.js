@@ -12,17 +12,27 @@ dotenv.config({
 // ===============================
 
 const dbConfig = {
-    host: process.env.MYSQL_HOST || process.env.MYSQLHOST || '127.0.0.1',
+    host:
+        process.env.DB_HOST ||
+        process.env.MYSQL_HOST ||
+        process.env.MYSQLHOST ||
+        '127.0.0.1',
 
     port: Number(
+        process.env.DB_PORT ||
         process.env.MYSQL_PORT ||
         process.env.MYSQLPORT ||
         3306
     ),
 
-    user: process.env.MYSQL_USER || process.env.MYSQLUSER || 'root',
+    user:
+        process.env.DB_USER ||
+        process.env.MYSQL_USER ||
+        process.env.MYSQLUSER ||
+        'root',
 
     password:
+        process.env.DB_PASSWORD ||
         process.env.MYSQL_PASSWORD ||
         process.env.MYSQLPASSWORD ||
         '',
@@ -34,6 +44,7 @@ const dbConfig = {
 };
 
 const databaseName =
+    process.env.DB_NAME ||
     process.env.MYSQL_DATABASE ||
     process.env.MYSQLDATABASE ||
     'event';
