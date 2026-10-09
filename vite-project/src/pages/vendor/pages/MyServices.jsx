@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiUrl } from '../../../api/config';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
 import { vendorApi } from '../../../api/vendor';
@@ -30,7 +31,7 @@ export default function MyServices() {
     }
 
     function openAdd() { setForm(EMPTY); setEditing(null); setModal('add'); setMsg(''); }
-    function openEdit(s) { setForm({ name: s.name, category: s.category, description: s.description, price: s.price, priceUnit: s.priceUnit, status: s.status, imageFile: null, imagePreview: s.image ? `http://localhost:5000${s.image}` : '' }); setEditing(s._id); setModal('edit'); setMsg(''); }
+    function openEdit(s) { setForm({ name: s.name, category: s.category, description: s.description, price: s.price, priceUnit: s.priceUnit, status: s.status, imageFile: null, imagePreview: s.image ? apiUrl(s.image) : '' }); setEditing(s._id); setModal('edit'); setMsg(''); }
 
     async function handleSave() {
         if (!form.name || !form.category || !form.price) { setMsg('Name, category and price are required.'); return; }

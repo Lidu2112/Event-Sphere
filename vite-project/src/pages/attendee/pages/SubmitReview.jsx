@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
 
-const BASE = 'http://localhost:5000/api/attendee';
+import { apiUrl } from '../../../api/config';
+
+const BASE = apiUrl('/api/attendee');
 
 function StarPicker({ value, onChange }) {
     const [hover, setHover] = useState(0);

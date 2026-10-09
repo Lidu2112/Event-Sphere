@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../api/config';
 import { Link, useSearchParams } from 'react-router-dom';
 import './Page.css';
 import './EventsPage.css';
@@ -46,7 +47,7 @@ export default function CategoriesPage() {
         setLoading(true);
         const params = new URLSearchParams({ category: selected });
         
-        fetch(`http://localhost:5000/api/events?${params}`)
+        fetch(apiUrl(`/api/events?${params}`))
             .then(r => r.json())
             .then(data => setEvents((data.events || []).filter(e => e.source === 'db')))
             .catch(() => setEvents([]))

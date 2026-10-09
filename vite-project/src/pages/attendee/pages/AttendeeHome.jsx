@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { StatCard, ActionButton, PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
 
-const BASE = 'http://localhost:5000/api/attendee';
+import { apiUrl } from '../../../api/config';
+
+const BASE = apiUrl('/api/attendee');
 
 export default function AttendeeHome() {
     const { user } = useAuth();

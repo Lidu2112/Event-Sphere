@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faArrowRight, faStore, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import './Vendors.css';
 
-const API_URL = 'http://localhost:5000/api';
+import { apiUrl } from '../api/config';
+
+const API_URL = apiUrl('/api');
 
 // Categories matching image two
 const DEFAULT_CATEGORIES = [
@@ -131,7 +133,7 @@ export default function Vendors() {
                                     <img
                                         src={
                                             service.image
-                                                ? `http://localhost:5000${service.image}`
+                                                ? apiUrl(service.image)
                                                 : '/default-vendor.jpg'
                                         }
                                         alt={service.name}

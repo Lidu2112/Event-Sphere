@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../../../api/config';
 import { api } from '../../../api/admin';
 import './AdminPages.css';
 
@@ -191,7 +192,7 @@ export default function EventManagement() {
                     <div className="modal-box" onClick={e => e.stopPropagation()} style={{ maxWidth: 600 }}>
                         <h3>Event Details</h3>
                         {selected.banner && (
-                            <img src={selected.banner.startsWith('http') ? selected.banner : `http://localhost:5000${selected.banner}`}
+                            <img src={selected.banner.startsWith('http') ? selected.banner : apiUrl(selected.banner)}
                                 alt={selected.title}
                                 style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 10, marginBottom: 16 }}
                                 onError={e => e.target.style.display = 'none'} />

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import './Page.css';
 import './VendorsPage.css';
 
-const API_URL = 'http://localhost:5000/api';
+import { apiUrl } from '../api/config';
+
+const API_URL = apiUrl('/api');
 
 export default function VendorsPage() {
     const [services, setServices] = useState([]);
@@ -72,7 +74,7 @@ export default function VendorsPage() {
                             <Link key={s._id} to={`/vendors/${s._id}`} className="vp-card">
                                 <div className="vp-img-wrap">
                                     <img
-                                        src={s.image ? `http://localhost:5000${s.image}` : '/default-vendor.jpg'}
+                                        src={s.image ? apiUrl(s.image) : '/default-vendor.jpg'}
                                         alt={s.name}
                                         loading="lazy"
                                     />

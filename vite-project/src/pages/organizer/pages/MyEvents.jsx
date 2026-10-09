@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { apiUrl } from '../../../api/config';
 import { PageHeader } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
 import { organizerApi } from '../../../api/organizer';
@@ -98,7 +99,7 @@ export default function MyEvents() {
         try {
             const fd = new FormData();
             fd.append('banner', file);
-            const res = await fetch('http://localhost:5000/api/upload/banner', { method: 'POST', body: fd });
+            const res = await fetch(apiUrl('/api/upload/banner'), { method: 'POST', body: fd });
             const text = await res.text();
             let data;
             try { data = JSON.parse(text); } catch { throw new Error(`Server error (${res.status})`); }

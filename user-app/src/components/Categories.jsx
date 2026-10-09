@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Categories.css';
 
-const API_URL = 'http://localhost:5000/api';
+import { apiUrl } from '../api/config';
+
+const API_URL = apiUrl('/api');
 
 // Static fallbacks matching image two with custom styling
 const REAL_CATEGORIES = [

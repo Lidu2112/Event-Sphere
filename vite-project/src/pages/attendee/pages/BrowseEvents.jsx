@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiUrl } from '../../../api/config';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 
 const ALL_CATEGORIES = 'All Categories';
@@ -17,8 +18,8 @@ export default function BrowseEvents() {
                 setError('');
 
                 const url = category === ALL_CATEGORIES
-                    ? 'http://localhost:5000/api/events'
-                    : `http://localhost:5000/api/events?category=${encodeURIComponent(category)}`;
+                    ? apiUrl('/api/events')
+                    : apiUrl(`/api/events?category=${encodeURIComponent(category)}`);
 
                 const res = await fetch(url);
                 const data = await res.json();

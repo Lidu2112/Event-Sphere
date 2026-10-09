@@ -1,4 +1,6 @@
-const BASE = 'http://localhost:5000/api/vendor';
+import { apiUrl } from './config';
+
+const BASE = apiUrl('/api/vendor');
 
 function getToken() {
     return localStorage.getItem('es_token');

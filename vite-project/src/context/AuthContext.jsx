@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { apiUrl } from '../api/config';
 
 const AuthContext = createContext(null);
 
-const AUTH_BASE = 'http://localhost:5000/api/auth';
+const AUTH_BASE = apiUrl('/api/auth');
 
 // Role name mapping: backend role → vite-project route role
 const ROLE_MAP = {

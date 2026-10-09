@@ -3,7 +3,9 @@ import { useAuth } from '../../../context/AuthContext';
 import { attendeeApi } from '../../../api/attendee';
 import './SubPage.css';
 
-const BASE = 'http://localhost:5000/api';
+import { apiUrl } from '../../../api/config';
+
+const BASE = apiUrl('/api');
 
 async function apiReq(method, path, body) {
     const res = await fetch(`${BASE}${path}`, {

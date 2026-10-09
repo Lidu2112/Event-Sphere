@@ -1,4 +1,6 @@
-const BASE = 'http://localhost:5000/api/attendee';
+import { apiUrl } from './config';
+
+const BASE = apiUrl('/api/attendee');
 
 async function req(method, path, body) {
     const res = await fetch(`${BASE}${path}`, {

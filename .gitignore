@@ -37,3 +37,9 @@ vite-project/LOGIN_INFO.md
 # Temporary files
 *.tmp
 *.temp
+Backend/
+.env
+user-app/.env
+.env.example
+vite-project/.env
+.env.example

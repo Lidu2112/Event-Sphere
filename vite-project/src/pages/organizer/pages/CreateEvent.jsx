@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { apiUrl } from '../../../api/config';
 import { useNavigate } from 'react-router-dom';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -32,7 +33,7 @@ export default function CreateEvent() {
         try {
             const fd = new FormData();
             fd.append('banner', file);
-            const res = await fetch('http://localhost:5000/api/upload/banner', {
+            const res = await fetch(apiUrl('/api/upload/banner'), {
                 method: 'POST',
                 body: fd,
             });

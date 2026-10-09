@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiUrl } from '../api/config';
 import { useSearchParams, Link } from 'react-router-dom';
 import './PaymentSuccess.css';
 
@@ -17,7 +18,7 @@ export default function PaymentSuccess() {
         let tries = 0;
         async function verify() {
             try {
-                const res = await fetch(`http://localhost:5000/api/payment/verify?tx_ref=${txRef}`);
+                const res = await fetch(apiUrl(`/api/payment/verify?tx_ref=${txRef}`));
                 const data = await res.json();
 
                 if (data.ticket?.status === 'paid') {

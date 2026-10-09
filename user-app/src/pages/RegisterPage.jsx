@@ -1,4 +1,5 @@
 import { GoogleLogin } from '@react-oauth/google';
+import { apiUrl } from '../api/config';
 import { jwtDecode } from 'jwt-decode';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -86,7 +87,7 @@ async function handleSubmit(e) {
         }
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/register",
+            apiUrl('/api/auth/register'),
             {
                 method: "POST",
                 headers: {
@@ -148,7 +149,7 @@ onSuccess={async (credentialResponse)=>{
         const decoded = jwtDecode(credentialResponse.credential);
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/google",
+            apiUrl('/api/auth/google'),
             {
                 method:"POST",
                 headers:{

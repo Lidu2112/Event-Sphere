@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../api/config';
 import { Link } from 'react-router-dom';
 import './FeaturedEvents.css';
 
@@ -20,7 +21,7 @@ export default function FeaturedEvents() {
     const [searchDate, setSearchDate] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/events')
+        fetch(apiUrl('/api/events'))
             .then(res => res.json())
             .then(data => {
                 const dbEvents = (data.events || [])

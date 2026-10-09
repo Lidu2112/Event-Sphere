@@ -1,4 +1,6 @@
-const BASE = 'http://localhost:5000/api/events';
+import { apiUrl } from './config';
+
+const BASE = apiUrl('/api/events');
 
 export async function fetchEvents(params = {}) {
     const q = new URLSearchParams(params).toString();

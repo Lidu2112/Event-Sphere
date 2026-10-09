@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from '../api/config';
 import { useNavigate } from "react-router-dom";
 import "./ResetPassword.css";
 
@@ -12,7 +13,7 @@ export default function ForgotPassword() {
 
         try {
             const response = await fetch(
-                "http://localhost:5000/api/auth/forgot-password",
+                apiUrl('/api/auth/forgot-password'),
                 {
                     method: "POST",
                     headers: {

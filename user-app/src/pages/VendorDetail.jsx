@@ -3,7 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import './Page.css';
 import './VendorDetail.css';
 
-const API_URL = 'http://localhost:5000/api';
+import { apiUrl } from '../api/config';
+
+const API_URL = apiUrl('/api');
 
 export default function VendorDetail() {
     const { id } = useParams();
@@ -63,7 +65,7 @@ export default function VendorDetail() {
                 <div className="vd-main">
                     <div className="vd-img-wrap">
                         <img
-                            src={service.image ? `http://localhost:5000${service.image}` : '/default-vendor.jpg'}
+                            src={service.image ? apiUrl(service.image) : '/default-vendor.jpg'}
                             alt={service.name}
                         />
                     </div>

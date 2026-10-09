@@ -1,4 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { apiUrl } from '../api/config';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './EventDetail.css';
@@ -71,7 +72,7 @@ function PaymentModal({ event, selection, user, onClose, onBack }) {
             const firstName = nameParts[0] || 'Guest';
             const lastName = nameParts.slice(1).join(' ') || 'User';
 
-            const res = await fetch('http://localhost:5000/api/payment/initialize', {
+            const res = await fetch(apiUrl('/api/payment/initialize'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -173,7 +174,7 @@ export default function EventDetail() {
         }
 
         // All other IDs (MongoDB ObjectIds, static 's1'-'s6') → fetch from API
-        fetch(`http://localhost:5000/api/events/${id}`)
+        fetch(apiUrl(`/api/events/${id}`))
             .then(r => r.json())
             .then(data => {
                 if (data.success && data.event) {

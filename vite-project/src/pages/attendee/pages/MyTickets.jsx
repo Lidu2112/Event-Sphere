@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiUrl } from '../../../api/config';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
 
@@ -9,7 +10,7 @@ export default function MyTickets() {
 
     useEffect(() => {
         if (!user?.email) return;
-        fetch(`http://localhost:5000/api/attendee/tickets?userEmail=${encodeURIComponent(user.email)}`)
+        fetch(apiUrl(`/api/attendee/tickets?userEmail=${encodeURIComponent(user.email)}`))
             .then(r => r.json())
             .then(d => setTickets(d.tickets || []))
             .catch(console.error)

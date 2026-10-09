@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiUrl } from '../api/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
  import { GoogleLogin } from '@react-oauth/google';
@@ -81,7 +82,7 @@ if (tab === "email") {
 }
 
 const response = await fetch(
-    "http://localhost:5000/api/auth/login",
+    apiUrl('/api/auth/login'),
     {
         method: "POST",
         headers: {
@@ -195,7 +196,7 @@ onSuccess={async (credentialResponse)=>{
         const decoded = jwtDecode(credentialResponse.credential);
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/google",
+            apiUrl('/api/auth/google'),
             {
                 method:"POST",
                 headers:{
