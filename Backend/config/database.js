@@ -1,4 +1,5 @@
-const mysql = require('mysql2/promise');
+
+const { Pool } = require('pg');
 const crypto = require('crypto');
 const path = require('path');
 const dotenv = require('dotenv');
@@ -7,222 +8,66 @@ dotenv.config({
     path: path.join(__dirname, '..', '.env')
 });
 
-// ===============================
-// MySQL Configuration
-// ===============================
-
-const dbConfig = {
-    host:
-        process.env.DB_HOST ||
-        process.env.MYSQL_HOST ||
-        process.env.MYSQLHOST ||
-        '127.0.0.1',
-
-    port: Number(
-        process.env.DB_PORT ||
-        process.env.MYSQL_PORT ||
-        process.env.MYSQLPORT ||
-        3306
-    ),
-
-    user:
-        process.env.DB_USER ||
-        process.env.MYSQL_USER ||
-        process.env.MYSQLUSER ||
-        'root',
-
-    password:
-        process.env.DB_PASSWORD ||
-        process.env.MYSQL_PASSWORD ||
-        process.env.MYSQLPASSWORD ||
-        '',
-
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-    charset: 'utf8mb4'
-};
-
-const databaseName =
-    process.env.DB_NAME ||
-    process.env.MYSQL_DATABASE ||
-    process.env.MYSQLDATABASE ||
-    'event';
-
-// ===============================
-// MySQL Pool
-// ===============================
-
-const pool = mysql.createPool({
-    ...dbConfig,
-    database: databaseName
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+    max: 10,
+    connectionTimeoutMillis: 15000
 });
 
-// ===============================
-// Initialize Database
-// ===============================
+pool.on('error', (err) => {
+    console.error('Unexpected PostgreSQL pool error:', err.message);
+});
 
 async function initializeDatabase() {
-    const connection = await pool.getConnection();
+    const client = await pool.connect();
 
     try {
+        const tables = [
+            'users',
+            'organizer_events',
+            'tickets',
+            'entrances',
+            'bookings',
+            'services',
+            'reviews',
+            'support_requests',
+            'settings',
+            'vendor_profiles',
+            'availabilities',
+            'vendors',
+            'sessions',
+            'notifications'
+        ];
 
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS users (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
+        await client.query('BEGIN');
 
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS organizer_events (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
+        for (const table of tables) {
+            await client.query(`
+                CREATE TABLE IF NOT EXISTS ${table} (
+                    id VARCHAR(64) PRIMARY KEY,
+                    data JSONB NOT NULL,
+                    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+                )
+            `);
+        }
 
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS tickets (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS entrances (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS bookings (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS services (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS reviews (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS support_requests (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS settings (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS vendor_profiles (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS availabilities (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS vendors (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS sessions (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        `);
-
-        await connection.query(`
-            CREATE TABLE IF NOT EXISTS notifications (
-                id VARCHAR(64) PRIMARY KEY,
-                data JSON NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                    ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
+        await client.query('COMMIT');
+        console.log('Supabase PostgreSQL tables initialized.');
         return true;
-
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error('Database initialization failed:', error.message);
+        throw error;
     } finally {
-        connection.release();
+        client.release();
     }
 }
-
-// ===============================
-// Generate ID
-// ===============================
 
 function generateId() {
     return crypto.randomUUID();
 }
-
-// ===============================
-// Exports
-// ===============================
 
 module.exports = {
     pool,

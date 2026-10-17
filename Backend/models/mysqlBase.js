@@ -93,7 +93,11 @@ function wrapDocument(doc, tableName, rowId) {
         delete payload.save;
         payload.updatedAt = new Date();
         const row = toDbRow(payload, rowId);
-        await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, rowId]);
+        // await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, rowId]);
+        await pool.query(
+    `UPDATE ${tableName} SET data = $1 WHERE id = $2`,
+    [row.data, rowId]
+);
         return wrapDocument({ ...payload, _id: rowId, id: rowId, createdAt: safeDoc.createdAt, updatedAt: payload.updatedAt }, tableName, rowId);
     };
 
@@ -180,7 +184,10 @@ function makeModel(tableName) {
 
         async create(payload) {
             const row = toDbRow(payload);
-            await pool.query(`INSERT INTO ${tableName} (id, data) VALUES (?, ?)`, [row.id, row.data]);
+    await pool.query(
+    `INSERT INTO ${tableName} (id, data) VALUES ($1, $2)`,
+    [row.id, row.data]
+);
             return wrapDocument({ ...payload, createdAt: new Date(), updatedAt: new Date() }, tableName, row.id);
         },
 
@@ -237,7 +244,11 @@ function makeModel(tableName) {
         },
 
         async findByIdAndDelete(id) {
-            await pool.query(`DELETE FROM ${tableName} WHERE id = ?`, [id]);
+            // await pool.query(`DELETE FROM ${tableName} WHERE id = ?`, [id]);
+            await pool.query(
+    `DELETE FROM ${tableName} WHERE id = $1`,
+    [id]
+);
             return true;
         },
 
@@ -295,7 +306,11 @@ function makeModel(tableName) {
             delete merged.updatedAt;
             delete merged.save;
             const row = toDbRow({ ...merged, updatedAt: new Date() }, existing.id);
-            await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, existing.id]);
+            // await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, existing.id]);
+            await pool.query(
+    `UPDATE ${tableName} SET data = $1 WHERE id = $2`,
+    [row.data, id]
+);
             const updated = await model.findOne(query).exec();
             return updated;
         },
@@ -370,7 +385,8 @@ function makeModel(tableName) {
         },
 
         async _findRaw(query = {}) {
-            const [rows] = await pool.query(`SELECT * FROM ${tableName}`);
+            // const [rows] = await pool.query(`SELECT * FROM ${tableName}`);
+            const { rows } = await pool.query(`SELECT * FROM ${tableName}`);
             const records = rows.map(row => {
                 const parsed = normalizeRecord(row.data);
                 return {
