@@ -237,7 +237,11 @@ function makeModel(tableName) {
             delete merged.updatedAt;
             delete merged.save;
             const row = toDbRow({ ...merged, updatedAt: new Date() }, id);
-            await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, id]);
+            // await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, id]);
+            await pool.query(
+    `UPDATE ${tableName} SET data = $1 WHERE id = $2`,
+    [row.data, id]
+);
             const updated = await model.findById(id).exec();
             if (options.new === false) return existing;
             return updated;
@@ -307,9 +311,9 @@ function makeModel(tableName) {
             delete merged.save;
             const row = toDbRow({ ...merged, updatedAt: new Date() }, existing.id);
             // await pool.query(`UPDATE ${tableName} SET data = ? WHERE id = ?`, [row.data, existing.id]);
-            await pool.query(
+       await pool.query(
     `UPDATE ${tableName} SET data = $1 WHERE id = $2`,
-    [row.data, id]
+    [row.data, existing.id]
 );
             const updated = await model.findOne(query).exec();
             return updated;
@@ -318,7 +322,11 @@ function makeModel(tableName) {
         async findOneAndDelete(query = {}) {
             const existing = await model.findOne(query).exec();
             if (!existing) return null;
-            await pool.query(`DELETE FROM ${tableName} WHERE id = ?`, [existing.id]);
+            // await pool.query(`DELETE FROM ${tableName} WHERE id = ?`, [existing.id]);
+            await pool.query(
+    `DELETE FROM ${tableName} WHERE id = $1`,
+    [existing.id]
+);
             return existing;
         },
 
