@@ -1,4 +1,3 @@
-
 const nodemailer = require("nodemailer");
 
 if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
@@ -11,7 +10,14 @@ const transporter = nodemailer.createTransport({
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
+    // Force IPv4 to prevent ENETUNREACH network errors on certain networks
+    socketTimeout: 60000,
+    connectionTimeout: 60000,
 });
+
+// Force DNS to resolve to IPv4 addresses to bypass IPv6 network blocks
+const dns = require('dns');
+dns.setDefaultResultOrder?.('ipv4first');
 
 transporter.verify()
     .then(() => {
