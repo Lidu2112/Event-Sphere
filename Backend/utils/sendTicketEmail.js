@@ -32,14 +32,19 @@ module.exports = async function sendTicketEmail(data) {
 
     try {
         const result = await resend.emails.send({
-            from: 'EventSphere <onboarding@resend.dev>',
-            to: data.email,
-            subject: 'Your Event-Sphere Ticket Confirmation',
-            html: html,
-        });
+    from: 'EventSphere <onboarding@resend.dev>',
+    to: data.email,
+    subject: 'Your Event-Sphere Ticket Confirmation',
+    html,
+});
 
-        console.log("Ticket email sent successfully:", result.data?.id);
-        return result;
+if (result.error) {
+    console.error("RESEND EMAIL FAILED:", result.error);
+    throw new Error(result.error.message || "Resend failed to send email.");
+}
+
+console.log("Ticket email accepted by Resend:", result.data?.id);
+return result;
     } catch (error) {
         console.error("TICKET EMAIL FAILED:", error.message);
         throw error;
