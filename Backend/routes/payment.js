@@ -234,15 +234,23 @@ router.get('/verify', async (req, res) => {
             // 4. Retry email on later verification requests if needed.
             if (ticket.emailSent !== true) {
                 try {
-                    await sendTicketEmail({
-                        email: ticket.userEmail,
-                        userName: ticket.userName,
-                        eventName: ticket.eventTitle,
-                        eventDate: ticket.eventDate,
-                        venue: ticket.eventVenue,
-                        ticketId: ticket.ticketCode,
-                        qrCode: ticket.qrCode,
-                    });
+                  setImmediate(async () => {
+    try {
+        await sendTicketEmail({
+            email: ticket.userEmail,
+            userName: ticket.userName,
+            eventName: ticket.eventTitle,
+            eventDate: ticket.eventDate,
+            venue: ticket.eventVenue,
+            ticketId: ticket.ticketCode,
+            qrCode: ticket.qrCode,
+        });
+
+        console.log("Ticket email sent:", ticket.userEmail);
+    } catch (err) {
+        console.error("Background email error:", err);
+    }
+});
 
                     ticket.emailSent = true;
                     await ticket.save();

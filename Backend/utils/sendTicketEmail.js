@@ -1,5 +1,6 @@
 
-const transporter = require("../config/email");
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 function escapeHtml(value) {
     return String(value ?? "")
@@ -17,28 +18,27 @@ module.exports = async function sendTicketEmail(data) {
 
     const html = `
         <h2>Hello ${escapeHtml(data.userName || "Attendee")}</h2>
-        <p>Your payment was successful.</p>
+        <p>Your payment was successful and your ticket is confirmed!</p>
         <p><b>Ticket ID:</b> ${escapeHtml(data.ticketId)}</p>
         <p><b>Event:</b> ${escapeHtml(data.eventName)}</p>
         <p><b>Date:</b> ${escapeHtml(data.eventDate)}</p>
         <p><b>Venue:</b> ${escapeHtml(data.venue)}</p>
         ${
             data.qrCode
-                ? `<img src="${escapeHtml(data.qrCode)}"
-                        alt="Ticket QR Code" width="220"/>`
+                ? `<img src="${escapeHtml(data.qrCode)}" alt="Ticket QR Code" width="220"/>`
                 : "<p>Your ticket QR code is not available in this email.</p>"
         }
     `;
 
     try {
-        const result = await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+        const result = await resend.emails.send({
+            from: 'EventSphere <onboarding@resend.dev>',
             to: data.email,
-            subject: "Your Event-Sphere Ticket",
-            html,
+            subject: 'Your Event-Sphere Ticket Confirmation',
+            html: html,
         });
 
-        console.log("Ticket email sent:", result.messageId);
+        console.log("Ticket email sent successfully:", result.data?.id);
         return result;
     } catch (error) {
         console.error("TICKET EMAIL FAILED:", error.message);
