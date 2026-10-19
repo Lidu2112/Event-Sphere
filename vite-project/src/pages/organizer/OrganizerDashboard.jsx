@@ -11,20 +11,20 @@ import InviteStaff from './pages/InviteStaff';
 import ManageVendors from './pages/ManageVendors';
 
 const NAV = [
-    { path: '/organizer', label: 'Dashboard', icon: '📊' },
-    { path: '/organizer/events', label: 'My Events', icon: '🎪' },
-    { path: '/organizer/create', label: 'Create Event', icon: '➕' },
-    { path: '/organizer/tickets', label: 'Sell Tickets', icon: '🎟️' },
-    { path: '/organizer/attendees', label: 'Manage Attendees', icon: '👥' },
-    { path: '/organizer/vendors', label: 'Manage Vendors', icon: '🏪' },
-    { path: '/organizer/staff', label: 'Invite Staff', icon: '👷' },
-    { path: '/organizer/analytics', label: 'View Analytics', icon: '📈' },
-    { path: '/organizer/settings', label: 'Account Settings', icon: '⚙️' },
+    { path: '/organizer', label: 'Dashboard', icon: '' },
+    { path: '/organizer/events', label: 'My Events', icon: '' },
+    { path: '/organizer/create', label: 'Create Event', icon: '' },
+    { path: '/organizer/tickets', label: 'Sell Tickets', icon: '' },
+    { path: '/organizer/attendees', label: 'Manage Attendees', icon: '' },
+    { path: '/organizer/vendors', label: 'Manage Vendors', icon: '' },
+    { path: '/organizer/staff', label: 'Invite Staff', icon: '' },
+    { path: '/organizer/analytics', label: 'View Analytics', icon: '' },
+    { path: '/organizer/settings', label: 'Account Settings', icon: '' },
 ];
 
 export default function OrganizerDashboard() {
     return (
-        <DashboardLayout navigation={NAV} roleLabel="Event Organizer" roleIcon="🎪" roleColor="#0ea5e9">
+        <DashboardLayout navigation={NAV} roleLabel="Event Organizer" roleIcon="" roleColor="#0ea5e9">
             <Routes>
                 <Route index element={<OrganizerHome />} />
                 <Route path="events" element={<MyEvents />} />

@@ -6,10 +6,10 @@ import './DashboardLayout.css';
 const LOGO = 'https://static.vecteezy.com/system/resources/thumbnails/043/211/173/small/people-gathered-in-front-of-a-blue-and-orange-logo-develop-a-clean-elegant-logo-for-a-conference-management-firm-free-vector.jpg';
 
 const SAMPLE_NOTIFS = [
-    { id: 1, icon: '🎟️', text: 'Your ticket for Summer Music Festival is confirmed.', time: '2 min ago', unread: true },
-    { id: 2, icon: '📅', text: 'Tech Conference 2024 schedule has been updated.', time: '1 hr ago', unread: true },
-    { id: 3, icon: '📣', text: "Don't miss City Marathon 2024 this weekend!", time: '3 hrs ago', unread: true },
-    { id: 4, icon: '⭐', text: 'Please review your experience at Art Exhibition.', time: '1 day ago', unread: false },
+    { id: 1, icon: '', text: 'Your ticket for Summer Music Festival is confirmed.', time: '2 min ago', unread: true },
+    { id: 2, icon: '', text: 'Tech Conference 2024 schedule has been updated.', time: '1 hr ago', unread: true },
+    { id: 3, icon: '', text: "Don't miss City Marathon 2024 this weekend!", time: '3 hrs ago', unread: true },
+    { id: 4, icon: '', text: 'Please review your experience at Art Exhibition.', time: '1 day ago', unread: false },
 ];
 
 export default function DashboardLayout({ children, navigation, roleLabel, roleIcon }) {
@@ -81,12 +81,12 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
                 </nav>
 
                 <div className="ds-user">
-                    <div className="ds-user-avatar">{roleIcon}</div>
+                    <div className="ds-user-avatar">{initials}</div>
                     <div className="ds-user-info">
                         <strong>{user?.name}</strong>
                         <small>{roleLabel}</small>
                     </div>
-                    <button className="ds-logout" onClick={handleLogout} title="Sign out">⏏</button>
+                    <button className="ds-logout" onClick={handleLogout} title="Sign out">Out</button>
                 </div>
             </aside>
 
@@ -94,7 +94,7 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
             <div className="dash-main">
                 <header className="dash-topbar">
                     <div className="dt-left">
-                        <button className="hamburger" onClick={() => setSidebarOpen(s => !s)}>☰</button>
+                        <button className="hamburger" onClick={() => setSidebarOpen(s => !s)}>Menu</button>
                         <div>
                             <h1 className="dt-title">{currentNav?.label || 'Dashboard'}</h1>
                             <p className="dt-breadcrumb">EventSphere / {roleLabel} / {currentNav?.label}</p>
@@ -103,7 +103,6 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
 
                     <div className="dt-right">
                         <div className="dt-search">
-                            <span>🔍</span>
                             <input type="text" placeholder="Search..." />
                         </div>
 
@@ -111,7 +110,7 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
                         <div className="topbar-dropdown-wrap" ref={notifRef}>
                             <button className="dt-notif"
                                 onClick={() => { setNotifOpen(o => !o); setProfileOpen(false); }}>
-                                🔔
+                                Notifications
                                 {unread > 0 && <span className="dt-badge">{unread}</span>}
                             </button>
 
@@ -164,10 +163,10 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
                                     <div className="profile-dropdown-menu">
                                         <Link to={settingsPath} className="pd-item"
                                             onClick={() => setProfileOpen(false)}>
-                                            <span>⚙️</span> Account Settings
+                                            Account Settings
                                         </Link>
                                         <button className="pd-item pd-logout" onClick={handleLogout}>
-                                            <span>🚪</span> Sign Out
+                                            Sign Out
                                         </button>
                                     </div>
                                 </div>

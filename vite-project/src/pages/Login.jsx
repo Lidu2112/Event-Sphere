@@ -116,7 +116,7 @@ export default function Login() {
                     {/* Error */}
                     {getError() && (
                         <div className="login-error">
-                            ⚠️ {getError()}
+                            {getError()}
                         </div>
                     )}
 
@@ -126,7 +126,6 @@ export default function Login() {
                             <div className="form-group">
                                 <label>Email Address</label>
                                 <div className="input-wrap">
-                                    <span className="input-icon">✉️</span>
                                     <input
                                         type="email"
                                         placeholder="you@example.com"
@@ -139,7 +138,6 @@ export default function Login() {
                             <div className="form-group">
                                 <label>Password</label>
                                 <div className="input-wrap">
-                                    <span className="input-icon">🔒</span>
                                     <input
                                         type={showPass ? 'text' : 'password'}
                                         placeholder="Enter your password"
@@ -148,7 +146,7 @@ export default function Login() {
                                         autoComplete="current-password"
                                     />
                                     <button type="button" className="show-pass" onClick={() => setShowPass(s => !s)}>
-                                        {showPass ? '🙈' : '👁️'}
+                                        {showPass ? 'Hide' : 'Show'}
                                     </button>
                                 </div>
                             </div>
@@ -169,7 +167,6 @@ export default function Login() {
                             <div className="form-group">
                                 <label>Phone Number</label>
                                 <div className="input-wrap">
-                                    <span className="input-icon">📱</span>
                                     <input
                                         type="tel"
                                         placeholder="+251 91 100 0001"
@@ -182,7 +179,6 @@ export default function Login() {
                             <div className="form-group">
                                 <label>Password</label>
                                 <div className="input-wrap">
-                                    <span className="input-icon">🔒</span>
                                     <input
                                         type={showPass ? 'text' : 'password'}
                                         placeholder="Enter your password"
@@ -191,7 +187,7 @@ export default function Login() {
                                         autoComplete="current-password"
                                     />
                                     <button type="button" className="show-pass" onClick={() => setShowPass(s => !s)}>
-                                        {showPass ? '🙈' : '👁️'}
+                                        {showPass ? 'Hide' : 'Show'}
                                     </button>
                                 </div>
                             </div>
@@ -213,9 +209,9 @@ export default function Login() {
                                         onClick={() => handleGoogleLogin(a)}
                                         disabled={loading}
                                     >
-                                        <span className="g-avatar" style={{ background: ROLE_COLORS[a.role] + '20', color: ROLE_COLORS[a.role] }}>
-                                            {a.avatar}
-                                        </span>
+                                        <div className="g-avatar" style={{ background: ROLE_COLORS[a.role] + '20', color: ROLE_COLORS[a.role] }}>
+                                            {(a.name || 'U')[0].toUpperCase()}
+                                        </div>
                                         <div className="g-info">
                                             <strong>{a.name}</strong>
                                             <small>{a.email}</small>
@@ -232,7 +228,6 @@ export default function Login() {
                         <div className="login-form">
                             {resetSent ? (
                                 <div className="reset-success">
-                                    <div className="reset-success-icon">📬</div>
                                     <h3>Check your email</h3>
                                     <p>We sent a password reset link to <strong>{resetEmail}</strong>.</p>
                                     <button className="submit-btn" style={{ marginTop: 20 }} onClick={() => handleTabChange('email')}>
@@ -245,7 +240,6 @@ export default function Login() {
                                     <div className="form-group">
                                         <label>Email Address</label>
                                         <div className="input-wrap">
-                                            <span className="input-icon">✉️</span>
                                             <input
                                                 type="email"
                                                 placeholder="you@example.com"

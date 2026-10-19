@@ -11,20 +11,20 @@ import Reviews from './pages/Reviews';
 import AccountSettings from '../AccountSettings';
 
 const NAV = [
-    { path: '/vendor', label: 'Dashboard', icon: '📊' },
-    { path: '/vendor/profile', label: 'Vendor Profile', icon: '🪪' },
-    { path: '/vendor/services', label: 'My Services', icon: '🏪' },
-    { path: '/vendor/bookings', label: 'Booking Requests', icon: '📩' },
-    { path: '/vendor/portfolio', label: 'Portfolio / Gallery', icon: '🖼️' },
-    { path: '/vendor/reviews', label: 'Reviews & Ratings', icon: '⭐' },
-    { path: '/vendor/availability', label: 'Manage Availability', icon: '📅' },
-    { path: '/vendor/payments', label: 'Receive Payments', icon: '💰' },
-    { path: '/vendor/settings', label: 'Account Settings', icon: '⚙️' },
+    { path: '/vendor', label: 'Dashboard', icon: '' },
+    { path: '/vendor/profile', label: 'Vendor Profile', icon: '' },
+    { path: '/vendor/services', label: 'My Services', icon: '' },
+    { path: '/vendor/bookings', label: 'Booking Requests', icon: '' },
+    { path: '/vendor/portfolio', label: 'Portfolio / Gallery', icon: '' },
+    { path: '/vendor/reviews', label: 'Reviews & Ratings', icon: '' },
+    { path: '/vendor/availability', label: 'Manage Availability', icon: '' },
+    { path: '/vendor/payments', label: 'Receive Payments', icon: '' },
+    { path: '/vendor/settings', label: 'Account Settings', icon: '' },
 ];
 
 export default function VendorDashboard() {
     return (
-        <DashboardLayout navigation={NAV} roleLabel="Vendor" roleIcon="🏪" roleColor="#ec4899">
+        <DashboardLayout navigation={NAV} roleLabel="Vendor" roleIcon="" roleColor="#ec4899">
             <Routes>
                 <Route index element={<VendorHome />} />
                 <Route path="profile" element={<VendorProfile />} />
