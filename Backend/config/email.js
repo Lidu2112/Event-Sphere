@@ -1,4 +1,9 @@
+
 const nodemailer = require("nodemailer");
+
+if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error("EMAIL ERROR: EMAIL_USER or EMAIL_PASS is missing.");
+}
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -8,15 +13,12 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-transporter.verify(function (error, success) {
-
-    if (error) {
-        console.log("EMAIL ERROR:");
-        console.log(error);
-    } else {
-        console.log("✅ Email Server Ready");
-    }
-
-});
+transporter.verify()
+    .then(() => {
+        console.log("Email server is ready.");
+    })
+    .catch((error) => {
+        console.error("EMAIL CONNECTION ERROR:", error.message);
+    });
 
 module.exports = transporter;
