@@ -4,25 +4,21 @@ const roles = [
     {
         id: 'platform-admin',
         label: 'Platform Administrator',
-        icon: '🛡️',
         color: '#6366f1',
     },
     {
         id: 'event-organizer',
         label: 'Event Organizer',
-        icon: '🎪',
         color: '#0ea5e9',
     },
     {
         id: 'event-staff',
         label: 'Event Staff',
-        icon: '👷',
         color: '#10b981',
     },
     {
         id: 'vendor',
         label: 'Vendor',
-        icon: '🏪',
         color: '#ec4899',
     },
 ];
@@ -50,7 +46,6 @@ function Sidebar({ currentRole, setCurrentRole }) {
                         onClick={() => setCurrentRole(role.id)}
                         style={currentRole === role.id ? { borderLeftColor: role.color, background: role.color + '18' } : {}}
                     >
-                        <span className="role-icon">{role.icon}</span>
                         <span className="role-label">{role.label}</span>
                         {currentRole === role.id && <span className="active-dot" style={{ background: role.color }} />}
                     </button>
@@ -60,7 +55,7 @@ function Sidebar({ currentRole, setCurrentRole }) {
             <div className="sidebar-footer">
                 <div className="footer-user">
                     <div className="footer-avatar" style={{ background: active?.color }}>
-                        {active?.icon}
+                        {active?.label.charAt(0)}
                     </div>
                     <div>
                         <div className="footer-name">Demo User</div>

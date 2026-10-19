@@ -91,14 +91,14 @@ export default function EventManagement() {
                     <h2 className="page-title">Event Management</h2>
                     <p className="page-subtitle">{events.length} events — manage, edit, cancel, hide or feature</p>
                 </div>
-                <button className="btn-primary" onClick={load}>↻ Refresh</button>
+                <button className="btn-primary" onClick={load}>Refresh</button>
             </div>
 
             {/* Search + Filters */}
             <div style={{ display: 'flex', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
                 <input
                     className="table-search"
-                    placeholder="🔍 Search event name, venue or organizer..."
+                    placeholder="Search event name, venue or organizer..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     style={{ flex: 1, minWidth: 220 }}
@@ -149,8 +149,8 @@ export default function EventManagement() {
                                 return (
                                     <tr key={id}>
                                         <td className="td-bold" style={{ maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                            {ev.featured && <span title="Featured" style={{ marginRight: 4 }}>⭐</span>}
-                                            {ev.hidden && <span title="Hidden" style={{ marginRight: 4 }}>🙈</span>}
+                                            {ev.featured && <span title="Featured" style={{ marginRight: 4 }}>[Featured]</span>}
+                                            {ev.hidden && <span title="Hidden" style={{ marginRight: 4 }}>[Hidden]</span>}
                                             {ev.title}
                                         </td>
                                         <td className="td-muted">{ev.organizerEmail || '—'}</td>
@@ -162,19 +162,19 @@ export default function EventManagement() {
                                         <td><span className={`status-badge ${statusLabel}`}>{statusLabel}</span></td>
                                         <td>
                                             <div className="action-btns" style={{ flexWrap: 'wrap', gap: 3 }}>
-                                                <button className="action-btn" title="View" onClick={() => openView(ev)}>👁️</button>
-                                                <button className="action-btn" title="Edit" onClick={() => openEdit(ev)}>✏️</button>
+                                                <button className="action-btn" title="View" onClick={() => openView(ev)}>View</button>
+                                                <button className="action-btn" title="Edit" onClick={() => openEdit(ev)}>Edit</button>
                                                 <button className="action-btn" title={ev.featured ? 'Unfeature' : 'Feature'} onClick={() => doAction(api.featureAdminEvent, ev)} disabled={actionId === id}>
-                                                    {ev.featured ? '★' : '☆'}
+                                                    {ev.featured ? 'Unfeature' : 'Feature'}
                                                 </button>
                                                 <button className="action-btn" title={ev.hidden ? 'Unhide' : 'Hide'} onClick={() => doAction(api.hideAdminEvent, ev)} disabled={actionId === id}>
-                                                    {ev.hidden ? '👁️' : '🙈'}
+                                                    {ev.hidden ? 'Unhide' : 'Hide'}
                                                 </button>
                                                 <button className="action-btn" title="Cancel" onClick={() => { if (window.confirm(`Cancel "${ev.title}"?`)) doAction(api.cancelAdminEvent, ev); }} disabled={actionId === id || ev.status === 'cancelled'}>
-                                                    🚫
+                                                    Cancel
                                                 </button>
                                                 <button className="action-btn" title="Delete" onClick={() => handleDelete(ev)} disabled={actionId === id} style={{ color: '#ef4444' }}>
-                                                    🗑️
+                                                    Delete
                                                 </button>
                                             </div>
                                         </td>
@@ -227,7 +227,7 @@ export default function EventManagement() {
                         )}
                         <div className="modal-actions">
                             <button className="btn-secondary" onClick={closeModal}>Close</button>
-                            <button className="btn-primary" onClick={() => openEdit(selected)}>✏️ Edit</button>
+                            <button className="btn-primary" onClick={() => openEdit(selected)}>Edit</button>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ export default function ApproveOrganizers() {
     const [organizers, setOrganizers] = useState(STATIC_ORGANIZERS);
     const [statusFilter, setStatusFilter] = useState('all');
     const [selected, setSelected] = useState(null);
-    const [detailModal, setDetailModal] = useState(null); // null | 'events' | 'revenue'
+    const [detailModal, setDetailModal] = useState(null);
     const [detailData, setDetailData] = useState(null);
     const [detailLoading, setDetailLoading] = useState(false);
     const [actionId, setActionId] = useState(null);
@@ -108,7 +108,9 @@ export default function ApproveOrganizers() {
                 {filtered.map(o => (
                     <div key={o._id} className="approval-card">
                         <div className="approval-header">
-                            <div className="approval-avatar">🧑</div>
+                            <div className="approval-avatar">
+                                {o.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                            </div>
                             <div className="approval-info">
                                 <div className="approval-name">{o.name}</div>
                                 <div className="approval-company">{o.company}</div>
@@ -117,26 +119,26 @@ export default function ApproveOrganizers() {
                         </div>
 
                         <div className="approval-details">
-                            <div className="approval-row"><span className="label-icon">✉️</span><span>{o.email}</span></div>
-                            <div className="approval-row"><span className="label-icon">📅</span><span>Submitted {o.submitted}</span></div>
-                            <div className="approval-row"><span className="label-icon">📎</span><a href="#" className="doc-link" onClick={e => e.preventDefault()}>{o.doc}</a></div>
+                            <div className="approval-row"><span>{o.email}</span></div>
+                            <div className="approval-row"><span>Submitted {o.submitted}</span></div>
+                            <div className="approval-row"><a href="#" className="doc-link" onClick={e => e.preventDefault()}>{o.doc}</a></div>
                         </div>
 
                         <div className="approval-actions" style={{ flexWrap: 'wrap' }}>
-                            <button className="btn-secondary" onClick={() => setSelected(o)}>👁️ Details</button>
-                            <button className="btn-secondary" onClick={() => viewEvents(o)}>📅 Events</button>
-                            <button className="btn-secondary" onClick={() => viewRevenue(o)}>💰 Revenue</button>
+                            <button className="btn-secondary" onClick={() => setSelected(o)}>Details</button>
+                            <button className="btn-secondary" onClick={() => viewEvents(o)}>Events</button>
+                            <button className="btn-secondary" onClick={() => viewRevenue(o)}>Revenue</button>
                             {(o.status === 'pending' || !o.status) && (
                                 <>
-                                    <button className="btn-approve" onClick={() => handleApprove(o)} disabled={actionId === o._id}>✅ Approve</button>
-                                    <button className="btn-reject" onClick={() => handleReject(o)} disabled={actionId === o._id}>❌ Reject</button>
+                                    <button className="btn-approve" onClick={() => handleApprove(o)} disabled={actionId === o._id}>Approve</button>
+                                    <button className="btn-reject" onClick={() => handleReject(o)} disabled={actionId === o._id}>Reject</button>
                                 </>
                             )}
                             {o.status === 'active' && (
-                                <button className="btn-secondary" style={{ color: '#dc2626' }} onClick={() => handleSuspend(o)} disabled={actionId === o._id}>🚫 Suspend</button>
+                                <button className="btn-secondary" style={{ color: '#dc2626' }} onClick={() => handleSuspend(o)} disabled={actionId === o._id}>Suspend</button>
                             )}
                             {o.status === 'suspended' && (
-                                <button className="btn-approve" onClick={() => handleActivate(o)} disabled={actionId === o._id}>✅ Activate</button>
+                                <button className="btn-approve" onClick={() => handleActivate(o)} disabled={actionId === o._id}>Activate</button>
                             )}
                         </div>
                     </div>
@@ -167,7 +169,7 @@ export default function ApproveOrganizers() {
             {detailModal && (
                 <div className="modal-overlay" onClick={() => setDetailModal(null)}>
                     <div className="modal-box" onClick={e => e.stopPropagation()} style={{ maxWidth: 680, maxHeight: '85vh', overflowY: 'auto' }}>
-                        <h3>{detailModal === 'events' ? '📅 Organizer Events' : '💰 Revenue Summary'}</h3>
+                        <h3>{detailModal === 'events' ? 'Organizer Events' : 'Revenue Summary'}</h3>
                         {detailLoading ? <p style={{ color: '#94a3b8', padding: 20, textAlign: 'center' }}>Loading...</p> : detailData?.error ? (
                             <p style={{ color: '#ef4444' }}>{detailData.error}</p>
                         ) : detailModal === 'events' ? (

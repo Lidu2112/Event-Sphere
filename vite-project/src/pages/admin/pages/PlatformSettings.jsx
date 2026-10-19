@@ -69,7 +69,7 @@ export default function PlatformSettings() {
             const data = await api.saveSettings(settings);
             applySettings(data.settings);
             setSettings({ ...DEFAULTS, ...data.settings });
-            setMsg({ ok: true, text: '✅ Settings saved successfully.' });
+            setMsg({ ok: true, text: 'Settings saved successfully.' });
         } catch (err) {
             setMsg({ ok: false, text: err.message || 'Failed to save settings.' });
         } finally {
@@ -95,7 +95,7 @@ export default function PlatformSettings() {
                 currentPassword: pwForm.currentPassword,
                 newPassword: pwForm.newPassword,
             });
-            setPwMsg({ ok: true, text: '✅ Password changed successfully.' });
+            setPwMsg({ ok: true, text: 'Password changed successfully.' });
             setPwForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
         } catch (err) {
             setPwMsg({ ok: false, text: err.message || 'Failed to change password.' });
@@ -123,7 +123,7 @@ export default function PlatformSettings() {
                     <p className="page-subtitle">Configure global platform settings — saved to database</p>
                 </div>
                 <button className="btn-primary" onClick={handleSave} disabled={saving}>
-                    {saving ? 'Saving...' : '💾 Save All Settings'}
+                    {saving ? 'Saving...' : 'Save All Settings'}
                 </button>
             </div>
 
@@ -137,7 +137,7 @@ export default function PlatformSettings() {
 
                 {/* ── 1. General Settings ── */}
                 <div className="settings-section">
-                    <h3 className="settings-title">⚙️ General Settings</h3>
+                    <h3 className="settings-title">General Settings</h3>
                     <div className="settings-form">
                         <div className="form-field">
                             <label>Platform Name</label>
@@ -156,7 +156,7 @@ export default function PlatformSettings() {
 
                 {/* ── 2. Registration Settings ── */}
                 <div className="settings-section">
-                    <h3 className="settings-title">🔐 Registration Settings</h3>
+                    <h3 className="settings-title">Registration Settings</h3>
                     <div className="settings-toggles">
                         <Toggle checked={settings.allowSelfRegistration} onChange={v => set('allowSelfRegistration', v)}
                             label="Allow Self Registration" desc="Users can register without invitation" />
@@ -167,7 +167,7 @@ export default function PlatformSettings() {
 
                 {/* ── 3. Notification Settings ── */}
                 <div className="settings-section">
-                    <h3 className="settings-title">🔔 Notification Settings</h3>
+                    <h3 className="settings-title">Notification Settings</h3>
                     <div className="settings-toggles">
                         <Toggle checked={settings.emailNotifications} onChange={v => set('emailNotifications', v)}
                             label="Email Notifications" desc="Send system emails for tickets, resets, and alerts" />
@@ -184,7 +184,7 @@ export default function PlatformSettings() {
 
                 {/* ── 4. Security Settings ── */}
                 <div className="settings-section">
-                    <h3 className="settings-title">🛡️ Security Settings</h3>
+                    <h3 className="settings-title">Security Settings</h3>
                     <div className="settings-toggles">
                         <Toggle checked={settings.twoFactorAuth} onChange={v => set('twoFactorAuth', v)}
                             label="Two-Factor Authentication" desc="Require 2FA for all admin logins" />
@@ -216,7 +216,7 @@ export default function PlatformSettings() {
 
                 {/* ── 5. Change Admin Password ── */}
                 <div className="settings-section">
-                    <h3 className="settings-title">🔑 Change Admin Password</h3>
+                    <h3 className="settings-title">Change Admin Password</h3>
 
                     {pwMsg && (
                         <div style={{ padding: '10px 14px', borderRadius: 8, marginBottom: 14, fontSize: 13, fontWeight: 600, background: pwMsg.ok ? '#dcfce7' : '#fee2e2', color: pwMsg.ok ? '#16a34a' : '#dc2626' }}>
@@ -260,7 +260,7 @@ export default function PlatformSettings() {
                         </div>
                         <div>
                             <button type="submit" className="btn-primary" disabled={pwSaving} style={{ minWidth: 160 }}>
-                                {pwSaving ? 'Changing...' : '🔑 Change Password'}
+                                {pwSaving ? 'Changing...' : 'Change Password'}
                             </button>
                         </div>
                     </form>

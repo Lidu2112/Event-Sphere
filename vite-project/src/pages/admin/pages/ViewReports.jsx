@@ -63,11 +63,11 @@ export default function ViewReports() {
     ];
 
     const reports = [
-        { title: 'User Growth Report', desc: 'Monthly user registration trends', icon: '👥' },
-        { title: 'Revenue Report', desc: 'Platform earnings by month', icon: '💰' },
-        { title: 'Event Analytics', desc: 'Top events by ticket sales', icon: '🎪' },
-        { title: 'Vendor Performance', desc: 'Vendor bookings and revenue', icon: '🏪' },
-        { title: 'Platform Summary', desc: 'Overall platform statistics', icon: '📊' },
+        { title: 'User Growth Report', desc: 'Monthly user registration trends', icon: '' },
+        { title: 'Revenue Report', desc: 'Platform earnings by month', icon: '' },
+        { title: 'Event Analytics', desc: 'Top events by ticket sales', icon: '' },
+        { title: 'Vendor Performance', desc: 'Vendor bookings and revenue', icon: '' },
+        { title: 'Platform Summary', desc: 'Overall platform statistics', icon: '' },
     ];
 
     function handleDownload(title, format) {
@@ -95,7 +95,7 @@ export default function ViewReports() {
                     <h2 className="page-title">View Reports</h2>
                     <p className="page-subtitle">Real analytics from MongoDB {loading && '— Loading...'}</p>
                 </div>
-                <button className="btn-primary" onClick={() => setCustomModal(true)}>📈 Generate Custom Report</button>
+                <button className="btn-primary" onClick={() => setCustomModal(true)}>Generate Custom Report</button>
             </div>
 
             {/* Quick Metrics */}
@@ -120,9 +120,9 @@ export default function ViewReports() {
                             <div className="report-desc">{r.desc}</div>
                         </div>
                         <div className="report-actions">
-                            <button className="btn-secondary" onClick={() => handleDownload(r.title, 'pdf')}>📄 PDF</button>
-                            <button className="btn-secondary" onClick={() => handleDownload(r.title, 'excel')}>📊 Excel</button>
-                            <button className="btn-secondary" onClick={() => handlePreview(r.title)}>👁️ Preview</button>
+                            <button className="btn-secondary" onClick={() => handleDownload(r.title, 'pdf')}>PDF</button>
+                            <button className="btn-secondary" onClick={() => handleDownload(r.title, 'excel')}>Excel</button>
+                            <button className="btn-secondary" onClick={() => handlePreview(r.title)}>Preview</button>
                         </div>
                     </div>
                 ))}
@@ -131,7 +131,7 @@ export default function ViewReports() {
             {customModal && (
                 <div className="modal-overlay" onClick={() => setCustomModal(false)}>
                     <div className="modal-box" onClick={e => e.stopPropagation()}>
-                        <h3>📈 Generate Custom Report</h3>
+                        <h3>Generate Custom Report</h3>
                         <div className="modal-form">
                             <label>Report Type</label>
                             <select value={customType} onChange={e => setCustomType(e.target.value)}>
@@ -149,7 +149,7 @@ export default function ViewReports() {
                         </div>
                         <div className="modal-actions">
                             <button className="btn-secondary" onClick={() => setCustomModal(false)}>Cancel</button>
-                            <button className="btn-primary" onClick={handleCustomGenerate}>⬇️ Generate & Download</button>
+                            <button className="btn-primary" onClick={handleCustomGenerate}>Generate & Download</button>
                         </div>
                     </div>
                 </div>

@@ -84,7 +84,7 @@ export default function SupportRequests() {
             <div style={{ marginBottom: 14 }}>
                 <input
                     className="table-search"
-                    placeholder="🔍 Search by name, request ID, or subject..."
+                    placeholder="Search by name, request ID, or subject..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     style={{ width: '100%', maxWidth: 440 }}
@@ -146,12 +146,12 @@ export default function SupportRequests() {
                                     <td className="td-muted">{new Date(r.createdAt).toLocaleDateString()}</td>
                                     <td>
                                         <div className="action-btns">
-                                            <button className="action-btn" title="View & Reply" onClick={() => openDetail(r)}>👁️</button>
+                                            <button className="action-btn" title="View & Reply" onClick={() => openDetail(r)}>View</button>
                                             {r.status !== 'resolved' && (
-                                                <button className="action-btn" title="Mark Resolved" onClick={() => handleStatusChange(r._id, 'resolved')}>✅</button>
+                                                <button className="action-btn" title="Mark Resolved" onClick={() => handleStatusChange(r._id, 'resolved')}>Resolve</button>
                                             )}
                                             {r.status !== 'closed' && (
-                                                <button className="action-btn" title="Close Request" onClick={() => handleClose(r._id)}>🔒</button>
+                                                <button className="action-btn" title="Close Request" onClick={() => handleClose(r._id)}>Close</button>
                                             )}
                                         </div>
                                     </td>
@@ -241,7 +241,7 @@ export default function SupportRequests() {
                             <button className="btn-secondary" onClick={() => setSelected(null)}>Close</button>
                             {selected.status !== 'closed' && (
                                 <button className="btn-primary" onClick={handleReply} disabled={replying || !replyText.trim()}>
-                                    {replying ? 'Sending...' : '📨 Send Reply'}
+                                    {replying ? 'Sending...' : 'Send Reply'}
                                 </button>
                             )}
                         </div>

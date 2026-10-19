@@ -44,10 +44,10 @@ export default function MonitorPayments() {
     }
 
     const summaryCards = [
-        { label: 'Total Processed', value: `ETB ${(summary.totalProcessed || 0).toLocaleString()}`, icon: '💰', color: '#10b981' },
-        { label: 'Pending Payments', value: `ETB ${(summary.totalPending || 0).toLocaleString()}`, icon: '⏳', color: '#f59e0b' },
-        { label: 'Failed Transactions', value: summary.failedCount || 0, icon: '⚠️', color: '#ef4444' },
-        { label: 'Total Tickets', value: payments.length, icon: '🎟️', color: '#6366f1' },
+        { label: 'Total Processed', value: `ETB ${(summary.totalProcessed || 0).toLocaleString()}`, icon: '', color: '#10b981' },
+        { label: 'Pending Payments', value: `ETB ${(summary.totalPending || 0).toLocaleString()}`, icon: '', color: '#f59e0b' },
+        { label: 'Failed Transactions', value: summary.failedCount || 0, icon: '', color: '#ef4444' },
+        { label: 'Total Tickets', value: payments.length, icon: '', color: '#6366f1' },
     ];
 
     return (
@@ -58,11 +58,11 @@ export default function MonitorPayments() {
                     <p className="page-subtitle">Real ticket transactions from MongoDB</p>
                 </div>
                 <div style={{ position: 'relative' }}>
-                    <button className="btn-primary" onClick={() => setExportMenu(m => !m)}>📊 Export ▾</button>
+                    <button className="btn-primary" onClick={() => setExportMenu(m => !m)}>Export ▾</button>
                     {exportMenu && (
                         <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 6, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, boxShadow: '0 8px 24px rgba(0,0,0,.1)', zIndex: 50, minWidth: 160 }}>
-                            <button onClick={() => handleExport('pdf')} style={{ display: 'block', width: '100%', padding: '10px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: 13 }}>📄 Export as PDF</button>
-                            <button onClick={() => handleExport('excel')} style={{ display: 'block', width: '100%', padding: '10px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: 13 }}>📊 Export as Excel</button>
+                            <button onClick={() => handleExport('pdf')} style={{ display: 'block', width: '100%', padding: '10px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: 13 }}>Export as PDF</button>
+                            <button onClick={() => handleExport('excel')} style={{ display: 'block', width: '100%', padding: '10px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: 13 }}>Export as Excel</button>
                         </div>
                     )}
                 </div>
@@ -110,7 +110,7 @@ export default function MonitorPayments() {
                                 <td className="td-muted">{p.paymentMethod || 'Chapa'}</td>
                                 <td><span className={`status-badge ${STATUS_COLOR[p.status] || 'pending'}`}>{p.status}</span></td>
                                 <td>
-                                    <button className="action-btn" title="View" onClick={() => setSelected(p)}>👁️</button>
+                                    <button className="action-btn" title="View" onClick={() => setSelected(p)}>View</button>
                                 </td>
                             </tr>
                         ))}

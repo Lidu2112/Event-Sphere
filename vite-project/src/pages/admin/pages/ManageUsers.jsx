@@ -78,7 +78,7 @@ export default function ManageUsers() {
             <div style={{ display: 'flex', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
                 <input
                     className="table-search"
-                    placeholder="🔍 Search by name or email..."
+                    placeholder="Search by name or email..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     style={{ flex: 1, minWidth: 200 }}
@@ -121,12 +121,12 @@ export default function ManageUsers() {
                                     <td><span className={`status-badge ${u.status || 'active'}`}>{u.status || 'active'}</span></td>
                                     <td>
                                         <div className="action-btns">
-                                            <button className="action-btn" title="View" onClick={() => openView(u)}>👁️</button>
-                                            <button className="action-btn" title="Edit" onClick={() => openEdit(u)}>✏️</button>
+                                            <button className="action-btn" title="View" onClick={() => openView(u)}>View</button>
+                                            <button className="action-btn" title="Edit" onClick={() => openEdit(u)}>Edit</button>
                                             {u.status === 'suspended'
-                                                ? <button className="action-btn" title="Activate" onClick={() => handleStatus(u, 'active')}>✅</button>
-                                                : <button className="action-btn" title="Suspend" onClick={() => handleStatus(u, 'suspended')}>🚫</button>}
-                                            <button className="action-btn" title="Delete" onClick={() => handleDelete(u)}>🗑️</button>
+                                                ? <button className="action-btn" title="Activate" onClick={() => handleStatus(u, 'active')}>Activate</button>
+                                                : <button className="action-btn" title="Suspend" onClick={() => handleStatus(u, 'suspended')}>Suspend</button>}
+                                            <button className="action-btn" title="Delete" onClick={() => handleDelete(u)}>Delete</button>
                                         </div>
                                     </td>
                                 </tr>

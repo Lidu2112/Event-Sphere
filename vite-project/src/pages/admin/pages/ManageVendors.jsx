@@ -87,14 +87,14 @@ export default function ManageVendors() {
             </div>
 
             <div style={{ marginBottom: 20 }}>
-                <input className="table-search" placeholder="🔍 Search vendor name or category..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: 300 }} />
+                <input className="table-search" placeholder="Search vendor name or category..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: 300 }} />
             </div>
 
             <div className="vendor-grid">
                 {displayed.map(v => (
                     <div key={v._id} className="vendor-card">
                         <div className="vendor-header">
-                            <div className="vendor-avatar">🏪</div>
+                            <div className="vendor-avatar"></div>
                             <div className="vendor-info">
                                 <div className="vendor-name">{v.name}</div>
                                 <div className="vendor-service">{v.service || v.category || 'Vendor'}</div>
@@ -103,28 +103,28 @@ export default function ManageVendors() {
                         </div>
 
                         <div className="vendor-stats">
-                            <div className="vendor-stat"><span className="vs-icon">📦</span><div><div className="vs-value">{v.bookings ?? 0}</div><div className="vs-label">Bookings</div></div></div>
-                            <div className="vendor-stat"><span className="vs-icon">💰</span><div><div className="vs-value">{v.revenue || 'ETB 0'}</div><div className="vs-label">Revenue</div></div></div>
-                            <div className="vendor-stat"><span className="vs-icon">⭐</span><div><div className="vs-value">{v.rating > 0 ? v.rating : 'N/A'}</div><div className="vs-label">Rating</div></div></div>
+                            <div className="vendor-stat"><span className="vs-icon"></span><div><div className="vs-value">{v.bookings ?? 0}</div><div className="vs-label">Bookings</div></div></div>
+                            <div className="vendor-stat"><span className="vs-icon"></span><div><div className="vs-value">{v.revenue || 'ETB 0'}</div><div className="vs-label">Revenue</div></div></div>
+                            <div className="vendor-stat"><span className="vs-icon"></span><div><div className="vs-value">{v.rating > 0 ? v.rating : 'N/A'}</div><div className="vs-label">Rating</div></div></div>
                         </div>
 
                         {/* Primary actions */}
                         <div className="vendor-actions" style={{ flexWrap: 'wrap', gap: 4 }}>
-                            <button className="btn-secondary" onClick={() => openView(v)}>👁️ View</button>
-                            <button className="btn-secondary" onClick={() => openEdit(v)}>✏️ Edit</button>
-                            <button className="btn-secondary" onClick={() => openDetail('services', v)}>🛠 Services</button>
-                            <button className="btn-secondary" onClick={() => openDetail('bookings', v)}>📋 Bookings</button>
-                            <button className="btn-secondary" onClick={() => openDetail('reviews', v)}>⭐ Reviews</button>
-                            <button className="btn-secondary" onClick={() => openDetail('payments', v)}>💳 Payments</button>
+                            <button className="btn-secondary" onClick={() => openView(v)}>View</button>
+                            <button className="btn-secondary" onClick={() => openEdit(v)}>Edit</button>
+                            <button className="btn-secondary" onClick={() => openDetail('services', v)}>Services</button>
+                            <button className="btn-secondary" onClick={() => openDetail('bookings', v)}>Bookings</button>
+                            <button className="btn-secondary" onClick={() => openDetail('reviews', v)}>Reviews</button>
+                            <button className="btn-secondary" onClick={() => openDetail('payments', v)}>Payments</button>
                         </div>
 
                         {/* Status actions */}
                         <div className="vendor-actions" style={{ flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
-                            {v.status !== 'active' && <button className="btn-approve" onClick={() => { if (window.confirm(`Approve ${v.name}?`)) doAction(api.approveVendor, v); }} disabled={actionId === v._id}>✅ Approve</button>}
-                            {v.status !== 'rejected' && <button className="btn-reject" onClick={() => { if (window.confirm(`Reject ${v.name}?`)) doAction(api.rejectVendor, v); }} disabled={actionId === v._id}>✕ Reject</button>}
-                            {v.status === 'active' && <button className="btn-secondary" style={{ color: '#dc2626' }} onClick={() => { if (window.confirm(`Suspend ${v.name}?`)) doAction(api.suspendVendor, v); }} disabled={actionId === v._id}>🚫 Suspend</button>}
-                            {v.status === 'suspended' && <button className="btn-approve" onClick={() => { if (window.confirm(`Activate ${v.name}?`)) doAction(api.activateVendor, v); }} disabled={actionId === v._id}>✅ Activate</button>}
-                            <button className="btn-reject" onClick={() => { if (window.confirm(`Delete ${v.name}?`)) doAction(api.deleteVendor, v); }} disabled={actionId === v._id}>🗑️ Delete</button>
+                            {v.status !== 'active' && <button className="btn-approve" onClick={() => { if (window.confirm(`Approve ${v.name}?`)) doAction(api.approveVendor, v); }} disabled={actionId === v._id}>Approve</button>}
+                            {v.status !== 'rejected' && <button className="btn-reject" onClick={() => { if (window.confirm(`Reject ${v.name}?`)) doAction(api.rejectVendor, v); }} disabled={actionId === v._id}>Reject</button>}
+                            {v.status === 'active' && <button className="btn-secondary" style={{ color: '#dc2626' }} onClick={() => { if (window.confirm(`Suspend ${v.name}?`)) doAction(api.suspendVendor, v); }} disabled={actionId === v._id}>Suspend</button>}
+                            {v.status === 'suspended' && <button className="btn-approve" onClick={() => { if (window.confirm(`Activate ${v.name}?`)) doAction(api.activateVendor, v); }} disabled={actionId === v._id}>Activate</button>}
+                            <button className="btn-reject" onClick={() => { if (window.confirm(`Delete ${v.name}?`)) doAction(api.deleteVendor, v); }} disabled={actionId === v._id}>Delete</button>
                         </div>
                     </div>
                 ))}
@@ -155,7 +155,7 @@ export default function ManageVendors() {
                     <div className="modal-box" onClick={e => e.stopPropagation()}>
                         <h3>Vendor Details</h3>
                         <div className="view-detail-grid">
-                            {[['Name', selected.name], ['Service', selected.service || '—'], ['Email', selected.email || '—'], ['Phone', selected.phone || '—'], ['Bookings', String(selected.bookings ?? 0)], ['Revenue', selected.revenue || 'ETB 0'], ['Rating', selected.rating > 0 ? `⭐ ${selected.rating}` : 'No ratings'], ['Status', selected.status || 'active']].map(([k, v]) => (
+                            {[['Name', selected.name], ['Service', selected.service || '—'], ['Email', selected.email || '—'], ['Phone', selected.phone || '—'], ['Bookings', String(selected.bookings ?? 0)], ['Revenue', selected.revenue || 'ETB 0'], ['Rating', selected.rating > 0 ? `${selected.rating}` : 'No ratings'], ['Status', selected.status || 'active']].map(([k, v]) => (
                                 <div key={k} className="view-detail-row">
                                     <span className="view-detail-key">{k}</span>
                                     <span className="view-detail-val">{k === 'Status' ? <span className={`status-badge ${selected.status || 'active'}`}>{v}</span> : v}</span>
@@ -171,7 +171,7 @@ export default function ManageVendors() {
             {detailModal && (
                 <div className="modal-overlay" onClick={() => setDetailModal(null)}>
                     <div className="modal-box" onClick={e => e.stopPropagation()} style={{ maxWidth: 720, maxHeight: '85vh', overflowY: 'auto' }}>
-                        <h3>{detailModal === 'services' ? '🛠 Services' : detailModal === 'bookings' ? '📋 Bookings' : detailModal === 'reviews' ? '⭐ Reviews' : '💳 Payments'} — {selected?.name}</h3>
+                        <h3>{detailModal === 'services' ? 'Services' : detailModal === 'bookings' ? 'Bookings' : detailModal === 'reviews' ? 'Reviews' : 'Payments'} — {selected?.name}</h3>
                         {detailLoading ? <p style={{ color: '#94a3b8', padding: 20, textAlign: 'center' }}>Loading...</p> : detailData?.error ? (
                             <p style={{ color: '#ef4444' }}>{detailData.error}</p>
                         ) : (
@@ -190,7 +190,7 @@ export default function ManageVendors() {
                                         <tr key={b._id}><td>{b.clientName || b.clientEmail || '—'}</td><td>{b.serviceName || '—'}</td><td className="td-muted">{b.eventDate || '—'}</td><td><span className={`status-badge ${b.status}`}>{b.status}</span></td><td>ETB {b.amount || 0}</td></tr>
                                     ))}
                                     {detailModal === 'reviews' && (detailData?.reviews || []).map(r => (
-                                        <tr key={r._id}><td>{r.reviewerName || r.reviewerEmail || '—'}</td><td>{'⭐'.repeat(r.rating || 0)} {r.rating}/5</td><td>{r.comment || '—'}</td><td className="td-muted">{r.createdAt ? new Date(r.createdAt).toLocaleDateString() : '—'}</td></tr>
+                                        <tr key={r._id}><td>{r.reviewerName || r.reviewerEmail || '—'}</td><td>{r.rating}/5</td><td>{r.comment || '—'}</td><td className="td-muted">{r.createdAt ? new Date(r.createdAt).toLocaleDateString() : '—'}</td></tr>
                                     ))}
                                     {detailModal === 'payments' && (detailData?.bookings || []).map(b => (
                                         <tr key={b._id}><td>{b.clientName || b.clientEmail || '—'}</td><td>ETB {b.amount || 0}</td><td><span className={`status-badge ${b.paymentStatus || 'pending'}`}>{b.paymentStatus || 'pending'}</span></td><td className="td-muted">{b.createdAt ? new Date(b.createdAt).toLocaleDateString() : '—'}</td></tr>
