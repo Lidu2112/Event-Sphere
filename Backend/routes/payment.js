@@ -5,7 +5,6 @@ const axios = require('axios');
 const QRCode = require('qrcode');
 const Ticket = require('../models/Ticket');
 const Notification = require('../models/Notification');
-const transporter = require('../config/email');
 const sendTicketEmail = require("../utils/sendTicketEmail");
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
@@ -114,85 +113,173 @@ router.post('/initialize', async (req, res) => {
 // ─────────────────────────────────────────────────────────
 // GET /api/payment/verify?tx_ref=...   (Chapa callback + manual check)
 // ─────────────────────────────────────────────────────────
+
+
+
 router.get('/verify', async (req, res) => {
-    const { tx_ref } = req.query;
-    if (!tx_ref) return res.status(400).json({ success: false, message: 'tx_ref required.' });
+    const tx_ref = String(req.query.tx_ref || '');
+
+    if (!tx_ref) {
+        return res.status(400).json({
+            success: false,
+            message: 'tx_ref required.',
+        });
+    }
+
+    if (!process.env.CHAPA_SECRET_KEY) {
+        return res.status(500).json({
+            success: false,
+            message: 'Payment verification is not configured.',
+        });
+    }
 
     try {
-        // Verify with Chapa
+        // 1. Verify payment with Chapa, with a timeout.
         const chapaRes = await axios.get(
-            `${CHAPA_BASE}/transaction/verify/${tx_ref}`,
+            `${CHAPA_BASE}/transaction/verify/${encodeURIComponent(tx_ref)}`,
             {
-                headers: { Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}` },
+                headers: {
+                    Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
+                },
+                timeout: 15000,
             }
         );
 
         const chapaData = chapaRes.data?.data;
-        const isPaid = chapaData?.status === 'success';
 
+        if (chapaData?.status !== 'success' &&
+            chapaData?.status !== 'failed') {
+            return res.json({
+                success: true,
+                paid: false,
+                status: chapaData?.status || 'pending',
+                message: 'Payment is not confirmed yet.',
+            });
+        }
+
+        // 2. Find the existing ticket.
         const ticket = await Ticket.findOne({ txRef: tx_ref });
-        if (!ticket) return res.status(404).json({ success: false, message: 'Ticket not found.' });
 
-        if (isPaid && ticket.status !== 'paid') {
-            // Generate unique ticket code
-            const ticketCode = `TKT-${Date.now()}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-
-            // Generate QR Code (contains ticket code + event info)
-            const qrData = JSON.stringify({
-                ticketCode,
-                event: ticket.eventTitle,
-                holder: ticket.userName,
-                email: ticket.userEmail,
-                date: ticket.eventDate,
-                venue: ticket.eventVenue,
+        if (!ticket) {
+            return res.status(404).json({
+                success: false,
+                message: 'Ticket not found.',
             });
-            const qrCode = await QRCode.toDataURL(qrData);
+        }
 
-            ticket.status = 'paid';
-            ticket.ticketCode = ticketCode;
-            ticket.qrCode = qrCode;
-            ticket.paymentMethod = "Chapa";
-            ticket.paidAt = new Date();
+        // 3. Only mark the ticket paid after Chapa confirms it.
+        if (chapaData.status === 'success') {
+            if (ticket.status !== 'paid') {
+                // Check the transaction reference returned by Chapa.
+                if (chapaData.tx_ref && chapaData.tx_ref !== tx_ref) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'Transaction reference mismatch.',
+                    });
+                }
 
+                // Check amount before accepting payment.
+                if (
+                    chapaData.amount != null &&
+                    Number(chapaData.amount) !== Number(ticket.amount)
+                ) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'Payment amount mismatch.',
+                    });
+                }
+
+                const ticketCode =
+                    `TKT-${Date.now()}-${Math.random()
+                        .toString(36)
+                        .substring(2, 7)
+                        .toUpperCase()}`;
+
+                const qrData = JSON.stringify({
+                    ticketCode,
+                    event: ticket.eventTitle,
+                    holder: ticket.userName,
+                    email: ticket.userEmail,
+                    date: ticket.eventDate,
+                    venue: ticket.eventVenue,
+                });
+
+                ticket.ticketCode = ticketCode;
+                ticket.qrCode = await QRCode.toDataURL(qrData);
+                ticket.paymentMethod = 'Chapa';
+                ticket.paidAt = new Date();
+                ticket.status = 'paid';
+
+                await ticket.save();
+
+                console.log('Ticket marked paid:', tx_ref);
+
+                try {
+                    await Notification.create({
+                        userEmail: ticket.userEmail,
+                        title: 'Ticket Purchased',
+                        message: `Your ticket for ${ticket.eventTitle} has been confirmed. Ticket ID: ${ticketCode}.`,
+                        type: 'ticket',
+                        isRead: false,
+                        createdAt: new Date(),
+                    });
+                } catch (notificationError) {
+                    console.error(
+                        'NOTIFICATION FAILED:',
+                        notificationError.message
+                    );
+                }
+            }
+
+            // 4. Retry email on later verification requests if needed.
+            if (ticket.emailSent !== true) {
+                try {
+                    await sendTicketEmail({
+                        email: ticket.userEmail,
+                        userName: ticket.userName,
+                        eventName: ticket.eventTitle,
+                        eventDate: ticket.eventDate,
+                        venue: ticket.eventVenue,
+                        ticketId: ticket.ticketCode,
+                        qrCode: ticket.qrCode,
+                    });
+
+                    ticket.emailSent = true;
+                    await ticket.save();
+
+                    console.log('Ticket email sent for:', tx_ref);
+                } catch (emailError) {
+                    console.error(
+                        'TICKET EMAIL FAILED:',
+                        emailError.message
+                    );
+                    // Payment remains paid even if email sending fails.
+                }
+            }
+        } else if (ticket.status !== 'paid') {
+            ticket.status = 'failed';
             await ticket.save();
-            console.log("================================");
-console.log("Recipient Email:", ticket.userEmail);
-console.log("Recipient Name :", ticket.userName);
-console.log("================================");
-            await sendTicketEmail({
-    email: ticket.userEmail,
-    userName: ticket.userName,
-    eventName: ticket.eventTitle,
-    eventDate: ticket.eventDate,
-    venue: ticket.eventVenue,
-    ticketId: ticket.ticketCode,
-    qrCode: ticket.qrCode,
-});
+        }
 
-            await Notification.create({
-                userEmail: ticket.userEmail,
-                title: 'Ticket Purchased',
-                message: `Your ticket for ${ticket.eventTitle} has been confirmed. Ticket ID: ${ticketCode}.`,
-                type: 'ticket',
-                isRead: false,
-                createdAt: new Date(),
-            });
-      } else if (!isPaid && chapaData?.status === 'failed') {
-    ticket.status = 'failed';
-    await ticket.save();
-}
-
-        res.json({
+        // 5. Return the payment result without waiting on another email call.
+        return res.json({
             success: true,
             paid: ticket.status === 'paid',
             ticket,
         });
-
     } catch (err) {
-        console.error('Chapa verify error:', err.response?.data || err.message);
-        res.status(500).json({ success: false, message: 'Payment verification failed.' });
+        console.error(
+            'PAYMENT VERIFICATION ERROR:',
+            err.response?.data || err.message
+        );
+
+        return res.status(500).json({
+            success: false,
+            message: 'Payment verification failed.',
+        });
     }
 });
+
 
 // ─────────────────────────────────────────────────────────
 // GET /api/payment/ticket/:txRef  — fetch ticket details
