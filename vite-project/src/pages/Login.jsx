@@ -55,22 +55,24 @@ export default function Login() {
         e.preventDefault();
         if (!email || !password) { setLocalError('Please fill in all fields.'); return; }
         setLoading(true);
-        setTimeout(() => {
-            const res = loginWithEmail(email, password);
+        try {
+            const res = await loginWithEmail(email, password);
             if (res.ok) redirect(res.role);
+        } finally {
             setLoading(false);
-        }, 600);
+        }
     }
 
     async function handlePhoneLogin(e) {
         e.preventDefault();
         if (!phone || !password) { setLocalError('Please fill in all fields.'); return; }
         setLoading(true);
-        setTimeout(() => {
-            const res = loginWithPhone(phone, password);
+        try {
+            const res = await loginWithPhone(phone, password);
             if (res.ok) redirect(res.role);
+        } finally {
             setLoading(false);
-        }, 600);
+        }
     }
 
     async function handleGoogleLogin(account) {
