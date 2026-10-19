@@ -12,9 +12,9 @@ dotenv.config({ path: path.join(__dirname, '..', '.env') });
 const router = express.Router();
 
 const CHAPA_BASE = 'https://api.chapa.co/v1';
-const CALLBACK_URL = 'http://localhost:5000/api/payment/verify';
-const RETURN_URL = 'http://localhost:5174/payment-success'; // user-app port
 
+const CALLBACK_URL = `${process.env.BACKEND_URL}/api/payment/verify`;
+const RETURN_URL = `${process.env.FRONTEND_URL}/payment-success`;
 // ─────────────────────────────────────────────────────────
 // POST /api/payment/initialize
 // Body: { amount, email, firstName, lastName, eventId, eventTitle, eventDate, eventVenue, userId, userName }
@@ -177,10 +177,10 @@ console.log("================================");
                 isRead: false,
                 createdAt: new Date(),
             });
-        } else if (!isPaid) {
-            ticket.status = 'failed';
-            await ticket.save();
-        }
+      } else if (!isPaid && chapaData?.status === 'failed') {
+    ticket.status = 'failed';
+    await ticket.save();
+}
 
         res.json({
             success: true,
