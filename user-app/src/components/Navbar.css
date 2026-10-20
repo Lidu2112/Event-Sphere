@@ -15,10 +15,10 @@
 
 /* Solid/sticky — on all other pages, sits above content */
 .navbar.navbar-solid {
-    background: #0d0520;
+    background: #0d1117;
     position: sticky;
     top: 0;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .nav-container {
@@ -47,7 +47,7 @@
 
 .nav-menu {
     display: flex;
-    gap: 32px;
+    gap: 24px;
     align-items: center;
 }
 
@@ -56,22 +56,25 @@
 }
 
 .nav-link {
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: all 0.2s;
     position: relative;
-    padding-bottom: 4px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .nav-dropdown-toggle {
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
-    padding: 0;
     font: inherit;
+    text-transform: uppercase;
 }
 
 .nav-dropdown:hover .nav-dropdown-toggle,
@@ -117,39 +120,31 @@
     color: #0f172a;
 }
 
-.nav-link.active {
-    color: #fff;
-    font-weight: 600;
-}
-
 .nav-link:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
+/* Active Pill Styling Matching the Reference Image */
 .nav-link.active {
     color: #fff;
-    font-weight: 600;
+    font-weight: 700;
+    background: #3B1E38;
+    border: 1px solid rgba(229, 138, 43, 0.3);
 }
 
 .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #ff6422, #e91e8c);
-    border-radius: 2px;
+    display: none; /* Replaced underline with solid pill container */
 }
 
 .nav-actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
 }
 
 .nav-btn {
-    padding: 8px 18px;
+    padding: 9px 20px;
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
@@ -161,24 +156,25 @@
 .nav-btn.login {
     background: transparent;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .nav-btn.login:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 .nav-btn.register {
-    background: linear-gradient(135deg, #ff6422, #e91e8c);
+    background: linear-gradient(135deg, #E58A2B, #d27216);
     color: #fff;
     border: none;
+    box-shadow: 0 4px 14px rgba(229, 138, 43, 0.3);
 }
 
 .nav-btn.register:hover {
     opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(233, 30, 140, 0.45);
+    box-shadow: 0 6px 18px rgba(229, 138, 43, 0.45);
 }
 
 .hamburger-menu {
@@ -195,14 +191,19 @@
 }
 
 .nav-profile-btn {
-    background: rgba(255, 255, 255, .12);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, .2);
-    border-radius: 12px;
-    padding: 10px 18px;
+    background: rgba(229, 138, 43, 0.15);
+    color: #fff;
+    border: 1px solid rgba(229, 138, 43, 0.4);
+    border-radius: 10px;
+    padding: 9px 16px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
+    transition: background 0.2s;
+}
+
+.nav-profile-btn:hover {
+    background: rgba(229, 138, 43, 0.25);
 }
 
 .nav-profile-menu {
@@ -263,7 +264,7 @@
 }
 
 .nav-btn.dashboard-btn {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #00A3FF, #0088CC);
     color: #fff;
     border: none;
     text-decoration: none;
@@ -273,16 +274,16 @@
 }
 
 .nav-btn.dashboard-btn:hover {
-    background: linear-gradient(135deg, #059669, #047857);
+    background: linear-gradient(135deg, #0088CC, #006699);
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 14px rgba(0, 163, 255, 0.4);
 }
 
 /* ── Mobile slide-down menu ── */
 .mobile-nav-panel {
     display: flex;
     flex-direction: column;
-    background: rgba(10, 2, 20, 0.97);
+    background: rgba(13, 17, 23, 0.98);
     backdrop-filter: blur(16px);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding: 8px 0 16px;
@@ -328,7 +329,7 @@
 }
 
 .mobile-nav-link.active {
-    color: #ff7a3c;
+    color: #E58A2B;
     font-weight: 700;
 }
 
@@ -348,10 +349,10 @@
 }
 
 .mobile-logout {
-    color: #f87171 !important;
+    color: #ef4444 !important;
 }
 
 .mobile-register {
-    color: #ff7a3c !important;
+    color: #E58A2B !important;
     font-weight: 700 !important;
 }

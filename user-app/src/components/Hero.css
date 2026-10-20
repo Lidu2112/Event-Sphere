@@ -34,9 +34,9 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(105deg,
-            rgba(15, 5, 30, 0.88) 0%,
-            rgba(30, 10, 60, 0.75) 45%,
-            rgba(180, 40, 20, 0.35) 100%);
+            rgba(15, 10, 25, 0.92) 0%,
+            rgba(26, 16, 37, 0.82) 45%,
+            rgba(229, 138, 43, 0.3) 100%);
 }
 
 /* ── Container ── */
@@ -64,10 +64,10 @@
 .hero-tag {
     display: inline-block;
     padding: 6px 16px;
-    background: rgba(255, 100, 30, 0.25);
-    border: 1px solid rgba(255, 100, 30, 0.5);
+    background: rgba(229, 138, 43, 0.2);
+    border: 1px solid rgba(229, 138, 43, 0.45);
     border-radius: 50px;
-    color: #ff9f6b;
+    color: #f3a655;
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 24px;
@@ -86,7 +86,7 @@
 }
 
 .hero-title-accent {
-    background: linear-gradient(90deg, #ff6422, #e91e8c, #9c27b0);
+    background: linear-gradient(90deg, #E58A2B, #f3a655, #00A3FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -95,7 +95,7 @@
 /* ── Subtitle ── */
 .hero-subtitle {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 255, 255, 0.75);
     margin-bottom: 36px;
     max-width: 520px;
     line-height: 1.7;
@@ -112,14 +112,14 @@
 
 .hero-btn-primary {
     padding: 14px 32px;
-    background: linear-gradient(135deg, #ff6422, #e91e8c);
+    background: linear-gradient(135deg, #E58A2B, #d27216);
     color: #fff;
     border-radius: 50px;
     font-size: 15px;
     font-weight: 700;
     text-decoration: none;
     transition: opacity 0.2s, transform 0.2s;
-    box-shadow: 0 6px 24px rgba(233, 30, 140, 0.4);
+    box-shadow: 0 6px 24px rgba(229, 138, 43, 0.35);
 }
 
 .hero-btn-primary:hover {
@@ -129,19 +129,20 @@
 
 .hero-btn-outline {
     padding: 14px 32px;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 163, 255, 0.15);
     color: #fff;
-    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border: 1.5px solid rgba(0, 163, 255, 0.6);
     border-radius: 50px;
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
     transition: background 0.2s, transform 0.2s;
     backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 163, 255, 0.25);
 }
 
 .hero-btn-outline:hover {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(0, 163, 255, 0.3);
     transform: translateY(-2px);
 }
 
@@ -162,13 +163,13 @@
 .hero-stat-value {
     font-size: 28px;
     font-weight: 900;
-    color: #ff7a3c;
+    color: #E58A2B;
     line-height: 1;
 }
 
 .hero-stat-label {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.65);
     font-weight: 500;
 }
 
@@ -209,8 +210,8 @@
 }
 
 .slider-arrow:hover {
-    background: rgba(233, 30, 140, 0.6);
-    border-color: #e91e8c;
+    background: rgba(229, 138, 43, 0.6);
+    border-color: #E58A2B;
 }
 
 .slider-arrow.left {
@@ -243,7 +244,7 @@
 }
 
 .slider-dot.active {
-    background: #ff6422;
+    background: #E58A2B;
     width: 24px;
     border-radius: 4px;
 }
