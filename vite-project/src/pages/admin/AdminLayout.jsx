@@ -83,9 +83,8 @@ export default function AdminLayout({ children }) {
             {/* Sidebar */}
             <aside className="admin-sidebar">
                 <div className="as-brand">
-                    <img src={LOGO} alt="EventSphere" className="as-brand-logo" />
                     <div>
-                        <div className="as-brand-name">EventSphere</div>
+                        <div className="as-brand-name">Ethio Eventsphere</div>
                         <div className="as-brand-role">Admin Portal</div>
                     </div>
                 </div>

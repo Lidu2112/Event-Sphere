@@ -35,7 +35,7 @@
 }
 
 .auth-link {
-    color: #6366f1;
+    color: #2A1527;
     font-weight: 600;
     text-decoration: none;
 }
@@ -68,7 +68,7 @@
 }
 
 .google-btn:hover:not(:disabled) {
-    border-color: #6366f1;
+    border-color: #2A1527;
     background: #f5f3ff;
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
 }
@@ -181,7 +181,7 @@
 }
 
 .field-wrap:focus-within {
-    border-color: #6366f1;
+    border-color: #2A1527;
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     background: #fff;
 }
@@ -218,7 +218,7 @@
 }
 
 .show-pass-btn:hover {
-    color: #6366f1;
+    color: #381c34;
 }
 
 .confirm-check {
@@ -252,7 +252,7 @@
 .auth-submit {
     width: 100%;
     padding: 13px;
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    background: #2A1527;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -267,7 +267,7 @@
 }
 
 .auth-submit:hover:not(:disabled) {
-    background: linear-gradient(135deg, #4f46e5, #4338ca);
+       background:#381c349a ;
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
 }
@@ -288,7 +288,7 @@
     display: inline-block;
 }
 .forgot{
-    color:#6366f1;
+    color:#2A1527;
     cursor:pointer;
     text-align:center;
     margin-top:15px;

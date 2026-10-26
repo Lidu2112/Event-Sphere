@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { useEffect } from 'react';
 import Profile from './pages/dashboard/pages/Profile';
 import Navbar from './components/Navbar';
@@ -34,8 +35,9 @@ function Landing() {
       <Hero />
       <FeaturedEvents />
       <Categories />
-      <Vendors />
       <About />
+      <Vendors />
+
     </>
   );
 }
@@ -127,7 +129,9 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppShell />
+        <LanguageProvider>
+          <AppShell />
+        </LanguageProvider>
       </AuthProvider>
     </BrowserRouter>
   );

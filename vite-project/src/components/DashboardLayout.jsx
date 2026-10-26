@@ -3,8 +3,6 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './DashboardLayout.css';
 
-const LOGO = 'https://static.vecteezy.com/system/resources/thumbnails/043/211/173/small/people-gathered-in-front-of-a-blue-and-orange-logo-develop-a-clean-elegant-logo-for-a-conference-management-firm-free-vector.jpg';
-
 const SAMPLE_NOTIFS = [
     { id: 1, icon: '', text: 'Your ticket for Summer Music Festival is confirmed.', time: '2 min ago', unread: true },
     { id: 2, icon: '', text: 'Tech Conference 2024 schedule has been updated.', time: '1 hr ago', unread: true },
@@ -12,7 +10,7 @@ const SAMPLE_NOTIFS = [
     { id: 4, icon: '', text: 'Please review your experience at Art Exhibition.', time: '1 day ago', unread: false },
 ];
 
-export default function DashboardLayout({ children, navigation, roleLabel, roleIcon }) {
+export default function DashboardLayout({ children, navigation, roleLabel }) {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -57,9 +55,8 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
             {/* Sidebar */}
             <aside className="dash-sidebar">
                 <div className="ds-brand">
-                    <img src={LOGO} alt="EventSphere" className="ds-brand-logo" />
                     <div>
-                        <div className="ds-brand-name">EventSphere</div>
+                        <div className="ds-brand-name">Ethio EventSphere</div>
                         <div className="ds-brand-role">{roleLabel}</div>
                     </div>
                 </div>
@@ -90,7 +87,7 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
                 </div>
             </aside>
 
-            {/* Main */}
+            {/* Main Content Area */}
             <div className="dash-main">
                 <header className="dash-topbar">
                     <div className="dt-left">
@@ -142,12 +139,12 @@ export default function DashboardLayout({ children, navigation, roleLabel, roleI
                             )}
                         </div>
 
-                        {/* Account / Profile */}
+                        {/* Account / Profile Badge */}
                         <div className="topbar-dropdown-wrap" ref={profileRef}>
                             <div className="dt-profile"
                                 onClick={() => { setProfileOpen(o => !o); setNotifOpen(false); }}>
                                 <div className="dt-avatar">{initials}</div>
-                                <span className="dt-uname">{user?.name?.split(' ')[0]}</span>
+                                <span className="dt-uname">{user?.name || 'Abebe Girma'}</span>
                                 <span style={{ fontSize: 10, color: '#9ca3af' }}>▾</span>
                             </div>
 

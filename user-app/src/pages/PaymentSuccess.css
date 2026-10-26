@@ -69,7 +69,7 @@
 }
 
 .ps-ticket-header {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: #2A1527;
     padding: 18px 20px;
     color: #fff;
 }
@@ -162,7 +162,7 @@
 
 .ps-btn-primary {
     padding: 12px 24px;
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    background: #2A1527;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -185,7 +185,7 @@
     padding: 12px 24px;
     background: transparent;
     color: #6366f1;
-    border: 1.5px solid #6366f1;
+    border: 1.5px solid #2A1527;
     border-radius: 10px;
     font-size: 14px;
     font-weight: 700;

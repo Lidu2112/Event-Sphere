@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLang } from '../context/LanguageContext';
+import { t } from '../data/translations';
+import { apiUrl } from '../api/config';
 import './Page.css';
 import './VendorsPage.css';
-
-import { apiUrl } from '../api/config';
 
 const API_URL = apiUrl('/api');
 
 export default function VendorsPage() {
+    const { lang } = useLang();
     const [services, setServices] = useState([]);
     const [search, setSearch] = useState('');
     const [category, setCategory] = useState('All');
@@ -30,14 +32,11 @@ export default function VendorsPage() {
     });
 
     return (
-        <div>
+        <div className="vendors-page-wrapper">
             <div className="page-hero">
                 <div className="page-hero-inner">
-                    <div className="page-breadcrumb">
-                        <Link to="/">Home</Link> / Vendors
-                    </div>
-                    <h1>Event Vendors</h1>
-                    <p>Find the best service providers for your events</p>
+                    <h1>{t(lang, 'vp_title')}</h1>
+                    <p>{t(lang, 'vp_subtitle')}</p>
                 </div>
             </div>
 
@@ -45,7 +44,7 @@ export default function VendorsPage() {
                 <div className="filter-bar">
                     <input
                         type="text"
-                        placeholder="🔍  Search services..."
+                        placeholder={t(lang, 'vp_search')}
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
@@ -56,20 +55,23 @@ export default function VendorsPage() {
 
                 <div className="vp-pills">
                     {cats.map(c => (
-                        <button
-                            key={c}
-                            className={`ep-pill ${category === c ? 'active' : ''}`}
-                            onClick={() => setCategory(c)}
-                        >
+                        <button key={c} className={`ep-pill ${category === c ? 'active' : ''}`}
+                            onClick={() => setCategory(c)}>
                             {c}
                         </button>
                     ))}
                 </div>
 
                 {loading ? (
-                    <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading services...</div>
+                    <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>
+                        {t(lang, 'vp_loading')}
+                    </div>
+                ) : filtered.length === 0 ? (
+                    <div className="vp-empty-card">
+                        <p>{t(lang, 'vp_empty')}</p>
+                    </div>
                 ) : (
-                    <div className="pg-grid-3">
+                    <div className="vp-grid">
                         {filtered.map(s => (
                             <Link key={s._id} to={`/vendors/${s._id}`} className="vp-card">
                                 <div className="vp-img-wrap">
@@ -82,11 +84,15 @@ export default function VendorsPage() {
                                 <div className="vp-content">
                                     <div className="vp-cat">{s.category}</div>
                                     <h3 className="vp-name">{s.name}</h3>
-                                    <p className="vp-desc">{(s.description || '').slice(0, 80)}...</p>
+                                    <p className="vp-desc">
+                                        {s.description
+                                            ? (s.description.length > 90 ? s.description.substring(0, 90) + '...' : s.description)
+                                            : (lang === 'am' ? 'ለዝርዝሮ ያሰሱ' : 'Explore professional services tailored for your unique event experience.')}
+                                    </p>
                                     <div className="vp-footer">
                                         <div className="vp-rating">
-                                            ⭐ <strong>{s.rating || 0}</strong>
-                                            <span>({s.bookings || 0} bookings)</span>
+                                            ⭐ <strong>{s.rating || '0.0'}</strong>
+                                            <span>({s.bookings || 0} {t(lang, 'vp_bookings')})</span>
                                         </div>
                                         <span className="vp-price">ETB {Number(s.price || 0).toLocaleString()}</span>
                                     </div>

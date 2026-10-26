@@ -1,9 +1,21 @@
 /* ── Section Container ── */
 .vd-section {
     padding: 60px 24px;
-    background-color: #0b0813;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #0d233a;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    animation: fadeInSection 0.6s ease-out forwards;
+}
+
+@keyframes fadeInSection {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .vd-container {
@@ -17,13 +29,19 @@
     align-items: center;
     justify-content: center;
     min-height: 250px;
-    color: #9ca3af;
+    color: #516f90;
     gap: 12px;
 }
 
 .vd-spinner {
     font-size: 28px;
-    color: #a855f7;
+    color: #ff7a59;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* ── Section Header ── */
@@ -34,40 +52,29 @@
     margin-bottom: 24px;
 }
 
-.vd-badge {
-    background: rgba(168, 85, 247, 0.15);
-    color: #c084fc;
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
 .vd-title {
     font-size: 28px;
     font-weight: 800;
-    color: #ffffff;
+    color: #0d233a;
     margin: 8px 0 0 0;
 }
 
 .vd-view-all {
     font-size: 14px;
     font-weight: 600;
-    color: #a855f7;
+    color: #8b5cf6;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: color 0.2s ease;
+    transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .vd-view-all:hover {
-    color: #c084fc;
+    color: #7c3aed;
+    transform: translateX(4px) scale(1.03);
 }
-/* ── Category Dropdown Filter ── */
+
 /* ── Category Dropdown Filter ── */
 .vd-filter-wrapper {
     display: flex;
@@ -77,103 +84,170 @@
 }
 
 .vd-filter-label {
-    font-size: 18px;
-    font-family: 'Georgia', serif, system-ui;
-    color: #0d233a; /* Dark navy color so it's clearly visible on light backgrounds */
+    font-size: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #0d233a;
     font-weight: 600;
 }
 
 .vd-filter-select {
     padding: 8px 36px 8px 16px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: system-ui, -apple-system, sans-serif;
-    color: #000000;
+    color: #0d233a;
     background-color: #ffffff;
-    border: 2px solid #d1d5db;
+    border: 2px solid #e2e8f0;
     border-radius: 10px;
     outline: none;
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d233a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.vd-filter-select:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
 }
 
 .vd-filter-select:focus {
-    border-color: #9ca3af;
+    border-color: #ff7a59;
+    box-shadow: 0 0 0 3px rgba(255, 122, 89, 0.15);
+    transform: translateY(-1px);
 }
 
 /* ── Vendor Grid ── */
 .vd-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
 }
 
-/* ── Dark Card Styling ── */
+/* ── Continuous Rapid Pop Up and Down Keyframes ── */
+@keyframes rapidRepeatPopup {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-18px) scale(1.05);
+    }
+}
+
 .vendor-card {
-    background: #151026;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #ff7a59;
+    border-radius: 16px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 14px;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+    
+    /* Rapidly repeats popping up and down infinitely */
+    animation: rapidRepeatPopup 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    will-change: transform;
 }
 
+/* Staggered delays create a wave-like bouncing motion across cards */
+.vendor-card:nth-child(1) { animation-delay: 0.00s; }
+.vendor-card:nth-child(2) { animation-delay: 0.08s; }
+.vendor-card:nth-child(3) { animation-delay: 0.16s; }
+.vendor-card:nth-child(4) { animation-delay: 0.24s; }
+.vendor-card:nth-child(5) { animation-delay: 0.32s; }
+.vendor-card:nth-child(6) { animation-delay: 0.40s; }
+.vendor-card:nth-child(7) { animation-delay: 0.48s; }
+.vendor-card:nth-child(8) { animation-delay: 0.56s; }
+
+/* Pause repeating motion on hover so user can easily click */
 .vendor-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(168, 85, 247, 0.4);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    animation-play-state: paused;
+    transform: translateY(-10px) scale(1.03);
+    border-color: #ff5722;
+    box-shadow: 0 16px 32px rgba(255, 122, 89, 0.28);
+}
+
+.vendor-card:active {
+    transform: translateY(-2px) scale(0.99);
 }
 
 .vc-avatar-wrapper {
     position: relative;
     width: 100%;
     height: 140px;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    background: #0f0c20;
+    background: #f8fafc;
 }
 
 .vendor-avatar {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.vendor-card:hover .vendor-avatar {
+    transform: scale(1.08);
 }
 
 .vc-category-tag {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: rgba(11, 8, 19, 0.75);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(13, 35, 58, 0.8);
+    backdrop-filter: blur(6px);
     color: #ffffff;
     font-size: 11px;
     font-weight: 600;
     padding: 3px 10px;
     border-radius: 20px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+}
+
+.vendor-card:hover .vc-category-tag {
+    transform: scale(1.06) translateY(-1px);
+    background: rgba(13, 35, 58, 0.92);
 }
 
 .vc-info {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .vc-name {
     font-size: 16px;
     font-weight: 700;
-    color: #ffffff;
+    color: #0d233a;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.2s ease;
+}
+
+.vendor-card:hover .vc-name {
+    color: #ff7a59;
+}
+
+/* Description styling */
+.vc-description {
+    font-size: 13px;
+    color: #516f90;
+    line-height: 1.45;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 38px;
 }
 
 .vc-meta {
@@ -181,11 +255,13 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid #f1f5f9;
 }
 
 .vc-rating {
     font-size: 13px;
-    color: #ffffff;
+    color: #0d233a;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -194,117 +270,42 @@
 .star-icon {
     color: #f59e0b;
     font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.vendor-card:hover .star-icon {
+    transform: scale(1.15);
 }
 
 .vc-reviews {
-    color: #9ca3af;
+    color: #94a3b8;
     font-size: 12px;
 }
 
 .vc-price {
     font-size: 13px;
     font-weight: 800;
-    color: #c084fc;
+    color: #8b5cf6;
+    transition: transform 0.2s ease;
+}
+
+.vendor-card:hover .vc-price {
+    transform: scale(1.05);
 }
 
 .vd-empty-card {
-    background: #151026;
-    border: 1px dashed rgba(255, 255, 255, 0.15);
+    background: #f8fafc;
+    border: 2px dashed #e2e8f0;
     border-radius: 16px;
     padding: 40px;
     text-align: center;
-    color: #9ca3af;
+    color: #64748b;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
 }
-/* Container Grid */
-.vendor-grid,
-.pg-grid-3,
-.pg-grid-4 {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    padding: 16px 0;
-}
 
-/* Vendor Card Style */
-.vendor-card,
-.vp-card {
-    background: #ffffff;
-    border: 1px solid #ff7a59; /* Crisp orange border matching reference */
-    border-radius: 12px;
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-}
-
-.vendor-card:hover,
-.vp-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 122, 89, 0.12);
-}
-
-/* Icon / Badge Container Style */
-.vendor-icon-wrap,
-.vendor-badge-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #fff1ed; /* Soft orange/peach background */
-    color: #ff7a59;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-size: 20px;
-}
-
-/* Image Banner Style Fix for View All Vendors Page */
-.vendor-img-wrap {
-    width: 100%;
-    height: 180px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #f8fafc;
-    margin-bottom: 16px;
-}
-
-.vendor-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Prevents stretching and crops cleanly */
-    object-position: center;
-    transition: transform 0.3s ease;
-}
-
-.vendor-card:hover .vendor-img-wrap img {
-    transform: scale(1.03);
-}
-
-/* Typography & Content Sizing */
-.vendor-card h3,
-.vp-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #0d233a; /* Dark navy text matching reference */
-    margin: 0 0 12px 0;
-    line-height: 1.3;
-}
-
-.vendor-card p,
-.vp-card p {
-    font-size: 0.92rem;
-    color: #516f90; /* Soft dark gray text for description */
-    line-height: 1.5;
-    margin: 0;
-}
 /* ── Responsive Rules ── */
 @media (max-width: 1024px) {
     .vd-grid {
@@ -323,7 +324,7 @@
 
     .vd-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 16px;
     }
 
     .vc-avatar-wrapper {

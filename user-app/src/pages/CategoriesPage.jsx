@@ -5,19 +5,74 @@ import './Page.css';
 import './EventsPage.css';
 import './CategoriesPage.css';
 
-// Real Event Categories matching the user-facing categories
+// Real Event Categories with added descriptions and image paths
 const STATIC_CATEGORIES = [
-    { icon: '🎤', label: 'Concert', color: '#8b5cf6' },
-    { icon: '💼', label: 'Conference', color: '#0ea5e9' },
-    { icon: '🖼️', label: 'Exhibition', color: '#f59e0b' },
-    { icon: '🛠️', label: 'Workshop', color: '#10b981' },
-    { icon: '📚', label: 'Seminar', color: '#6366f1' },
-    { icon: '🎉', label: 'Festival', color: '#ec4899' },
-    { icon: '🤝', label: 'Networking', color: '#3b82f6' },
-    { icon: '💻', label: 'Webinar', color: '#06b6d4' },
-    { icon: '⚽', label: 'Sports', color: '#10b981' },
-    { icon: '🏛️', label: 'Cultural', color: '#f97316' },
-    { icon: '🍔', label: 'Food', color: '#ef4444' },
+    { 
+        label: 'Concert', 
+        color: '#8b5cf6', 
+        description: 'Live musical performances and band shows.', 
+        image: 'https://i.pinimg.com/1200x/f6/63/a4/f663a4a0de0f2e0f5e680ca70b956fd8.jpg' 
+    },
+    { 
+        label: 'Conference', 
+        color: '#0ea5e9', 
+        description: 'Professional gatherings and keynotes.', 
+        image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=80' 
+    },
+    { 
+        label: 'Exhibition', 
+        color: '#f59e0b', 
+        description: 'Art displays, trade shows, and showcases.', 
+        image: 'https://catbirdinafrica.wordpress.com/wp-content/uploads/2012/11/pb017976.jpg' 
+    },
+    { 
+        label: 'Workshop', 
+        color: '#10b981', 
+        description: 'Interactive learning and hands-on skill sessions.', 
+        image: 'https://ehrc.org/wp-content/uploads/2026/06/DSC04821.JPG-1024x577.jpg' 
+    },
+    { 
+        label: 'Seminar', 
+        color: '#6366f1', 
+        description: 'Educational talks and informative lectures.', 
+        image: 'https://www.ena.et/documents/d/eng/aswasaas-1-jpg' 
+    },
+    { 
+        label: 'Festival', 
+        color: '#ec4899', 
+        description: 'Cultural celebrations, music, and food fairs.', 
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRklY1vEAk8HjPevgOm4TSNeKn63vJiXIcPR7_JHre7VHQyoWfvQN-xvGTu&s=10' 
+    },
+    { 
+        label: 'Networking', 
+        color: '#3b82f6', 
+        description: 'Connect with industry peers and professionals.', 
+        image: 'https://eu-images.contentstack.com/v3/assets/blta47798dd33129a0c/blt4bc94877d572b0bb/671b68ff113408cb1f6fb111/map-ethiopia-polygonal-mesh-line-map-flag-map_(1)_(1).jpg' 
+    },
+    { 
+        label: 'Webinar', 
+        color: '#06b6d4', 
+        description: 'Online seminars and digital conferences.', 
+        image: 'https://pbs.twimg.com/media/HUg__eAXkAENHCX?format=webp&name=large' 
+    },
+    { 
+        label: 'Sports', 
+        color: '#10b981', 
+        description: 'Athletic competitions and fitness events.', 
+        image: 'https://www.tadias.com/wp-content/uploads/2020/05/result-51.jpg' 
+    },
+    { 
+        label: 'Cultural', 
+        color: '#f97316', 
+        description: 'Traditional heritage and community meetups.', 
+        image: 'https://ethiopianembassy.org/wp-content/uploads/2019/01/download-10.jpg' 
+    },
+    { 
+        label: 'Food', 
+        color: '#ef4444', 
+        description: 'Culinary experiences and tasting events.', 
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ79S_0Ihr62dCTtdNLD3ycPAABBcljBC97nod3nwfRJ5Rl-u0uZKoVtKo&s=10' 
+    },
 ];
 
 export default function CategoriesPage() {
@@ -73,7 +128,7 @@ export default function CategoriesPage() {
             <div className="page-hero">
                 <div className="page-hero-inner">
                     <div className="page-breadcrumb">
-                        <Link to="/">Home</Link> / Categories
+                        {/* <Link to="/">Home</Link> / Categories */}
                     </div>
                     <h1>Browse by Category</h1>
                     <p>Explore events across all categories</p>
@@ -90,8 +145,19 @@ export default function CategoriesPage() {
                                 key={i}
                                 className={`cp-card ${isSelected ? 'active' : ''}`}
                                 style={isSelected
-                                    ? { background: cat.color, borderColor: cat.color }
-                                    : { borderTopColor: cat.color }}
+                                    ? { 
+                                        background: cat.color, 
+                                        borderColor: cat.color,
+                                        borderWidth: '2px',
+                                        borderStyle: 'solid'
+                                      }
+                                    : { 
+                                        borderTopColor: cat.color,
+                                        borderTopWidth: '6px', // Increased top border accent size
+                                        borderWidth: '2px',    // Increased surrounding border thickness
+                                        borderStyle: 'solid',
+                                        borderColor: '#e5e7eb'
+                                      }}
                                 onClick={() => handleSelectCategory(cat.label)}
                             >
                                 <div className="cp-icon" style={
@@ -99,11 +165,24 @@ export default function CategoriesPage() {
                                         ? { background: 'rgba(255,255,255,0.2)', color: '#fff' }
                                         : { background: cat.color + '20', color: cat.color }
                                 }>
-                                    {cat.icon}
+                                    {cat.image ? (
+                                        <img src={cat.image} alt={cat.label} style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                                    ) : (
+                                        cat.icon
+                                    )}
                                 </div>
                                 <div className={`cp-label ${isSelected ? 'cp-label-white' : ''}`}>
                                     {cat.label}
                                 </div>
+                                {/* Simple Description added below title */}
+                                <p style={{
+                                    fontSize: '12px',
+                                    color: isSelected ? 'rgba(255, 255, 255, 0.85)' : '#6b7280',
+                                    margin: '6px 0 0 0',
+                                    lineHeight: '1.3'
+                                }}>
+                                    {cat.description}
+                                </p>
                             </button>
                         );
                     })}

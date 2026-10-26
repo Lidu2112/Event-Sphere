@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useLang } from '../context/LanguageContext';
+import { t } from '../data/translations';
 import './Hero.css';
 
 const SLIDES = [
@@ -18,6 +20,7 @@ const SLIDES = [
 ];
 
 export default function Hero() {
+    const { lang } = useLang();
     const [current, setCurrent] = useState(0);
     const [paused, setPaused] = useState(false);
 
@@ -32,52 +35,62 @@ export default function Hero() {
 
     return (
         <section className="hero" id="home">
-            {/* Background slider */}
-            <div className="hero-slider">
-                {SLIDES.map((slide, i) => (
-                    <div
-                        key={i}
-                        className={`hero-slide ${i === current ? 'active' : ''}`}
-                        style={{ backgroundImage: `url(${slide.url})` }}
-                    />
-                ))}
+            {/* Background Video */}
+            <div className="hero-video-bg">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="hero-bg-video"
+                >
+                    <source src="/hero-bg.mp4" type="video/mp4" />
+                    {/* Fallback: image slider if video doesn't load */}
+                    {SLIDES.map((slide, i) => (
+                        <div
+                            key={i}
+                            className={`hero-slide ${i === current ? 'active' : ''}`}
+                            style={{ backgroundImage: `url(${slide.url})` }}
+                        />
+                    ))}
+                </video>
                 <div className="hero-overlay" />
             </div>
 
-            {/* Main content */}
+            {/* Main content split layout */}
             <div className="hero-container">
                 <div className="hero-left">
-                    <div className="hero-tag">🎵 Live Events & Festivals</div>
+                    <div className="hero-tag">{t(lang, 'hero_tag')}</div>
                     <h1 className="hero-title">
-                        Sounds in the <span className="hero-title-accent">City Festival</span>
+                        {t(lang, 'hero_title_1')} <span className="hero-title-accent">{t(lang, 'hero_title_accent')}</span><br />
+                        <span className="hero-sp">{t(lang, 'hero_title_2')}</span>
                     </h1>
-                    <p className="hero-subtitle">
-                        Get ready to rock out! This year's lineup is packed with incredible talent
-                        from all genres. Don't miss out — get your tickets now!
-                    </p>
+                    <p className="hero-subtitle">{t(lang, 'hero_subtitle')}</p>
                     <div className="hero-btns">
-                        <Link to="/events" className="hero-btn-primary">Explore Events</Link>
-                        <Link to="/register" className="hero-btn-outline">Get Tickets</Link>
+                        <Link to="/events" className="hero-btn-primary">{t(lang, 'hero_btn_explore')}</Link>
+                        <Link to="/register" className="hero-btn-outline">{t(lang, 'hero_btn_tickets')}</Link>
                     </div>
 
                     {/* Stats */}
                     <div className="hero-stats">
                         <div className="hero-stat">
                             <span className="hero-stat-value">50+</span>
-                            <span className="hero-stat-label">Festival</span>
+                            <span className="hero-stat-label">{t(lang, 'hero_stat_festival')}</span>
                         </div>
                         <div className="hero-stat-divider" />
                         <div className="hero-stat">
                             <span className="hero-stat-value">300+</span>
-                            <span className="hero-stat-label">Artist</span>
+                            <span className="hero-stat-label">{t(lang, 'hero_stat_artist')}</span>
                         </div>
                         <div className="hero-stat-divider" />
                         <div className="hero-stat">
                             <span className="hero-stat-value">578K</span>
-                            <span className="hero-stat-label">Visitors</span>
+                            <span className="hero-stat-label">{t(lang, 'hero_stat_visitors')}</span>
                         </div>
                     </div>
                 </div>
+
+                <div className="hero-right-card" />
             </div>
 
             {/* Slider controls */}

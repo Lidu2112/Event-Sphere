@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { apiUrl } from '../api/config';
 import { Link } from 'react-router-dom';
+import { useLang } from '../context/LanguageContext';
+import { t } from '../data/translations';
 import './FeaturedEvents.css';
 
 const CATEGORY_COLORS = {
@@ -11,6 +13,7 @@ const CATEGORY_COLORS = {
 };
 
 export default function FeaturedEvents() {
+    const { lang } = useLang();
     const [allEvents, setAllEvents] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -61,64 +64,63 @@ export default function FeaturedEvents() {
     });
 
     return (
-       <section className="featured-events" id="events">
-    <div className="featured-events-container">
+        <section className="featured-events" id="events">
+            <div className="featured-events-container">
 
-        {/* Combined Header & Search Bar Row */}
-        <div className="featured-header">
-            <div className="featured-header-left">
-                <h2 className="featured-title">Featured Events</h2>
-                {/* <p className="featured-subtitle">Discover the most popular events in your city</p> */}
-            </div>
+                {/* Combined Header & Search Bar Row */}
+                <div className="featured-header">
+                    <div className="featured-header-left">
+                        <h2 className="featured-title">{t(lang, 'featured_title')}</h2>
+                    </div>
 
-            {/* Embedded Search bar */}
-          <div className="featured-search-bar">
-    <div className="fsb-field">
-        <i className="fas fa-search" style={{ fontSize: '18px' }}></i>
-        <input
-            type="text"
-            placeholder="Search name..."
-            value={searchName}
-            onChange={e => setSearchName(e.target.value)}
-        />
-    </div>
-    {/* rest of your code */}
+                    {/* Embedded Search bar */}
+                    <div className="featured-search-bar">
+                        <div className="fsb-field">
+                            <i className="fas fa-search" style={{ fontSize: '18px' }}></i>
+                            <input
+                                type="text"
+                                placeholder={t(lang, 'featured_search_name')}
+                                value={searchName}
+                                onChange={e => setSearchName(e.target.value)}
+                            />
+                        </div>
+                        {/* rest of your code */}
 
-                <div className="fsb-divider" />
-                <div className="fsb-field">
-                    {/* <span className="fsb-icon"></span> */}
-                    <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
-                        {categories.map(c => <option key={c} value={c === 'All' ? '' : c}>{c}</option>)}
-                    </select>
+                        <div className="fsb-divider" />
+                        <div className="fsb-field">
+                            {/* <span className="fsb-icon"></span> */}
+                            <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
+                                {categories.map(c => <option key={c} value={c === 'All' ? '' : c}>{c}</option>)}
+                            </select>
+                        </div>
+                        <div className="fsb-divider" />
+                        <div className="fsb-field">
+                            {/* <span className="fsb-icon">📍</span> */}
+                            <input
+                                type="text"
+                                placeholder={t(lang, 'featured_search_city')}
+                                value={searchCity}
+                                onChange={e => setSearchCity(e.target.value)}
+                            />
+                        </div>
+                        <div className="fsb-divider" />
+                        <div className="fsb-field">
+                            {/* <span className="fsb-icon">📅</span> */}
+                            <input
+                                type="date"
+                                value={searchDate}
+                                onChange={e => setSearchDate(e.target.value)}
+                            />
+                        </div>
+                        <button className="fsb-btn" onClick={() => { setSearchName(''); setSearchCategory(''); setSearchCity(''); setSearchDate(''); }}>
+                            {t(lang, 'featured_clear')}
+                        </button>
+                    </div>
+
+                    <Link to="/events" className="featured-view-all">
+                        {t(lang, 'featured_view_all')}
+                    </Link>
                 </div>
-                <div className="fsb-divider" />
-                <div className="fsb-field">
-                    {/* <span className="fsb-icon">📍</span> */}
-                    <input
-                        type="text"
-                        placeholder="City..."
-                        value={searchCity}
-                        onChange={e => setSearchCity(e.target.value)}
-                    />
-                </div>
-                <div className="fsb-divider" />
-                <div className="fsb-field">
-                    {/* <span className="fsb-icon">📅</span> */}
-                    <input
-                        type="date"
-                        value={searchDate}
-                        onChange={e => setSearchDate(e.target.value)}
-                    />
-                </div>
-                <button className="fsb-btn" onClick={() => { setSearchName(''); setSearchCategory(''); setSearchCity(''); setSearchDate(''); }}>
-                    Clear
-                </button>
-            </div>
-
-            <Link to="/events" className="featured-view-all">
-                View All Events →
-            </Link>
-        </div>
 
                 {/* Search bar */}
                 {/* <div className="featured-search-bar">
@@ -164,13 +166,13 @@ export default function FeaturedEvents() {
 
                 {loading ? (
                     <div style={{ padding: '40px 0', textAlign: 'center', color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>
-                        Loading events...
+                        {t(lang, 'featured_loading')}
                     </div>
                 ) : filtered.length === 0 ? (
                     <div style={{ padding: '60px 0', textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
                         <div style={{ fontSize: 40, marginBottom: 12 }}>🎪</div>
                         <p style={{ margin: 0, fontSize: 15 }}>
-                            {allEvents.length === 0 ? 'No events yet. Check back soon!' : 'No events match your search.'}
+                            {allEvents.length === 0 ? t(lang, 'featured_no_events') : t(lang, 'featured_no_match')}
                         </p>
                     </div>
                 ) : (

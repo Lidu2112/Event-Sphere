@@ -1,4 +1,4 @@
-* {
+- {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,4 +12,20 @@ body {
 
 .app {
   min-height: 100vh;
+}
+
+/* ── Remove Gaps Between Successive Sections ── */
+
+/* 1. Reduce top padding for sections that appear right after another section or hero */
+.hero + *, 
+.vd-section + .vd-section,
+section + section {
+    padding-top: 15px !important; /* Change to 0px if you want them touching completely */
+    margin-top: 0 !important;
+}
+
+/* 2. Tighten section padding so sections stack closely together */
+.vd-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

@@ -1,158 +1,203 @@
-.categories {
-    padding: 48px 0 56px;
-    background: linear-gradient(
-        90deg,
-        #f96332 0%,
-        #e0247d 45%,
-        #9c1cb8 75%,
-        #5b17a0 100%
-    );
-    overflow: hidden;
+.categories-hero-slider {
+    position: relative;
+    width: 100%;
+    min-height: 540px;
+    padding: 60px 0 80px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.6s ease-in-out;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Full-width dark gradient overlay matching reference layout */
+.cat-slider-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(11, 15, 25, 0.92) 0%,
+        rgba(11, 15, 25, 0.65) 40%,
+        rgba(11, 15, 25, 0.85) 80%,
+        rgba(11, 15, 25, 0.95) 100%
+    );
+    z-index: 1;
 }
 
 .cat-container {
+    position: relative;
+    z-index: 2;
     max-width: 1280px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 24px;
+    box-sizing: border-box;
 }
 
 .cat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
-.cat-title {
+.cat-section-title {
     font-size: 28px;
     font-weight: 800;
     color: #ffffff;
     margin: 0;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.3px;
 }
 
-.cat-view-all {
-    font-size: 13px;
+.cat-view-all-gallery {
+    font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
+    color: #facc15;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 8px 18px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    transition: all 0.2s ease;
-    white-space: nowrap;
+    transition: opacity 0.2s ease;
 }
 
-.cat-view-all:hover {
-    background: rgba(255, 255, 255, 0.32);
-    transform: translateY(-1px);
+.cat-view-all-gallery:hover {
+    opacity: 0.8;
+    text-decoration: underline;
 }
 
-/* ── Horizontal Infinite Track Setup ── */
-.cat-scroll-wrapper {
-    width: 100%;
-    overflow: hidden;
-    padding: 8px 0;
-}
-
-.cat-track {
+/* ── Content & Controls Layout ── */
+.cat-slider-content-area {
+    position: relative;
     display: flex;
-    gap: 16px;
-    width: max-content;
-    animation: infiniteScroll 25s linear infinite;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
 }
 
-.cat-scroll-wrapper:hover .cat-track {
-    animation-play-state: paused;
-}
-
-@keyframes infiniteScroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* ── Category Cards ── */
-.cat-card {
-    text-decoration: none;
-    color: inherit;
-    background: #ffffff;
-    border: none;
-    border-top: 4px solid;
-    border-radius: 16px;
-    padding: 18px 10px 14px;
+.cat-slider-content {
+    max-width: 750px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.cat-badge-pill {
+    background: rgba(0, 0, 0, 0.8);
+    color: #facc15;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.cat-active-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.cat-active-subtitle {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 8px 0;
+    line-height: 1.5;
+}
+
+.cat-explore-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cat-explore-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* ── Controls (Dots & Arrows aligned to bottom right) ── */
+.cat-slider-controls {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 110px;
-    height: 110px;
-    box-sizing: border-box;
+    gap: 24px;
     flex-shrink: 0;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    padding-bottom: 8px;
 }
 
-.cat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+.cat-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
-.cat-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+.cat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.cat-dot.active {
+    width: 28px;
+    background: #facc15;
+}
+
+.cat-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.cat-arrow-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.cat-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #1f2937;
-    text-align: center;
-    line-height: 1.2;
+.cat-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-    .categories {
-        padding: 36px 0;
+/* ── Responsive Design ── */
+@media (max-width: 900px) {
+    .cat-slider-content-area {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
     }
 
-    .cat-container {
-        padding: 0 16px;
+    .cat-slider-controls {
+        width: 100%;
+        justify-content: space-between;
     }
 
-    .cat-title {
-        font-size: 22px;
-    }
-
-    .cat-card {
-        width: 100px;
-        height: 100px;
-        padding: 14px 8px 10px;
-        gap: 8px;
-    }
-
-    .cat-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
-        border-radius: 10px;
-    }
-
-    .cat-label {
-        font-size: 12px;
+    .cat-active-title {
+        font-size: 32px;
     }
 }

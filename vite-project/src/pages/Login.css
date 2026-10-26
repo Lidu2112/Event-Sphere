@@ -5,7 +5,7 @@
 
 /* ===== RIGHT PANEL ===== */
 .login-right {
-   flex: 1;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,8 +105,8 @@
 }
 
 .input-wrap:focus-within {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    border-color: #2A1527;
+    box-shadow: 0 0 0 3px rgba(42, 21, 39, 0.1);
     background: #fff;
 }
 
@@ -149,7 +149,7 @@
     background: none;
     border: none;
     font-size: 12px;
-    color: #6366f1;
+    color: #2A1527;
     cursor: pointer;
     font-weight: 600;
 }
@@ -161,7 +161,7 @@
 .submit-btn {
     width: 100%;
     padding: 13px;
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    background: #2A1527;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -177,9 +177,9 @@
 }
 
 .submit-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    background: #3d1f38;
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 20px rgba(42, 21, 39, 0.35);
 }
 
 .submit-btn:disabled {
@@ -252,9 +252,9 @@
 }
 
 .google-account-btn:hover:not(:disabled) {
-    border-color: #6366f1;
+    border-color: #2A1527;
     background: #fff;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 4px 12px rgba(42, 21, 39, 0.1);
 }
 
 .g-avatar {

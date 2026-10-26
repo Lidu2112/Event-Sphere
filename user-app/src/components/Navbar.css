@@ -1,24 +1,25 @@
 .navbar {
-    border-bottom: none;
-    box-shadow: none;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
     z-index: 100;
+    background: #ffffff;
 }
 
-/* Transparent/absolute — only on landing page, overlays the hero */
+/* Transparent navbar on landing page */
 .navbar.navbar-transparent {
-    background: transparent;
-    position: absolute;
+    background: #ffffff;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
 
-/* Solid/sticky — on all other pages, sits above content */
+/* Solid/sticky navbar on other pages */
 .navbar.navbar-solid {
-    background: #0d1117;
+    background: #ffffff;
     position: sticky;
     top: 0;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -40,9 +41,15 @@
 
 .logo-text {
     font-size: 20px;
-    font-weight: 800;
-    color: #fff;
+    font-weight: 1000;
+    color: #F5823A; /* Ethio color */
     letter-spacing: -0.3px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+}
+
+.logo-text .highlight {
+    color: #2A1527; /* EventSphere color */
 }
 
 .nav-menu {
@@ -57,8 +64,8 @@
 
 .nav-link {
     font-size: 13px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85);
+    font-weight: 800;
+    color: #374151;
     text-decoration: none;
     transition: all 0.2s;
     position: relative;
@@ -71,7 +78,7 @@
 .nav-dropdown-toggle {
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.85);
+    color: #374151;
     cursor: pointer;
     font: inherit;
     text-transform: uppercase;
@@ -79,7 +86,7 @@
 
 .nav-dropdown:hover .nav-dropdown-toggle,
 .nav-dropdown-toggle:focus {
-    color: #fff;
+    color: #111827;
 }
 
 .nav-dropdown-menu {
@@ -111,7 +118,7 @@
     color: #102a43;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 800;
     transition: background 0.2s, color 0.2s;
 }
 
@@ -121,20 +128,20 @@
 }
 
 .nav-link:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.08);
+    color: #111827;
+    background: #f3f4f6;
 }
 
-/* Active Pill Styling Matching the Reference Image */
+/* Active navigation item */
 .nav-link.active {
-    color: #fff;
+    color: #ffffff;
     font-weight: 700;
-    background: #3B1E38;
-    border: 1px solid rgba(229, 138, 43, 0.3);
+    background: #2A1527;
+    border: 1px solid rgba(42, 21, 39, 0.3);
 }
 
 .nav-link.active::after {
-    display: none; /* Replaced underline with solid pill container */
+    display: none;
 }
 
 .nav-actions {
@@ -154,27 +161,27 @@
 }
 
 .nav-btn.login {
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
 }
 
 .nav-btn.login:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.6);
+    background: #f9fafb;
+    border-color: #9ca3af;
 }
 
 .nav-btn.register {
-    background: linear-gradient(135deg, #E58A2B, #d27216);
-    color: #fff;
+    background: #2A1527;
+    color: #ffffff;
     border: none;
-    box-shadow: 0 4px 14px rgba(229, 138, 43, 0.3);
+    box-shadow: 0 4px 14px rgba(42, 21, 39, 0.3);
 }
 
 .nav-btn.register:hover {
-    opacity: 0.9;
+    opacity: 0.88;
     transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(229, 138, 43, 0.45);
+    box-shadow: 0 6px 18px rgba(42, 21, 39, 0.45);
 }
 
 .hamburger-menu {
@@ -183,7 +190,7 @@
     border: none;
     font-size: 22px;
     cursor: pointer;
-    color: #fff;
+    color: #111827;
 }
 
 .nav-profile {
@@ -191,9 +198,9 @@
 }
 
 .nav-profile-btn {
-    background: rgba(229, 138, 43, 0.15);
-    color: #fff;
-    border: 1px solid rgba(229, 138, 43, 0.4);
+    background: #fff7ed;
+    color: #374151;
+    border: 1px solid #fed7aa;
     border-radius: 10px;
     padding: 9px 16px;
     cursor: pointer;
@@ -203,7 +210,7 @@
 }
 
 .nav-profile-btn:hover {
-    background: rgba(229, 138, 43, 0.25);
+    background: #ffedd5;
 }
 
 .nav-profile-menu {
@@ -214,7 +221,7 @@
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     z-index: 999;
 }
 
@@ -240,32 +247,18 @@
     font-weight: 600;
 }
 
-@media (max-width: 900px) {
-    .nav-menu {
-        display: none;
-    }
-
-    .nav-container {
-        padding: 12px 16px;
-    }
-
-    .hamburger-menu {
-        display: block;
-    }
-}
-
 .nav-user {
     font-size: 13px;
     font-weight: 600;
-    color: #fff;
+    color: #374151;
     padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #f3f4f6;
     border-radius: 8px;
 }
 
 .nav-btn.dashboard-btn {
     background: linear-gradient(135deg, #00A3FF, #0088CC);
-    color: #fff;
+    color: #ffffff;
     border: none;
     text-decoration: none;
     display: inline-flex;
@@ -279,22 +272,125 @@
     box-shadow: 0 4px 14px rgba(0, 163, 255, 0.4);
 }
 
-/* ── Mobile slide-down menu ── */
+/* Mobile slide-down menu */
 .mobile-nav-panel {
     display: flex;
     flex-direction: column;
-    background: rgba(13, 17, 23, 0.98);
+    background: rgba(255, 255, 255, 0.99);
     backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid #e5e7eb;
     padding: 8px 0 16px;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     z-index: 99;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
     animation: mobileSlideDown 0.22s ease;
 }
+/* =========================================
+   LANGUAGE SWITCHER STYLES
+   ========================================= */
 
+.nav-lang-dropdown {
+    position: relative;
+}
+
+.nav-lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid #d1d5db;
+    border-radius: 50px;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-lang-btn:hover {
+    border-color: #9ca3af;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.lang-globe {
+    font-size: 14px;
+    color: #b7791f; /* Golden touch */
+}
+
+.nav-lang-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 130px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    z-index: 100;
+    animation: fadeInMenu 0.15s ease;
+}
+
+@keyframes fadeInMenu {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-lang-item {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.nav-lang-item:hover,
+.nav-lang-item.active {
+    background: #f3f4f6;
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Mobile Language Switcher Panel */
+.mobile-lang-switcher {
+    display: flex;
+    gap: 10px;
+    padding: 8px 24px;
+}
+
+.mobile-lang-opt {
+    flex: 1;
+    padding: 8px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    text-align: center;
+}
+
+.mobile-lang-opt.active {
+    background: #2A1527;
+    color: #ffffff;
+    border-color: #2A1527;
+}
+
+/* Amharic Font global application when body has .lang-am */
+body.lang-am {
+    font-family: 'Noto Sans Ethiopic', sans-serif, system-ui;
+}
 @keyframes mobileSlideDown {
     from {
         opacity: 0;
@@ -310,7 +406,7 @@
 .mobile-nav-link {
     display: block;
     padding: 13px 24px;
-    color: rgba(255, 255, 255, 0.85);
+    color: #374151;
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
@@ -324,22 +420,22 @@
 
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-    background: rgba(255, 255, 255, 0.07);
-    color: #fff;
+    background: #f3f4f6;
+    color: #111827;
 }
 
 .mobile-nav-link.active {
-    color: #E58A2B;
+    color: #b7791f;
     font-weight: 700;
 }
 
 .mobile-nav-divider {
     height: 1px;
-    background: rgba(255, 255, 255, 0.08);
+    background: #e5e7eb;
     margin: 6px 24px;
     font-size: 11px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.4);
+    color: #6b7280;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     display: flex;
@@ -353,6 +449,20 @@
 }
 
 .mobile-register {
-    color: #E58A2B !important;
+    color: #b7791f !important;
     font-weight: 700 !important;
+}
+
+@media (max-width: 900px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-container {
+        padding: 12px 16px;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
 }

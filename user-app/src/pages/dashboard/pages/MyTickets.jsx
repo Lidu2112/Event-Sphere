@@ -39,8 +39,8 @@ export default function MyTickets() {
                     <button key={s} onClick={() => setFilter(s)}
                         style={{
                             padding: '6px 16px', borderRadius: 20, border: '1px solid',
-                            borderColor: filter === s ? '#6366f1' : '#e2e8f0',
-                            background: filter === s ? '#6366f1' : '#fff',
+                            borderColor: filter === s ? '#2A1527' : '#e2e8f0',
+                            background: filter === s ? '#2A1527' : '#fff',
                             color: filter === s ? '#fff' : '#64748b',
                             fontWeight: 600, fontSize: 13, cursor: 'pointer',
                         }}>

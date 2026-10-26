@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faArrowRight, faStore, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import './Vendors.css';
-
+import { useLang } from '../context/LanguageContext';
+import { t } from '../data/translations';
 import { apiUrl } from '../api/config';
+import './Vendors.css';
 
 const API_URL = apiUrl('/api');
 
-// Categories matching image two
+// Categories matching reference
 const DEFAULT_CATEGORIES = [
     'All Categories',
     'Photography',
@@ -22,6 +23,7 @@ const DEFAULT_CATEGORIES = [
 ];
 
 export default function Vendors() {
+    const { lang } = useLang();
     const [services, setServices] = useState([]);
     const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
     const [loading, setLoading] = useState(true);
@@ -42,7 +44,6 @@ export default function Vendors() {
                 );
 
                 if (dbCategories.length > 0) {
-                    // Combine default categories with any extra categories returned from backend
                     const mergedCategories = Array.from(
                         new Set(['All Categories', ...DEFAULT_CATEGORIES.slice(1), ...dbCategories])
                     );
@@ -58,17 +59,17 @@ export default function Vendors() {
         fetchData();
     }, []);
 
-    // Filter logic supporting precise and loose matching (e.g. 'Decor' vs 'Decoration')
+    // Filter logic supporting precise and loose matching
     const filteredServices = selectedCategory === 'All Categories'
         ? services
         : services.filter(s => {
             if (!s.category) return false;
             const cat = s.category.toLowerCase();
             const selected = selectedCategory.toLowerCase();
-            
-            return cat === selected || 
-                   (selected.includes('decor') && cat.includes('decor')) ||
-                   (selected.includes('dj') && cat.includes('dj'));
+
+            return cat === selected ||
+                (selected.includes('decor') && cat.includes('decor')) ||
+                (selected.includes('dj') && cat.includes('dj'));
         });
 
     if (loading) {
@@ -76,7 +77,7 @@ export default function Vendors() {
             <section className="vd-section">
                 <div className="vd-container vd-state-center">
                     <FontAwesomeIcon icon={faSpinner} spin className="vd-spinner" />
-                    <p>Fetching top vendors...</p>
+                    <p>{t(lang, 'vendors_loading')}</p>
                 </div>
             </section>
         );
@@ -86,20 +87,18 @@ export default function Vendors() {
         <section className="vd-section" id="vendors">
             <div className="vd-container">
 
-                {/* Header Row */}
+                {/* Header Row ("Popular Vendors" title removed, keeping View All link aligned) */}
                 <div className="vd-header">
-                    <div>
-                        <h2 className="vd-title">Popular Vendors</h2>
-                    </div>
+                    <div></div>
                     <Link to="/vendors" className="vd-view-all">
-                        View All Vendors <FontAwesomeIcon icon={faArrowRight} />
+                        {t(lang, 'vendors_view_all')} <FontAwesomeIcon icon={faArrowRight} />
                     </Link>
                 </div>
 
                 {/* Category Dropdown Filter */}
                 <div className="vd-filter-wrapper">
                     <label htmlFor="vd-category-select" className="vd-filter-label">
-                        Category:
+                        {t(lang, 'vendors_category')}
                     </label>
                     <select
                         id="vd-category-select"
@@ -119,7 +118,7 @@ export default function Vendors() {
                 {filteredServices.length === 0 ? (
                     <div className="vd-empty-card">
                         <FontAwesomeIcon icon={faStore} size="2x" />
-                        <p>No vendors found for this category.</p>
+                        <p>{t(lang, 'vendors_empty')}</p>
                     </div>
                 ) : (
                     <div className="vd-grid">
@@ -149,7 +148,16 @@ export default function Vendors() {
 
                                 <div className="vc-info">
                                     <div className="vc-name">{service.name}</div>
-                                    
+
+                                    {/* Vendor Description */}
+                                    <p className="vc-description">
+                                        {service.description
+                                            ? (service.description.length > 90
+                                                ? service.description.substring(0, 90) + '...'
+                                                : service.description)
+                                            : 'Explore professional services tailored for your unique event experience.'}
+                                    </p>
+
                                     <div className="vc-meta">
                                         <div className="vc-rating">
                                             <FontAwesomeIcon icon={faStar} className="star-icon" />
