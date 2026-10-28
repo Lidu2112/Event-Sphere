@@ -30,20 +30,20 @@ export default function MyServices() {
     }
 
     function openAdd() { setForm(EMPTY); setEditing(null); setModal('add'); setMsg(''); }
-    function openEdit(s) { 
-        setForm({ 
-            name: s.name, 
-            category: s.category, 
-            description: s.description || '', 
-            price: s.price, 
-            priceUnit: s.priceUnit || 'per event', 
-            status: s.status || 'active', 
-            imageFile: null, 
-            imagePreview: s.image || '' 
-        }); 
-        setEditing(s._id); 
-        setModal('edit'); 
-        setMsg(''); 
+    function openEdit(s) {
+        setForm({
+            name: s.name,
+            category: s.category,
+            description: s.description || '',
+            price: s.price,
+            priceUnit: s.priceUnit || 'per event',
+            status: s.status || 'active',
+            imageFile: null,
+            imagePreview: s.image || ''
+        });
+        setEditing(s._id);
+        setModal('edit');
+        setMsg('');
     }
 
     async function handleSave() {
@@ -67,7 +67,7 @@ export default function MyServices() {
                 // If your backend supports updating services with images via FormData:
                 await vendorApi.updateService(editing, fd);
             }
-            setModal(null); 
+            setModal(null);
             load();
         } catch (e) { setMsg(e.message); }
         finally { setSaving(false); }
@@ -97,7 +97,11 @@ export default function MyServices() {
                             {/* Service Image Banner */}
                             {s.image && (
                                 <div style={{ height: 140, width: '100%', overflow: 'hidden', backgroundColor: '#f1f5f9' }}>
-                                    <img src={s.image} alt={s.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    <img
+                                        src={s.image.startsWith('http') ? s.image : apiUrl(s.image)}
+                                        alt={s.name}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    />
                                 </div>
                             )}
 

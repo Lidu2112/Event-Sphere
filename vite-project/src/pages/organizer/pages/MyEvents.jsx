@@ -171,7 +171,10 @@ export default function MyEvents() {
                         const mine = isMine(ev);
                         const raw = mine ? getRawEvent(ev) : null;
                         const published = raw ? raw.published : false;
-                        const img = ev.banner || ev.img || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800';
+                        const rawImg = ev.banner || ev.img || '';
+                        const img = rawImg
+                            ? (rawImg.startsWith('http') ? rawImg : apiUrl(rawImg))
+                            : 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800';
                         const price = ev.price || (Number(ev.ticketPrice) === 0 ? 'Free' : ev.ticketPrice ? `ETB ${Number(ev.ticketPrice).toLocaleString()}` : '');
                         const venue = ev.location || ev.venue || '';
                         const badgeColor = ev.badgeColor || '#6366f1';
