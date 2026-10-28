@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import './Page.css';
 import './VendorDetail.css';
 
-import { apiUrl } from '../api/config';
+import { apiUrl, imageUrl } from '../api/config';
 
 const API_URL = apiUrl('/api');
 
@@ -65,7 +65,7 @@ export default function VendorDetail() {
                 <div className="vd-main">
                     <div className="vd-img-wrap">
                         <img
-                            src={service.image ? apiUrl(service.image) : '/default-vendor.jpg'}
+                            src={service.image ? imageUrl(service.image) : '/images/default-vendor.svg'}
                             alt={service.name}
                         />
                     </div>

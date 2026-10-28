@@ -127,7 +127,7 @@ router.post(
             }
 
             const image = req.file
-                ? `/uploads/services/${req.file.filename}`
+                ? (req.file.path || `/uploads/services/${req.file.filename}`)
                 : '';
 
             const s = await Service.create({

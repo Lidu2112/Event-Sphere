@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { apiUrl } from '../api/config';
+import { apiUrl, imageUrl } from '../api/config';
 import { Link, useSearchParams } from 'react-router-dom';
 import './Page.css';
 import './EventsPage.css';
@@ -212,7 +212,7 @@ export default function CategoriesPage() {
                                 {events.map(event => (
                                     <Link key={event.id || event._id} to={`/events/${event.id || event._id}`} className="ep-card">
                                         <div className="ep-img-wrap">
-                                            <img src={event.img || event.banner} alt={event.title} loading="lazy" />
+                                            <img src={imageUrl(event.img || event.banner)} alt={event.title} loading="lazy" />
                                             <span className="ep-badge" style={{ background: event.badgeColor || activeColor }}>
                                                 {event.badge || event.category}
                                             </span>

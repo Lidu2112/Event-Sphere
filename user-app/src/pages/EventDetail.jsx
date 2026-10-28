@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { apiUrl } from '../api/config';
+import { apiUrl, imageUrl } from '../api/config';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './EventDetail.css';
@@ -12,7 +12,7 @@ function normalize(ev) {
         location: ev.location || ev.venue || '',
         date: ev.date,
         price: ev.ticketPrice ?? 0,
-        image: ev.img || ev.banner || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200',
+        image: imageUrl(ev.img || ev.banner) || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200',
         category: ev.badge || ev.category || 'Event',
         organizer: ev.organizer || ev.organizerEmail || '',
         time: ev.time || '',

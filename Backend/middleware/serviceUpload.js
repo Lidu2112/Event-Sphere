@@ -1,6 +1,8 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const uploadDir = 'uploads/services';
 
@@ -8,7 +10,13 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-const storage = multer.diskStorage({
+const hasCloudinaryConfig = Boolean(
+    process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET
+);
+
+const diskStorage = multer.diskStorage({
 
     destination: (req, file, cb) => {
         cb(null, uploadDir);
@@ -42,6 +50,24 @@ const fileFilter = (req, file, cb) => {
         cb(new Error('Only image files are allowed'));
     }
 };
+
+let storage = diskStorage;
+
+if (hasCloudinaryConfig) {
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+
+    storage = new CloudinaryStorage({
+        cloudinary,
+        params: {
+            folder: 'eventsphere-vendor-services',
+            allowed_formats: ['jpeg', 'jpg', 'png', 'webp'],
+        },
+    });
+}
 
 const upload = multer({
     storage,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { apiUrl } from '../api/config';
+import { apiUrl, imageUrl } from '../api/config';
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
@@ -35,7 +35,7 @@ export default function FeaturedEvents() {
                         location: e.location || e.venue || '',
                         date: e.date,
                         price: e.price || (e.ticketPrice === 0 ? 'Free' : `ETB ${Number(e.ticketPrice).toLocaleString()}`),
-                        image: e.img || e.banner || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600',
+                        image: imageUrl(e.img || e.banner) || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600',
                         category: e.badge || e.category || 'Event',
                         categoryColor: e.badgeColor || CATEGORY_COLORS[e.badge] || CATEGORY_COLORS[e.category] || '#6366f1',
                     }));

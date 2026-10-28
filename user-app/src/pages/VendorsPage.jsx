@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
-import { apiUrl } from '../api/config';
+import { apiUrl, imageUrl } from '../api/config';
 import './Page.css';
 import './VendorsPage.css';
 
@@ -76,7 +76,7 @@ export default function VendorsPage() {
                             <Link key={s._id} to={`/vendors/${s._id}`} className="vp-card">
                                 <div className="vp-img-wrap">
                                     <img
-                                        src={s.image ? apiUrl(s.image) : '/default-vendor.jpg'}
+                                        src={s.image ? imageUrl(s.image) : '/images/default-vendor.svg'}
                                         alt={s.name}
                                         loading="lazy"
                                     />

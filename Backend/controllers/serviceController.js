@@ -33,7 +33,7 @@ console.log('SERVICE FILE:', req.file);
         }
 
         const image = req.file
-            ? `/uploads/services/${req.file.filename}`
+            ? (req.file.path || `/uploads/services/${req.file.filename}`)
             : '';
 
         const service = await Service.create({

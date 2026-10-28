@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faArrowRight, faStore, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
-import { apiUrl } from '../api/config';
+import { apiUrl, imageUrl } from '../api/config';
 import './Vendors.css';
 
 const API_URL = apiUrl('/api');
@@ -132,8 +132,8 @@ export default function Vendors() {
                                     <img
                                         src={
                                             service.image
-                                                ? apiUrl(service.image)
-                                                : '/default-vendor.jpg'
+                                                ? imageUrl(service.image)
+                                                : '/images/default-vendor.svg'
                                         }
                                         alt={service.name}
                                         className="vendor-avatar"
