@@ -1,27 +1,29 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const router = express.Router();
 
-// Ensure uploads directory exists at startup
-const UPLOAD_DIR = path.join(__dirname, '../uploads');
-if (!fs.existsSync(UPLOAD_DIR)) {
-    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-}
+// Configure Cloudinary using environment variables from Render / .env
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, UPLOAD_DIR),
-    filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname).toLowerCase() || '.jpg';
-        cb(null, `banner_${Date.now()}${ext}`);
+// Set up Cloudinary storage for multer
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'eventsphere-banners', // Folder name inside your Cloudinary account
+        allowed_formats: ['jpeg', 'png', 'jpg', 'webp', 'gif'],
     },
 });
 
 const upload = multer({
     storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB limit
 });
 
 // POST /api/upload/banner
@@ -39,7 +41,9 @@ router.post('/banner', (req, res) => {
         if (!req.file) {
             return res.status(400).json({ success: false, message: 'No file received. Make sure the field name is "banner".' });
         }
-        const url = `http://localhost:5000/uploads/${req.file.filename}`;
+        
+        // req.file.path returns the secure, permanent Cloudinary HTTPS URL automatically
+        const url = req.file.path;
         res.json({ success: true, url });
     });
 });
