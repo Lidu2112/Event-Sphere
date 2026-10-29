@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchEvents } from '../api/events';
+import { imageUrl } from '../api/config';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
 import './EventsPage.css';
@@ -119,7 +120,15 @@ export default function EventsPage() {
                             {filtered.map(event => (
                                 <Link key={event.id} to={`/events/${event.id}`} className="ep-card">
                                     <div className="ep-img-wrap">
-                                        <img src={event.img} alt={event.title} loading="lazy" />
+                                        <img
+                                            src={imageUrl(event.img || event.banner) || '/images/events/banner_1792931809869.jpg'}
+                                            alt={event.title}
+                                            loading="lazy"
+                                            onError={e => {
+                                                e.currentTarget.onerror = null;
+                                                e.currentTarget.src = '/images/events/banner_1792931809869.jpg';
+                                            }}
+                                        />
                                         {event.badge && (
                                             <span className="ep-badge" style={{ backgroundColor: event.badgeColor || '#6366f1' }}>
                                                 {event.badge}

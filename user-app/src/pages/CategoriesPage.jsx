@@ -212,7 +212,15 @@ export default function CategoriesPage() {
                                 {events.map(event => (
                                     <Link key={event.id || event._id} to={`/events/${event.id || event._id}`} className="ep-card">
                                         <div className="ep-img-wrap">
-                                            <img src={imageUrl(event.img || event.banner)} alt={event.title} loading="lazy" />
+                                            <img
+                                                src={imageUrl(event.img || event.banner) || '/images/events/banner_1792931809869.jpg'}
+                                                alt={event.title}
+                                                loading="lazy"
+                                                onError={e => {
+                                                    e.currentTarget.onerror = null;
+                                                    e.currentTarget.src = '/images/events/banner_1792931809869.jpg';
+                                                }}
+                                            />
                                             <span className="ep-badge" style={{ background: event.badgeColor || activeColor }}>
                                                 {event.badge || event.category}
                                             </span>

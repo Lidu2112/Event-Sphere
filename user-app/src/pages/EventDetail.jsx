@@ -212,7 +212,14 @@ export default function EventDetail() {
                 <div className="event-details-grid">
                     {/* Image */}
                     <div className="event-details-image">
-                        <img src={event.image} alt={event.title} />
+                        <img
+                            src={event.image}
+                            alt={event.title}
+                            onError={e => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = '/images/events/banner_1792931809869.jpg';
+                            }}
+                        />
                         <span className="event-details-category">{event.category}</span>
                     </div>
 

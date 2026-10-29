@@ -79,6 +79,10 @@ export default function VendorsPage() {
                                         src={s.image ? imageUrl(s.image) : '/images/default-vendor.svg'}
                                         alt={s.name}
                                         loading="lazy"
+                                        onError={e => {
+                                            e.currentTarget.onerror = null;
+                                            e.currentTarget.src = '/images/default-vendor.svg';
+                                        }}
                                     />
                                 </div>
                                 <div className="vp-content">

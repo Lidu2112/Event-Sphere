@@ -67,6 +67,10 @@ export default function VendorDetail() {
                         <img
                             src={service.image ? imageUrl(service.image) : '/images/default-vendor.svg'}
                             alt={service.name}
+                            onError={e => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = '/images/default-vendor.svg';
+                            }}
                         />
                     </div>
 

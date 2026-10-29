@@ -138,6 +138,10 @@ export default function Vendors() {
                                         alt={service.name}
                                         className="vendor-avatar"
                                         loading="lazy"
+                                        onError={e => {
+                                            e.currentTarget.onerror = null;
+                                            e.currentTarget.src = '/images/default-vendor.svg';
+                                        }}
                                     />
                                     {service.category && (
                                         <span className="vc-category-tag">

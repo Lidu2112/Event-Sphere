@@ -185,7 +185,15 @@ export default function FeaturedEvents() {
                             >
                                 <div className="featured-card">
                                     <div className="featured-card-image">
-                                        <img src={event.image} alt={event.title} loading="lazy" />
+                                        <img
+                                            src={event.image}
+                                            alt={event.title}
+                                            loading="lazy"
+                                            onError={e => {
+                                                e.currentTarget.onerror = null;
+                                                e.currentTarget.src = '/images/events/banner_1792931809869.jpg';
+                                            }}
+                                        />
                                         <span
                                             className="featured-card-category"
                                             style={{ background: event.categoryColor }}
