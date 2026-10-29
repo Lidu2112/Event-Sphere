@@ -276,6 +276,46 @@ router.patch('/bookings/:id/pay', async (req, res) => {
         res.json({ success: true, booking: updated });
     } catch (e) { res.status(500).json({ success: false, message: e.message }); }
 });
+// ══════════════════════════════════════════════════════════
+// CREATE BOOKING (Organizer Request)
+// ══════════════════════════════════════════════════════════
+router.post('/bookings', async (req, res) => {
+    try {
+        const { serviceId, vendorId, eventDate, eventName, amount, notes } = req.body;
+        
+        if (!serviceId) {
+            return res.status(400).json({ success: false, message: 'serviceId is required' });
+        }
+
+        const service = await Service.findById(serviceId);
+        if (!service) {
+            return res.status(404).json({ success: false, message: 'Service not found' });
+        }
+
+        const newBooking = await Booking.create({
+            serviceId,
+            vendorId: vendorId || service.vendorId,
+            vendorEmail: service.vendorEmail,
+            serviceName: service.name,
+            amount: amount || service.price || 0,
+            eventDate: eventDate || new Date(),
+            eventName: eventName || 'General Event',
+            status: 'pending',
+            paymentStatus: 'pending',
+            messages: [{
+                sender: 'system',
+                text: 'Booking request sent by organizer.',
+                createdAt: new Date().toISOString()
+            }]
+        });
+
+        res.status(201).json({ success: true, booking: newBooking });
+    } catch (e) {
+        console.error('CREATE BOOKING ERROR:', e);
+        res.status(500).json({ success: false, message: e.message });
+    }
+});
+
 
 // ══════════════════════════════════════════════════════════
 // AVAILABILITY

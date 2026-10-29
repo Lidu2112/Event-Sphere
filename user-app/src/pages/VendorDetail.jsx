@@ -13,6 +13,21 @@ export default function VendorDetail() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
+    // Booking modal states
+    const [showBookingModal, setShowBookingModal] = useState(false);
+    const [bookingEventName, setBookingEventName] = useState('');
+    const [bookingEventDate, setBookingEventDate] = useState('');
+    const [bookingNotes, setBookingNotes] = useState('');
+    const [bookingLoading, setBookingLoading] = useState(false);
+
+    // Review modal states
+    const [showReviewModal, setShowReviewModal] = useState(false);
+    const [reviewRating, setReviewRating] = useState(5);
+    const [reviewComment, setReviewComment] = useState('');
+    const [reviewSubmitting, setReviewSubmitting] = useState(false);
+    
+    const [feedbackMessage, setFeedbackMessage] = useState({ type: '', text: '' });
+
     useEffect(() => {
         if (!id) return;
         setLoading(true);
@@ -31,6 +46,83 @@ export default function VendorDetail() {
             })
             .finally(() => setLoading(false));
     }, [id]);
+
+    // Handle Request Booking Submission
+    const handleRequestBookingSubmit = async (e) => {
+        e.preventDefault();
+        setBookingLoading(true);
+        setFeedbackMessage({ type: '', text: '' });
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API_URL}/vendor/bookings`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                },
+                body: JSON.stringify({ 
+                    serviceId: id, 
+                    vendorId: service?.vendorId,
+                    eventName: bookingEventName,
+                    eventDate: bookingEventDate,
+                    notes: bookingNotes,
+                    amount: service?.price || 0
+                })
+            });
+            const data = await res.json();
+            if (res.ok && (data.success !== false)) {
+                setFeedbackMessage({ type: 'success', text: 'Booking request sent successfully to the vendor!' });
+                setShowBookingModal(false);
+                setBookingEventName('');
+                setBookingEventDate('');
+                setBookingNotes('');
+            } else {
+                setFeedbackMessage({ type: 'error', text: data.message || 'Failed to send booking request.' });
+            }
+        } catch (err) {
+            console.error('Booking error:', err);
+            setFeedbackMessage({ type: 'error', text: 'An error occurred while requesting booking.' });
+        } finally {
+            setBookingLoading(false);
+        }
+    };
+
+    // Handle Review Submission
+    const handleSendReview = async (e) => {
+        e.preventDefault();
+        setReviewSubmitting(true);
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API_URL}/vendor/reviews`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                },
+                body: JSON.stringify({
+                    vendorEmail: service.vendorEmail,
+                    vendorId: service.vendorId,
+                    serviceId: id,
+                    rating: Number(reviewRating),
+                    comment: reviewComment
+                })
+            });
+            const data = await res.json();
+            if (res.ok && (data.success !== false)) {
+                setFeedbackMessage({ type: 'success', text: 'Review and message sent to vendor successfully!' });
+                setShowReviewModal(false);
+                setReviewComment('');
+                setReviewRating(5);
+            } else {
+                alert(data.message || 'Failed to submit review.');
+            }
+        } catch (err) {
+            console.error('Review error:', err);
+            alert('An error occurred while submitting your review.');
+        } finally {
+            setReviewSubmitting(false);
+        }
+    };
 
     if (loading) {
         return (
@@ -73,6 +165,12 @@ export default function VendorDetail() {
                             }}
                         />
                     </div>
+
+                    {feedbackMessage.text && (
+                        <div className={`vd-alert ${feedbackMessage.type}`}>
+                            {feedbackMessage.text}
+                        </div>
+                    )}
 
                     <div className="vd-section">
                         <h3>About</h3>
@@ -121,15 +219,137 @@ export default function VendorDetail() {
 
                         <div className="vd-price-tag">ETB {Number(service.price || 0).toLocaleString()}</div>
 
-                        <button className="btn-purple" style={{ background: '#8b5cf6', border: 'none', width: '100%', justifyContent: 'center', padding: '13px' }}>
+                        <button 
+                            className="btn-purple" 
+                            onClick={() => setShowBookingModal(true)}
+                            style={{ background: '#8b5cf6', border: 'none', width: '100%', justifyContent: 'center', padding: '13px', cursor: 'pointer' }}
+                        >
                             📩 Request Booking
                         </button>
-                        <button className="btn-outline" style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
+                        <button 
+                            className="btn-outline" 
+                            onClick={() => setShowReviewModal(true)}
+                            style={{ width: '100%', justifyContent: 'center', marginTop: '10px', cursor: 'pointer' }}
+                        >
                             💬 Send Message
                         </button>
                     </div>
                 </div>
             </div>
+
+            {/* Request Booking Form Modal */}
+            {showBookingModal && (
+                <div className="vd-modal-overlay">
+                    <div className="vd-modal">
+                        <h3>Request Booking with {service.name}</h3>
+                        <p>Fill out your event details to send a request to this vendor.</p>
+                        <form onSubmit={handleRequestBookingSubmit}>
+                            <div className="vd-form-group">
+                                <label>Event Name</label>
+                                <input 
+                                    type="text"
+                                    required
+                                    placeholder="e.g. Wedding Reception"
+                                    value={bookingEventName}
+                                    onChange={(e) => setBookingEventName(e.target.value)}
+                                    className="vd-select"
+                                />
+                            </div>
+                            <div className="vd-form-group">
+                                <label>Event Date</label>
+                                <input 
+                                    type="date"
+                                    required
+                                    value={bookingEventDate}
+                                    onChange={(e) => setBookingEventDate(e.target.value)}
+                                    className="vd-select"
+                                />
+                            </div>
+                            <div className="vd-form-group">
+                                <label>Additional Notes / Requirements</label>
+                                <textarea 
+                                    rows="3"
+                                    placeholder="Any specific instructions..."
+                                    value={bookingNotes}
+                                    onChange={(e) => setBookingNotes(e.target.value)}
+                                    className="vd-textarea"
+                                />
+                            </div>
+                            <div className="vd-modal-actions">
+                                <button 
+                                    type="button" 
+                                    className="btn-outline" 
+                                    onClick={() => setShowBookingModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    type="submit" 
+                                    className="btn-purple" 
+                                    disabled={bookingLoading}
+                                    style={{ background: '#8b5cf6', border: 'none', cursor: 'pointer' }}
+                                >
+                                    {bookingLoading ? 'Sending...' : 'Send Request'}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Review Form Modal */}
+            {showReviewModal && (
+                <div className="vd-modal-overlay">
+                    <div className="vd-modal">
+                        <h3>Write a Review & Message Vendor</h3>
+                        <p>Share your experience or inquiry with {service.name}</p>
+                        <form onSubmit={handleSendReview}>
+                            <div className="vd-form-group">
+                                <label>Rating (1 - 5 Stars)</label>
+                                <select 
+                                    value={reviewRating} 
+                                    onChange={(e) => setReviewRating(e.target.value)}
+                                    className="vd-select"
+                                >
+                                    <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                                    <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                                    <option value="3">⭐⭐⭐ (3/5)</option>
+                                    <option value="2">⭐⭐ (2/5)</option>
+                                    <option value="1">⭐ (1/5)</option>
+                                </select>
+                            </div>
+                            <div className="vd-form-group">
+                                <label>Your Message / Review</label>
+                                <textarea 
+                                    rows="4"
+                                    required
+                                    placeholder="Write your review or questions here..."
+                                    value={reviewComment}
+                                    onChange={(e) => setReviewComment(e.target.value)}
+                                    className="vd-textarea"
+                                />
+                            </div>
+                            <div className="vd-modal-actions">
+                                <button 
+                                    type="button" 
+                                    className="btn-outline" 
+                                    onClick={() => setShowReviewModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    type="submit" 
+                                    className="btn-purple" 
+                                    disabled={reviewSubmitting}
+                                    style={{ background: '#8b5cf6', border: 'none', cursor: 'pointer' }}
+                                >
+                                    {reviewSubmitting ? 'Sending...' : 'Send to Vendor'}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
