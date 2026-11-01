@@ -1,7 +1,7 @@
 /* ── Main Section Container ── */
 .about {
     position: relative;
-    padding: 60px 24px;
+    padding: 50px 24px;
     background: #f8fafc;
     color: #0f172a;
     overflow: hidden;
@@ -20,41 +20,37 @@
 .about-glow-left {
     top: 5%;
     left: -10%;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     background: rgba(235, 130, 60, 0.08);
 }
 
 .about-glow-right {
     bottom: 5%;
     right: -10%;
-    width: 400px;
-    height: 400px;
-    background: rgba(16, 185, 129, 0.06);
+    width: 350px;
+    height: 350px;
+    background: rgba(42, 21, 39, 0.05);
 }
 
-/* ── Main Card (Split Layout) ── */
+/* ── Main Card Container ── */
 .about-card-wrap {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto 32px auto;
+    max-width: 1240px;
+    margin: 0 auto;
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-    border: none;
-    animation: rapidCardPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    animation: rapidCardPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* Entrance animation for main card */
 @keyframes rapidCardPop {
     0% {
         opacity: 0;
-        transform: scale(0.9) translateY(40px);
-    }
-    70% {
-        transform: scale(1.02) translateY(-8px);
+        transform: scale(0.96) translateY(20px);
     }
     100% {
         opacity: 1;
@@ -62,36 +58,54 @@
     }
 }
 
-/* Vertical Orange Accent Bar on Left Edge */
-.about-card-wrap::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 10px;
-    background: #eb823c;
-    z-index: 3;
-    animation: barPulse 1.2s infinite alternate ease-in-out;
-}
-
-@keyframes barPulse {
-    0% { opacity: 0.8; transform: scaleX(1); }
-    100% { opacity: 1; transform: scaleX(1.3); }
-}
-
 .about-card-inner {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
-    min-height: 420px;
+    align-items: center;
+    padding: 36px;
+    gap: 40px;
 }
 
-/* Left Image Column */
+/* ── Continuous Up-and-Down Popup Animation for Image ── */
+@keyframes floatUpDown {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.01);
+    }
+}
+
+.float-animated {
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+
+/* ── Left Image Column (Increased Width and Height) ── */
 .about-image-col {
-    flex: 1.1;
+    flex: 1.1; /* Gives equal emphasis to the large image container */
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-main-img-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Increased image width */
+    height: 450px;    /* Height balanced with right text content line */
+    border-radius: 20px;
     overflow: hidden;
+    border: 6px solid #ffffff;
+    box-shadow: 0 18px 40px rgba(42, 21, 39, 0.2);
+    background: #ffffff;
+    z-index: 1;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-main-img-wrap:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 24px 50px rgba(42, 21, 39, 0.28);
 }
 
 .about-card-img {
@@ -99,218 +113,234 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.about-card-wrap:hover .about-card-img {
-    transform: scale(1.05);
+/* Floating Brand Badge inside Image */
+.about-floating-brand {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #2A1527;
+    padding: 8px 16px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Right Content Column */
+.about-brand-icon {
+    font-size: 16px;
+    color: #eb823c;
+}
+
+.about-brand-text {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+}
+
+/* ── Right Content Column ── */
 .about-text-col {
-    flex: 1;
-    padding: 60px 50px;
+    flex: 1.1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 18px;
+    gap: 10px;
 }
 
-/* ── Typography Styling ── */
-.about-title {
-    font-size: 32px;
-    font-weight: 800;
+.fade-in-animated {
+    animation: fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(16px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.about-tag {
+    display: inline-block;
+    background: rgba(235, 130, 60, 0.1);
     color: #eb823c;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.about-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
     line-height: 1.2;
     margin: 0;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.6px;
+}
+
+.about-title-accent {
+    color: #eb823c;
 }
 
 .about-body {
-    font-size: 15px;
+    font-size: 13.5px;
     color: #475569;
-    line-height: 1.7;
+    line-height: 1.6;
     margin: 0;
 }
 
-.about-highlight-text {
-    font-size: 16px;
-    font-weight: 700;
-    color: #eb823c;
-    line-height: 1.5;
-    margin: 4px 0 0 0;
+/* Feature List Section */
+.about-features-heading {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 8px 0 2px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Link Button */
+.heading-icon {
+    color: #eb823c;
+}
+
+/* Clean Numbered List (1, 2, 3, 4) */
+.about-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.about-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.25s ease;
+}
+
+.about-feature-item:hover {
+    background: #ffffff;
+    border-color: rgba(235, 130, 60, 0.4);
+    box-shadow: 0 4px 14px rgba(235, 130, 60, 0.08);
+    transform: translateX(4px);
+}
+
+.about-feature-num-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: #2A1527;
+    color: #eb823c;
+    font-weight: 900;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(42, 21, 39, 0.18);
+}
+
+.about-feature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.about-feature-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.title-icon {
+    font-size: 11px;
+    color: #eb823c;
+}
+
+.about-feature-desc {
+    margin: 0;
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* Action Button */
 .about-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     width: fit-content;
-    padding: 0;
-    background: transparent;
-    color: #eb823c;
-    font-size: 15px;
+    padding: 10px 20px;
+    background: #2A1527;
+    color: #ffffff;
+    font-size: 13px;
     font-weight: 700;
     text-decoration: none;
-    margin-top: 6px;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+    border-radius: 30px;
+    margin-top: 4px;
+    box-shadow: 0 4px 12px rgba(42, 21, 39, 0.2);
+    transition: all 0.25s ease;
 }
 
 .about-btn:hover {
-    color: #d96f27;
-    transform: translateY(-2px) scale(1.03);
+    background: #381c34;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(42, 21, 39, 0.3);
 }
 
 .about-btn-arrow {
     display: inline-block;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.2s ease;
 }
 
 .about-btn:hover .about-btn-arrow {
-    transform: translateX(6px) scale(1.2);
-}
-
-/* ── Rapid Pop-Up & Down Stat Cards ── */
-.about-stats-grid {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-/* Continuous Rapid Pop Up and Down Loop */
-@keyframes rapidPopLoop {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-    }
-    30% {
-        transform: translateY(-12px) scale(1.03);
-    }
-    50% {
-        transform: translateY(3px) scale(0.98);
-    }
-    70% {
-        transform: translateY(-6px) scale(1.01);
-    }
-}
-
-.about-stat-card {
-    background: #ffffff;
-    border: none;
-    border-radius: 16px;
-    padding: 24px 20px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    will-change: transform;
-
-    /* Continuous rapid popping animation loop (1.6s duration) */
-    animation: rapidPopLoop 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
-}
-
-/* Staggered timings for individual card rapid pops */
-.about-stat-card:nth-child(1) { animation-delay: 0s; }
-.about-stat-card:nth-child(2) { animation-delay: 0.25s; }
-.about-stat-card:nth-child(3) { animation-delay: 0.5s; }
-.about-stat-card:nth-child(4) { animation-delay: 0.75s; }
-
-/* Interactive Hover state overrides the loop cleanly */
-.about-stat-card:hover {
-    animation-play-state: paused;
-    transform: translateY(-14px) scale(1.06) !important;
-    box-shadow: 0 20px 40px rgba(235, 130, 60, 0.15);
-}
-
-.about-stat-card:active {
-    transform: translateY(-2px) scale(0.96) !important;
-}
-
-/* Icon Badge Rapid Animation */
-.about-stat-icon-wrap {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: #e6f7f0;
-    color: #10b981;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    margin-bottom: 4px;
-    animation: rapidIconPop 1.6s ease-in-out infinite alternate;
-}
-
-@keyframes rapidIconPop {
-    0% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.18) rotate(-6deg); }
-    100% { transform: scale(0.95) rotate(6deg); }
-}
-
-.about-stat-card:nth-child(1) .about-stat-icon-wrap { animation-delay: 0.1s; }
-.about-stat-card:nth-child(2) .about-stat-icon-wrap { animation-delay: 0.3s; }
-.about-stat-card:nth-child(3) .about-stat-icon-wrap { animation-delay: 0.5s; }
-.about-stat-card:nth-child(4) .about-stat-icon-wrap { animation-delay: 0.7s; }
-
-/* Values & Labels */
-.about-stat-value {
-    font-size: 32px;
-    font-weight: 900;
-    color: #eb823c;
-    line-height: 1;
-    margin: 0;
-    letter-spacing: -0.5px;
-}
-
-.about-stat-label {
-    font-size: 14px;
-    color: #0f172a;
-    font-weight: 700;
-    margin: 0;
-}
-
-.about-stat-desc {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.4;
-    margin: 0;
+    transform: translateX(4px);
 }
 
 /* ── Responsive Styling ── */
 @media (max-width: 992px) {
     .about-card-inner {
         flex-direction: column;
+        padding: 24px 18px;
+        gap: 28px;
     }
 
     .about-image-col {
-        height: 300px;
+        width: 100%;
     }
 
-    .about-text-col {
-        padding: 36px 28px;
-    }
-
-    .about-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .about-main-img-wrap {
+        width: 100%;
+        max-width: 380px;
+        height: 420px;
     }
 }
 
 @media (max-width: 640px) {
     .about {
-        padding: 40px 16px;
+        padding: 30px 14px;
     }
 
     .about-title {
-        font-size: 26px;
-    }
-
-    .about-stats-grid {
-        grid-template-columns: 1fr;
+        font-size: 22px;
     }
 }

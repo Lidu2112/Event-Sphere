@@ -34,7 +34,7 @@ export default function FeaturedEvents() {
                         title: e.title,
                         location: e.location || e.venue || '',
                         date: e.date,
-                        price: e.price || (e.ticketPrice === 0 ? 'Free' : `ETB ${Number(e.ticketPrice).toLocaleString()}`),
+                        price: e.price || (Number(e.ticketPrice) === 0 ? 'Free' : `ETB ${Number(e.ticketPrice).toLocaleString()}`),
                         image: imageUrl(e.img || e.banner) || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600',
                         category: e.badge || e.category || 'Event',
                         categoryColor: e.badgeColor || CATEGORY_COLORS[e.badge] || CATEGORY_COLORS[e.category] || '#6366f1',
@@ -76,7 +76,7 @@ export default function FeaturedEvents() {
                     {/* Embedded Search bar */}
                     <div className="featured-search-bar">
                         <div className="fsb-field">
-                            <i className="fas fa-search" style={{ fontSize: '18px' }}></i>
+                            <i className="fas fa-search" style={{ fontSize: '16px' }}></i>
                             <input
                                 type="text"
                                 placeholder={t(lang, 'featured_search_name')}
@@ -84,18 +84,17 @@ export default function FeaturedEvents() {
                                 onChange={e => setSearchName(e.target.value)}
                             />
                         </div>
-                        {/* rest of your code */}
 
                         <div className="fsb-divider" />
                         <div className="fsb-field">
-                            {/* <span className="fsb-icon"></span> */}
+                            <i className="fas fa-tag" style={{ fontSize: '14px' }}></i>
                             <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
                                 {categories.map(c => <option key={c} value={c === 'All' ? '' : c}>{c}</option>)}
                             </select>
                         </div>
                         <div className="fsb-divider" />
                         <div className="fsb-field">
-                            {/* <span className="fsb-icon">📍</span> */}
+                            <i className="fas fa-map-marker-alt" style={{ fontSize: '14px' }}></i>
                             <input
                                 type="text"
                                 placeholder={t(lang, 'featured_search_city')}
@@ -105,7 +104,7 @@ export default function FeaturedEvents() {
                         </div>
                         <div className="fsb-divider" />
                         <div className="fsb-field">
-                            {/* <span className="fsb-icon">📅</span> */}
+                            <i className="fas fa-calendar-alt" style={{ fontSize: '14px' }}></i>
                             <input
                                 type="date"
                                 value={searchDate}
@@ -122,54 +121,12 @@ export default function FeaturedEvents() {
                     </Link>
                 </div>
 
-                {/* Search bar */}
-                {/* <div className="featured-search-bar">
-                    <div className="fsb-field">
-                        <span className="fsb-icon">🔍</span>
-                        <input
-                            type="text"
-                            placeholder="Search by name..."
-                            value={searchName}
-                            onChange={e => setSearchName(e.target.value)}
-                        />
-                    </div>
-                    <div className="fsb-divider" />
-                    <div className="fsb-field">
-                        <span className="fsb-icon">🏷️</span>
-                        <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
-                            {categories.map(c => <option key={c} value={c === 'All' ? '' : c}>{c}</option>)}
-                        </select>
-                    </div>
-                    <div className="fsb-divider" />
-                    <div className="fsb-field">
-                        <span className="fsb-icon">📍</span>
-                        <input
-                            type="text"
-                            placeholder="City..."
-                            value={searchCity}
-                            onChange={e => setSearchCity(e.target.value)}
-                        />
-                    </div>
-                    <div className="fsb-divider" />
-                    <div className="fsb-field">
-                        <span className="fsb-icon">📅</span>
-                        <input
-                            type="date"
-                            value={searchDate}
-                            onChange={e => setSearchDate(e.target.value)}
-                        />
-                    </div>
-                    <button className="fsb-btn" onClick={() => { setSearchName(''); setSearchCategory(''); setSearchCity(''); setSearchDate(''); }}>
-                        Clear
-                    </button>
-                </div> */}
-
                 {loading ? (
-                    <div style={{ padding: '40px 0', textAlign: 'center', color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>
+                    <div style={{ padding: '40px 0', textAlign: 'center', color: '#64748b', fontSize: 14 }}>
                         {t(lang, 'featured_loading')}
                     </div>
                 ) : filtered.length === 0 ? (
-                    <div style={{ padding: '60px 0', textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
+                    <div style={{ padding: '60px 0', textAlign: 'center', color: '#64748b' }}>
                         <div style={{ fontSize: 40, marginBottom: 12 }}>🎪</div>
                         <p style={{ margin: 0, fontSize: 15 }}>
                             {allEvents.length === 0 ? t(lang, 'featured_no_events') : t(lang, 'featured_no_match')}
@@ -198,24 +155,33 @@ export default function FeaturedEvents() {
                                             className="featured-card-category"
                                             style={{ background: event.categoryColor }}
                                         >
-                                            {event.category}
+                                            <i className="fas fa-music" style={{ fontSize: '10px' }}></i> {event.category}
                                         </span>
+                                        <button 
+                                            className="featured-card-heart" 
+                                            onClick={(e) => { e.preventDefault(); /* Favorite toggle handler if needed */ }}
+                                            aria-label="Save Event"
+                                        >
+                                            <i className="far fa-heart"></i>
+                                        </button>
                                     </div>
                                     <div className="featured-card-content">
                                         <h3 className="featured-card-title">{event.title}</h3>
                                         <div className="featured-card-details">
                                             <div className="featured-card-location">
-                                                {/* <span className="featured-card-icon">📍</span> */}
+                                                <i className="fas fa-map-marker-alt"></i>
                                                 <span>{event.location}</span>
                                             </div>
                                             <div className="featured-card-date">
-                                                {/* <span className="featured-card-icon">📅</span> */}
+                                                <i className="far fa-calendar-alt"></i>
                                                 <span>{event.date}</span>
                                             </div>
                                         </div>
                                         <div className="featured-card-footer">
                                             <span className="featured-card-price">{event.price}</span>
-                                            <span className="featured-card-arrow">→</span>
+                                            <span className="featured-card-btn">
+                                                Get Ticket →
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

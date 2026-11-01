@@ -13,17 +13,15 @@
     justify-content: center;
 }
 
-/* Full-width dark gradient overlay matching reference layout */
+/* ── Clearer Image Overlay (Darker behind text, clear over the rest of the photo) ── */
 .cat-slider-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(11, 15, 25, 0.92) 0%,
-        rgba(11, 15, 25, 0.65) 40%,
-        rgba(11, 15, 25, 0.85) 80%,
-        rgba(11, 15, 25, 0.95) 100%
-    );
+    background: 
+        /* Left-side vignette to keep text fully legible */
+        linear-gradient(90deg, rgba(5, 7, 12, 0.88) 0%, rgba(5, 7, 12, 0.6) 50%, rgba(5, 7, 12, 0.25) 100%),
+        /* Subtle top and bottom frame gradient */
+        linear-gradient(180deg, rgba(5, 7, 12, 0.6) 0%, transparent 40%, transparent 70%, rgba(5, 7, 12, 0.85) 100%);
     z-index: 1;
 }
 
@@ -50,6 +48,7 @@
     color: #ffffff;
     margin: 0;
     letter-spacing: -0.3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .cat-view-all-gallery {
@@ -57,11 +56,12 @@
     font-weight: 600;
     color: #facc15;
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .cat-view-all-gallery:hover {
-    opacity: 0.8;
+    opacity: 0.9;
+    transform: translateX(3px);
     text-decoration: underline;
 }
 
@@ -79,52 +79,61 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
 }
 
 .cat-badge-pill {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.75);
     color: #facc15;
     font-size: 11px;
     font-weight: 800;
-    padding: 6px 12px;
-    border-radius: 6px;
-    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    border: 1px solid rgba(250, 204, 21, 0.3);
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .cat-active-title {
-    font-size: 42px;
+    font-size: 44px;
     font-weight: 800;
     color: #ffffff;
     margin: 0;
     line-height: 1.15;
     letter-spacing: -0.5px;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
 }
 
 .cat-active-subtitle {
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 8px 0;
-    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 6px 0;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* ── Enhanced Attractive Explore Button ── */
 .cat-explore-btn {
-    display: inline-block;
-    padding: 10px 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
     color: #ffffff;
     font-weight: 700;
-    font-size: 13px;
-    border-radius: 8px;
+    font-size: 14px;
+    border-radius: 10px;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .cat-explore-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    filter: brightness(1.1);
 }
 
 /* ── Controls (Dots & Arrows aligned to bottom right) ── */
@@ -156,32 +165,37 @@
 .cat-dot.active {
     width: 28px;
     background: #facc15;
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.6);
 }
 
 .cat-arrows {
     display: flex;
-    gap: 8px;
+    gap: 10px;
 }
 
 .cat-arrow-btn {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     color: #ffffff;
     font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    backdrop-filter: blur(4px);
-    transition: background 0.2s ease, transform 0.2s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.25s ease;
 }
 
 .cat-arrow-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
+    background: rgba(250, 204, 21, 0.9);
+    border-color: #facc15;
+    color: #0b0f19;
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(250, 204, 21, 0.4);
 }
 
 /* ── Responsive Design ── */

@@ -139,7 +139,8 @@
 
 .vendor-card {
     background: #ffffff;
-    border: 1px solid #ff7a59;
+    /* Clean rectangular border and radius matching the event cards style */
+    border: 1px solid #e2e8f0;
     border-radius: 16px;
     padding: 16px;
     display: flex;
@@ -148,7 +149,7 @@
     text-decoration: none;
     color: inherit;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
     
     /* Rapidly repeats popping up and down infinitely */
     animation: rapidRepeatPopup 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
@@ -165,12 +166,12 @@
 .vendor-card:nth-child(7) { animation-delay: 0.48s; }
 .vendor-card:nth-child(8) { animation-delay: 0.56s; }
 
-/* Pause repeating motion on hover so user can easily click */
+/* Pause repeating motion on hover without changing border color */
 .vendor-card:hover {
     animation-play-state: paused;
     transform: translateY(-10px) scale(1.03);
-    border-color: #ff5722;
-    box-shadow: 0 16px 32px rgba(255, 122, 89, 0.28);
+    border-color: #e2e8f0; /* Keeps the border color clean/neutral */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
 }
 
 .vendor-card:active {

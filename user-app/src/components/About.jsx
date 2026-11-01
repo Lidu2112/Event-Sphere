@@ -6,11 +6,31 @@ import './About.css';
 export default function About() {
   const { lang } = useLang();
 
-  const stats = [
-    { icon: '👥', value: '4,821+', labelKey: 'about_stat_users', descKey: 'about_stat_users_desc' },
-    { icon: '🎪', value: '138+', labelKey: 'about_stat_events', descKey: 'about_stat_events_desc' },
-    { icon: '🎟️', value: '28K+', labelKey: 'about_stat_tickets', descKey: 'about_stat_tickets_desc' },
-    { icon: '🏪', value: '92', labelKey: 'about_stat_vendors', descKey: 'about_stat_vendors_desc' },
+  const features = [
+    {
+      num: '1',
+      title: 'Event Discovery',
+      desc: 'Explore and discover exciting events across different categories, locations, and interests.',
+      icon: 'fas fa-compass'
+    },
+    {
+      num: '2',
+      title: 'Easy Ticket Booking',
+      desc: 'Purchase event tickets securely and conveniently through a simple online booking process.',
+      icon: 'fas fa-ticket-alt'
+    },
+    {
+      num: '3',
+      title: 'Vendor Marketplace',
+      desc: 'Connect event organizers with trusted vendors and service providers for successful events.',
+      icon: 'fas fa-store'
+    },
+    {
+      num: '4',
+      title: 'Smart Event Management',
+      desc: 'Manage events, staff, payments, and attendee check-ins efficiently from one platform.',
+      icon: 'fas fa-tasks'
+    }
   ];
 
   return (
@@ -20,35 +40,65 @@ export default function About() {
 
       <div className="about-card-wrap">
         <div className="about-card-inner">
+          
+          {/* Left Animated Large Rectangular Image Column */}
           <div className="about-image-col">
-            <img
-              src="https://www.thereporterethiopia.com/wp-content/uploads/2018/05/Concerts.jpg"
-              alt="EventSphere live concert"
-              className="about-card-img"
-            />
+            <div className="about-main-img-wrap float-animated">
+              <div className="about-floating-brand">
+                <i className="fas fa-calendar-star about-brand-icon"></i>
+                <span className="about-brand-text">EventSphere</span>
+              </div>
+              
+              <img
+                src="https://cdn.pixabay.com/photo/2016/11/23/15/48/audience-1853662_1280.jpg"
+                alt="Event Crowd"
+                className="about-card-img"
+              />
+            </div>
           </div>
-          <div className="about-text-col">
-            <h2 className="about-title">{t(lang, 'about_title')}</h2>
-            <p className="about-body">{t(lang, 'about_body')}</p>
-            <p className="about-highlight-text">{t(lang, 'about_highlight')}</p>
-            <a href="#events" className="about-btn">
-              {t(lang, 'about_btn')} <span className="about-btn-arrow">→</span>
+
+          {/* Right Content Column */}
+          <div className="about-text-col fade-in-animated">
+            <span className="about-tag">About EventSphere</span>
+            <h2 className="about-title">
+              Connecting People, Creating <span className="about-title-accent">Unforgettable Events</span>
+            </h2>
+            
+            <p className="about-body">
+              EventSphere is an all-in-one event management and ticketing platform designed to simplify the way events are discovered, organized, and experienced. It connects event organizers, vendors, attendees, and staff in one seamless platform.
+            </p>
+
+            {/* "What Makes EventSphere Special?" Heading */}
+            <h3 className="about-features-heading">
+              <i className="fas fa-bolt heading-icon"></i>
+              What Makes EventSphere Special?
+            </h3>
+
+            {/* Items 1, 2, 3, 4 */}
+            <div className="about-features-list">
+              {features.map((item) => (
+                <div className="about-feature-item" key={item.num}>
+                  <div className="about-feature-num-badge">
+                    <span>{item.num}</span>
+                  </div>
+                  <div className="about-feature-content">
+                    <h4 className="about-feature-title">
+                      <i className={`${item.icon} title-icon`}></i>
+                      {item.title}
+                    </h4>
+                    <p className="about-feature-desc">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <a href="/about" className="about-btn">
+              <span>Read more about who we are</span>
+              <span className="about-btn-arrow">→</span>
             </a>
           </div>
-        </div>
-      </div>
 
-      <div className="about-stats-grid">
-        {stats.map((stat, i) => (
-          <div key={i} className="about-stat-card">
-            <div className="about-stat-icon-wrap">
-              <span className="about-stat-icon">{stat.icon}</span>
-            </div>
-            <div className="about-stat-value">{stat.value}</div>
-            <div className="about-stat-label">{t(lang, stat.labelKey)}</div>
-            <p className="about-stat-desc">{t(lang, stat.descKey)}</p>
-          </div>
-        ))}
+        </div>
       </div>
     </section>
   );
