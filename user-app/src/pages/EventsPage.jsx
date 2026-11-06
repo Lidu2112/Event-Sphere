@@ -4,6 +4,15 @@ import { fetchEvents } from '../api/events';
 import { imageUrl } from '../api/config';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
+import SearchIcon from '@mui/icons-material/Search';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PlaceIcon from '@mui/icons-material/Place';
+// import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CloseIcon from '@mui/icons-material/Close';
+import Loader from '../components/Loader/Loader';
 import './EventsPage.css';
 
 export default function EventsPage() {
@@ -49,8 +58,25 @@ export default function EventsPage() {
 
     return (
         <div className="ep-page-wrapper">
-            <header className="page-hero">
-                <div className="page-hero-inner">
+            {/* Hero Section with increased height & floating particles */}
+            <header 
+                className="page-hero ep-hero"
+                style={{
+                    backgroundImage: `linear-gradient(90deg, rgba(30, 15, 28, 0.94) 0%, rgba(30, 15, 28, 0.8) 50%, rgba(30, 15, 28, 0.5) 100%), 
+                    url(https://as1.ftcdn.net/v2/jpg/21/20/63/38/1000_F_2120633815_NptYzpAbg6W8CRasm4GxxvUitHqITkGP.jpg)`
+                }}
+            >
+                {/* Animated Floating Event Particles */}
+                <div className="ep-hero-particles">
+                    <span className="particle particle-1"></span>
+                    <span className="particle particle-2"></span>
+                    <span className="particle particle-3"></span>
+                    <span className="particle particle-4"></span>
+                    <span className="particle particle-5"></span>
+                </div>
+
+                <div className="page-hero-inner ep-hero-inner">
+                    <span className="ep-hero-subtitle">— DISCOVER EXPERIENCES</span>
                     <h1>{t(lang, 'ep_title')}</h1>
                     <p>{t(lang, 'ep_subtitle')}</p>
                 </div>
@@ -60,29 +86,23 @@ export default function EventsPage() {
                 {/* Filter Bar */}
                 <div className="filter-bar">
                     <div className="filter-input-wrap search-wrap">
-                        <svg className="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
-                        </svg>
+                        <SearchIcon className="filter-icon" aria-hidden="true" />
                         <input
                             type="text"
                             placeholder={t(lang, 'ep_search')}
                             value={search}
                             onChange={e => setSearch(e.target.value)}
                         />
-                        {search && <button className="clear-input-btn" onClick={() => setSearch('')}>×</button>}
+                        {search && <button className="clear-input-btn" onClick={() => setSearch('')} aria-label="Clear search"><CloseIcon aria-hidden="true" /></button>}
                     </div>
 
                     <div className="filter-divider" />
 
                     <div className="filter-input-wrap custom-select" ref={dropdownRef}>
-                        <svg className="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                        </svg>
+                        <FilterListIcon className="filter-icon" aria-hidden="true" />
                         <button type="button" className="select-trigger" onClick={() => setIsDropdownOpen(o => !o)}>
                             <span>{displayCategory}</span>
-                            <svg className={`chevron-icon ${isDropdownOpen ? 'open' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M6 9l6 6 6-6" />
-                            </svg>
+                            <ExpandMoreIcon className={`chevron-icon ${isDropdownOpen ? 'open' : ''}`} aria-hidden="true" />
                         </button>
                         {isDropdownOpen && (
                             <ul className="select-dropdown">
@@ -105,7 +125,7 @@ export default function EventsPage() {
 
                 {loading ? (
                     <div className="ep-loading-state">
-                        <div className="spinner" />
+                        <Loader />
                         <p>{t(lang, 'ep_loading')}</p>
                     </div>
                 ) : (
@@ -134,23 +154,26 @@ export default function EventsPage() {
                                                 {event.badge}
                                             </span>
                                         )}
+                                        <span className="ep-wishlist-icon">
+                                            <FavoriteBorderIcon aria-hidden="true" />
+                                        </span>
                                     </div>
                                     <div className="ep-content">
                                         <h3>{event.title}</h3>
                                         <div className="ep-meta">
                                             <span>
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                                                <PlaceIcon aria-hidden="true" />
                                                 {event.location}
                                             </span>
                                             <span>
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                                                {/* <CalendarTodayIcon aria-hidden="true" /> */}
                                                 {event.date}
                                             </span>
                                         </div>
                                         <div className="ep-footer">
                                             <span className="ep-price">{event.price || 'Free'}</span>
-                                            <span className="ep-arrow-btn">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                                            <span className="ep-ticket-btn">
+                                                Get Ticket <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />
                                             </span>
                                         </div>
                                     </div>
@@ -161,9 +184,7 @@ export default function EventsPage() {
                         {filtered.length === 0 && (
                             <div className="ep-empty">
                                 <div className="ep-empty-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                        <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
-                                    </svg>
+                                    <SearchIcon aria-hidden="true" />
                                 </div>
                                 <h3>{t(lang, 'ep_no_results')}</h3>
                                 <p>{t(lang, 'ep_no_results_sub')}</p>

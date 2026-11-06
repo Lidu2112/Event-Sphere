@@ -1,6 +1,9 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { Globe } from 'lucide-react';
+import LanguageIcon from '@mui/icons-material/Language';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from '../context/AuthContext';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
@@ -80,7 +83,7 @@ export default function Navbar() {
                     {isAttendee && (
                         <div className="nav-item nav-dropdown">
                             <button type="button" className="nav-link nav-dropdown-toggle">
-                                {t(lang, 'nav_attendee')} ▾
+                                {t(lang, 'nav_attendee')} <ExpandMoreIcon aria-hidden="true" />
                             </button>
                             <div className="nav-dropdown-menu">
                                 {ATTENDEE_LINKS.map(l => (
@@ -102,9 +105,9 @@ export default function Navbar() {
                             aria-label="Choose language"
                             aria-expanded={langOpen}
                         >
-                            <Globe size={16} color="#2A1527" aria-hidden="true" />
+                            <LanguageIcon style={{ fontSize: 16, color: '#2A1527' }} aria-hidden="true" />
                             <span className="lang-text">{lang === 'en' ? 'EN' : 'አማ'}</span>
-                            <span className="lang-arrow">▾</span>
+                            <ExpandMoreIcon className="lang-arrow" aria-hidden="true" />
                         </button>
                         {langOpen && (
                             <div className="nav-lang-menu">
@@ -117,7 +120,7 @@ export default function Navbar() {
                     {user ? (
                         <div className="nav-profile" ref={profileRef}>
                             <button type="button" className="nav-profile-btn" onClick={() => setProfileOpen(o => !o)} aria-expanded={profileOpen}>
-                                {t(lang, 'nav_hi')} {firstName} ▼
+                                {t(lang, 'nav_hi')} {firstName} <ExpandMoreIcon aria-hidden="true" />
                             </button>
                             {profileOpen && (
                                 <div className="nav-profile-menu">
@@ -143,7 +146,7 @@ export default function Navbar() {
                 </div>
 
                 <button type="button" className="hamburger-menu" onClick={() => setMobileOpen(o => !o)} aria-label="Toggle menu" aria-expanded={mobileOpen}>
-                    {mobileOpen ? '✕' : '☰'}
+                    {mobileOpen ? <CloseIcon aria-hidden="true" /> : <MenuIcon aria-hidden="true" />}
                 </button>
             </div>
 

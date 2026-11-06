@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useState, useEffect } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { staffApi } from '../../../api/staff';
@@ -121,7 +122,7 @@ export default function AttendeeList() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10, marginBottom: 18 }}>
                     <input
                         type="text"
-                        placeholder="🔍  Search by name or email..."
+                        placeholder="Search by name or email..."
                         value={searchFilter}
                         onChange={e => setSearchFilter(e.target.value)}
                         style={{ padding: '9px 12px', borderRadius: 8, border: '1.5px solid #e2e8f0', fontSize: 13, outline: 'none' }}
@@ -140,22 +141,22 @@ export default function AttendeeList() {
                         style={{ padding: '9px 12px', borderRadius: 8, border: '1.5px solid #e2e8f0', fontSize: 13, outline: 'none' }}
                     >
                         <option value="">All Attendance Status</option>
-                        <option value="checked-in">✅ Checked In</option>
-                        <option value="not-arrived">⏳ Not Arrived</option>
+                        <option value="checked-in"><AppIcon name="checkCircle" /> Checked In</option>
+                        <option value="not-arrived"><AppIcon name="hourglass" /> Not Arrived</option>
                     </select>
                 </div>
 
                 {/* Error */}
                 {error && (
                     <div style={{ padding: '10px 14px', background: '#fee2e2', color: '#dc2626', borderRadius: 8, fontSize: 13, marginBottom: 14 }}>
-                        ⚠️ {error}
+                        <AppIcon name="warning" /> {error}
                     </div>
                 )}
 
                 {/* Table */}
                 {loading ? (
                     <div style={{ padding: 48, textAlign: 'center', color: '#94a3b8' }}>
-                        <div style={{ fontSize: 28, marginBottom: 10 }}>⏳</div>
+                        <div style={{ fontSize: 28, marginBottom: 10 }}><AppIcon name="hourglass" /></div>
                         Loading attendees from MongoDB...
                     </div>
                 ) : !selectedEvent ? (
@@ -195,7 +196,7 @@ export default function AttendeeList() {
                                                 color: a.status === 'paid' ? '#16a34a' : '#d97706',
                                                 padding: '3px 8px', borderRadius: 12, fontSize: 11, fontWeight: 700,
                                             }}>
-                                                {a.status === 'paid' ? '✓ Paid' : 'Pending'}
+                                                {a.status === 'paid' ? <><AppIcon name="check" /> Paid</> : 'Pending'}
                                             </span>
                                         </td>
                                         <td style={{ padding: '12px 10px' }}>
@@ -204,7 +205,7 @@ export default function AttendeeList() {
                                                 color: a.checkedIn ? '#16a34a' : '#64748b',
                                                 padding: '3px 8px', borderRadius: 12, fontSize: 11, fontWeight: 700,
                                             }}>
-                                                {a.checkedIn ? '✓ Checked In' : 'Not Arrived'}
+                                                {a.checkedIn ? <><AppIcon name="check" /> Checked In</> : 'Not Arrived'}
                                             </span>
                                         </td>
                                     </tr>

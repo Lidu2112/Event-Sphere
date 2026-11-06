@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -73,7 +74,7 @@ export default function ManageAttendees() {
                                     <td style={{ padding: '12px 10px', fontSize: '11px', fontFamily: 'monospace', color: '#6366f1' }}>{a.ticketCode || a.txRef}</td>
                                     <td style={{ padding: '12px 10px' }}>
                                         <span className={`status-badge ${a.checkedIn ? 'active' : 'pending'}`}>
-                                            {a.checkedIn ? `✓ Checked In ${a.checkedInAt ? new Date(a.checkedInAt).toLocaleTimeString() : ''}` : 'Not Checked In'}
+                                            {a.checkedIn ? <><AppIcon name="checkCircle" /> Checked In {a.checkedInAt ? new Date(a.checkedInAt).toLocaleTimeString() : ''}</> : 'Not Checked In'}
                                         </span>
                                     </td>
                                     <td style={{ padding: '12px 10px' }}>

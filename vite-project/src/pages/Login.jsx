@@ -1,3 +1,4 @@
+import AppIcon from '../components/AppIcon.jsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth, DEMO_ACCOUNTS } from '../context/AuthContext';
@@ -216,7 +217,7 @@ export default function Login() {
                                             <strong>{a.name}</strong>
                                             <small>{a.email}</small>
                                         </div>
-                                        <span className="g-arrow">→</span>
+                                        <span className="g-arrow"><AppIcon name="arrowForward" /></span>
                                     </button>
                                 ))}
                             </div>
@@ -252,7 +253,7 @@ export default function Login() {
                                         {loading ? <span className="spinner" /> : 'Send Reset Link'}
                                     </button>
                                     <button type="button" className="back-link" onClick={() => handleTabChange('email')}>
-                                        ← Back to login
+                                        <AppIcon name="arrowBack" /> Back to login
                                     </button>
                                 </form>
                             )}

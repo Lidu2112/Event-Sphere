@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox, StatCard } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -7,7 +8,7 @@ function Stars({ rating, size = 16 }) {
     return (
         <span style={{ display: 'inline-flex', gap: 1 }}>
             {[1, 2, 3, 4, 5].map(n => (
-                <span key={n} style={{ fontSize: size, color: n <= rating ? '#f59e0b' : '#e2e8f0' }}>★</span>
+                <span key={n} style={{ fontSize: size, color: n <= rating ? '#f59e0b' : '#e2e8f0' }}><AppIcon name="star" /></span>
             ))}
         </span>
     );
@@ -19,7 +20,7 @@ function StarPicker({ value, onChange }) {
         <span style={{ display: 'inline-flex', gap: 2, cursor: 'pointer' }}>
             {[1, 2, 3, 4, 5].map(n => (
                 <span key={n} onClick={() => onChange(n)} onMouseEnter={() => setHover(n)} onMouseLeave={() => setHover(0)}
-                    style={{ fontSize: 28, color: n <= (hover || value) ? '#f59e0b' : '#e2e8f0', transition: 'color 0.1s' }}>★</span>
+                    style={{ fontSize: 28, color: n <= (hover || value) ? '#f59e0b' : '#e2e8f0', transition: 'color 0.1s' }}><AppIcon name="star" /></span>
             ))}
         </span>
     );
@@ -63,7 +64,7 @@ export default function Reviews() {
             });
             setForm({ rating: 0, comment: '', reviewerName: '', reviewerEmail: '' });
             setShowForm(false);
-            setMsg({ text: '✅ Review added!', ok: true });
+            setMsg({ text: "Review added!", ok: true, icon: 'checkCircle' });
             load();
         } catch (e) { setMsg({ text: e.message, ok: false }); }
         finally { setSaving(false); }
@@ -97,10 +98,10 @@ export default function Reviews() {
 
             {/* Summary stats */}
             <div className="stats-grid">
-                <StatCard icon="⭐" label="Average Rating" value={avgRating} color="#f59e0b" />
-                <StatCard icon="💬" label="Total Reviews" value={reviews.length} color="#6366f1" />
-                <StatCard icon="🏆" label="5-Star Reviews" value={reviews.filter(r => r.rating === 5).length} color="#10b981" />
-                <StatCard icon="📊" label="Satisfaction" value={reviews.length ? `${Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100)}%` : '—'} color="#0ea5e9" />
+                <StatCard icon="star" label="Average Rating" value={avgRating} color="#f59e0b" />
+                <StatCard icon="mail" label="Total Reviews" value={reviews.length} color="#6366f1" />
+                <StatCard icon="events" label="5-Star Reviews" value={reviews.filter(r => r.rating === 5).length} color="#10b981" />
+                <StatCard icon="analytics" label="Satisfaction" value={reviews.length ? `${Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100)}%` : '—'} color="#0ea5e9" />
             </div>
 
             {/* Rating distribution */}
@@ -109,7 +110,9 @@ export default function Reviews() {
                     <div style={{ maxWidth: 400 }}>
                         {dist.map(d => (
                             <div key={d.star} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                                <span style={{ fontSize: 13, color: '#f59e0b', whiteSpace: 'nowrap', width: 40 }}>{'★'.repeat(d.star)}</span>
+                                <span style={{ fontSize: 13, color: '#f59e0b', whiteSpace: 'nowrap', width: 40 }}>
+                                    {Array.from({ length: d.star }, (_, i) => <AppIcon name="star" key={i} />)}
+                                </span>
                                 <div style={{ flex: 1, background: '#f1f5f9', borderRadius: 99, height: 8, overflow: 'hidden' }}>
                                     <div style={{ width: `${d.pct}%`, height: '100%', background: '#f59e0b', borderRadius: 99, transition: 'width 0.5s' }} />
                                 </div>
@@ -151,7 +154,7 @@ export default function Reviews() {
                             padding: '8px 12px', borderRadius: 6, marginTop: 10,
                             background: msg.ok ? '#dcfce7' : '#fee2e2', color: msg.ok ? '#16a34a' : '#dc2626', fontSize: 13
                         }}>
-                            {msg.text}
+                            {msg.icon && <AppIcon name={msg.icon} />} {msg.text}
                         </div>
                     )}
                     <div style={{ display: 'flex', gap: 8, marginTop: 14, justifyContent: 'flex-end' }}>
@@ -168,7 +171,7 @@ export default function Reviews() {
                     padding: '10px 16px', borderRadius: 8, marginBottom: 12,
                     background: msg.ok ? '#dcfce7' : '#fee2e2', color: msg.ok ? '#16a34a' : '#dc2626', fontSize: 14
                 }}>
-                    {msg.text}
+                    {msg.icon && <AppIcon name={msg.icon} />} {msg.text}
                 </div>
             )}
 
@@ -178,7 +181,7 @@ export default function Reviews() {
                     <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading reviews...</div>
                 ) : reviews.length === 0 ? (
                     <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                        <div style={{ fontSize: 48, marginBottom: 12 }}>⭐</div>
+                        <div style={{ fontSize: 48, marginBottom: 12 }}><AppIcon name="star" /></div>
                         <p style={{ margin: 0, fontSize: 15 }}>No reviews yet.</p>
                         <p style={{ margin: '4px 0 0', fontSize: 13 }}>Reviews from clients will appear here.</p>
                     </div>
@@ -198,7 +201,7 @@ export default function Reviews() {
                                         </span>
                                         <button onClick={() => handleDelete(r._id)} title="Delete review"
                                             style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: 14, padding: '2px 6px' }}>
-                                            🗑️
+                                            <AppIcon name="delete" />
                                         </button>
                                     </div>
                                 </div>

@@ -130,6 +130,13 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.auth-tabs button svg,
+.auth-error svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
 /* Error */
 .auth-error {
     display: flex;
@@ -188,6 +195,8 @@
 
 .field-icon {
     font-size: 14px;
+    width: 16px;
+    height: 16px;
     color: #9ca3af;
     flex-shrink: 0;
 }
@@ -221,8 +230,18 @@
     color: #381c34;
 }
 
+.show-pass-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
 .confirm-check {
     font-size: 16px;
+}
+
+.confirm-check svg {
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
 }
 

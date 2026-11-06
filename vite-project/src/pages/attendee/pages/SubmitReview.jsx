@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -16,7 +17,7 @@ function StarPicker({ value, onChange }) {
                     onMouseEnter={() => setHover(n)}
                     onMouseLeave={() => setHover(0)}
                     style={{ fontSize: 26, cursor: 'pointer', color: n <= (hover || value) ? '#f59e0b' : '#e2e8f0', transition: 'color 0.1s' }}>
-                    ★
+                    <AppIcon name="star" />
                 </span>
             ))}
         </div>
@@ -68,7 +69,7 @@ export default function SubmitReview() {
             if (!data.success) throw new Error(data.message);
             setMyReviews(prev => [data.review, ...prev]);
             setSelectedEvent(''); setRating(0); setComment('');
-            setMsg({ ok: true, text: '✅ Review submitted successfully!' });
+            setMsg({ ok: true, icon: 'checkCircle', text: "Review submitted successfully!" });
             setTimeout(() => setMsg(null), 3000);
         } catch (err) {
             setMsg({ ok: false, text: err.message });
@@ -84,7 +85,7 @@ export default function SubmitReview() {
 
             {msg && (
                 <div style={{ padding: '10px 16px', borderRadius: 8, marginBottom: 14, fontSize: 13, fontWeight: 600, background: msg.ok ? '#dcfce7' : '#fee2e2', color: msg.ok ? '#16a34a' : '#dc2626' }}>
-                    {msg.text}
+                    {msg.icon && <AppIcon name={msg.icon} />} {msg.text}
                 </div>
             )}
 
@@ -117,7 +118,7 @@ export default function SubmitReview() {
                                 placeholder="Share your experience..." />
                         </div>
                         <button className="btn-primary" type="submit" disabled={submitting || tickets.length === 0} style={{ alignSelf: 'flex-start' }}>
-                            {submitting ? 'Submitting...' : '⭐ Submit Review'}
+                            {submitting ? 'Submitting...' : <><AppIcon name="star" /> Submit Review</>}
                         </button>
                     </form>
                 )}
@@ -131,7 +132,9 @@ export default function SubmitReview() {
                             <div key={i} style={{ padding: '12px 14px', background: '#f8fafc', borderRadius: 10, border: '1px solid #e2e8f0' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                                     <strong style={{ fontSize: 13 }}>{r.serviceName || 'Event'}</strong>
-                                    <span style={{ color: '#f59e0b', fontSize: 16 }}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</span>
+                                    <span style={{ color: '#f59e0b', fontSize: 16 }}>
+                                        {Array.from({ length: 5 }, (_, i) => <AppIcon name={i < r.rating ? 'star' : 'starBorder'} key={i} />)}
+                                    </span>
                                 </div>
                                 {r.comment && <p style={{ margin: 0, fontSize: 13, color: '#475569' }}>{r.comment}</p>}
                                 <p style={{ margin: '5px 0 0', fontSize: 11, color: '#94a3b8' }}>{new Date(r.createdAt).toLocaleDateString()}</p>

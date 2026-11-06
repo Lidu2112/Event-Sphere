@@ -2,6 +2,16 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { apiUrl, imageUrl } from '../api/config';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import PlaceIcon from '@mui/icons-material/Place';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import Loader from '../components/Loader/Loader';
 import './EventDetail.css';
 
 // Normalize a DB/API event to local shape
@@ -32,15 +42,15 @@ function TicketModal({ event, onClose, onProceed }) {
             <div className="modal-box" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
                     <h3>Buy Tickets</h3>
-                    <button className="modal-close" onClick={onClose}>✕</button>
+                    <button className="modal-close" onClick={onClose} aria-label="Close"><CloseIcon aria-hidden="true" /></button>
                 </div>
                 <p className="modal-event-name">{event.title}</p>
 
                 <div className="modal-section-label">Number of Tickets</div>
                 <div className="modal-quantity">
-                    <button className="qty-btn" onClick={() => setQuantity(q => Math.max(1, q - 1))}>−</button>
+                    <button className="qty-btn" onClick={() => setQuantity(q => Math.max(1, q - 1))} aria-label="Decrease ticket quantity"><RemoveIcon aria-hidden="true" /></button>
                     <span className="qty-num">{quantity}</span>
-                    <button className="qty-btn" onClick={() => setQuantity(q => Math.min(10, q + 1))}>+</button>
+                    <button className="qty-btn" onClick={() => setQuantity(q => Math.min(10, q + 1))} aria-label="Increase ticket quantity"><AddIcon aria-hidden="true" /></button>
                 </div>
 
                 <div className="modal-total">
@@ -51,7 +61,7 @@ function TicketModal({ event, onClose, onProceed }) {
                 </div>
 
                 <button className="modal-proceed-btn" onClick={() => onProceed({ quantity, total })}>
-                    Proceed to Payment →
+                    Proceed to Payment <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />
                 </button>
             </div>
         </div>
@@ -111,9 +121,9 @@ function PaymentModal({ event, selection, user, onClose, onBack }) {
         <div className="modal-backdrop" onClick={onClose}>
             <div className="modal-box" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
-                    <button className="modal-back" onClick={onBack}>← Back</button>
+                    <button className="modal-back" onClick={onBack}><ArrowBackIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /> Back</button>
                     <h3>Payment Method</h3>
-                    <button className="modal-close" onClick={onClose}>✕</button>
+                    <button className="modal-close" onClick={onClose} aria-label="Close"><CloseIcon aria-hidden="true" /></button>
                 </div>
 
                 <div className="pay-summary">
@@ -133,7 +143,7 @@ function PaymentModal({ event, selection, user, onClose, onBack }) {
                         <div className="pay-method-name">Chapa</div>
                         <div className="pay-method-desc">Pay with telebirr, CBE, bank cards & more</div>
                     </div>
-                    <span className="pay-method-check">✓</span>
+                    <span className="pay-method-check"><CheckIcon aria-hidden="true" style={{ fontSize: 18, verticalAlign: 'middle' }} /></span>
                 </div>
 
                 {!user && (
@@ -144,7 +154,15 @@ function PaymentModal({ event, selection, user, onClose, onBack }) {
                 {error && <p className="pay-error">{error}</p>}
 
                 <button className="modal-proceed-btn" onClick={handlePay} disabled={loading}>
-                    {loading ? 'Redirecting…' : user ? 'Pay Now →' : 'Log In to Pay →'}
+                    {loading ? (
+                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                            <Loader size="small" /> Redirecting…
+                        </span>
+                    ) : user ? (
+                        <>Pay Now <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /></>
+                    ) : (
+                        <>Log In to Pay <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /></>
+                    )}
                 </button>
             </div>
         </div>
@@ -168,7 +186,7 @@ export default function EventDetail() {
 
         // Integer IDs 1-6 → use local static data (no API call needed)
         if (Number.isInteger(numId) && numId >= 1 && numId <= 6) {
-            setEvent(STATIC_EVENTS[numId] || null);
+            setEvent(STATIC_EVENTS?.[numId] || null);
             setLoading(false);
             return;
         }
@@ -189,7 +207,7 @@ export default function EventDetail() {
 
     if (loading) return (
         <div className="event-details-loading">
-            <div className="loading-spinner" />
+            <Loader />
             <p>Loading event details...</p>
         </div>
     );
@@ -207,7 +225,9 @@ export default function EventDetail() {
     return (
         <div className="event-details">
             <div className="event-details-container">
-                <button className="back-button" onClick={() => navigate(-1)}>← Back to Events</button>
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    <ArrowBackIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /> Back to Events
+                </button>
 
                 <div className="event-details-grid">
                     {/* Image */}
@@ -229,27 +249,16 @@ export default function EventDetail() {
 
                         <div className="event-details-meta">
                             <div className="event-meta-item">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                    <circle cx="12" cy="10" r="3" />
-                                </svg>
+                                <PlaceIcon aria-hidden="true" />
                                 <span>{event.location}</span>
                             </div>
                             <div className="event-meta-item">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                                    <line x1="16" y1="2" x2="16" y2="6" />
-                                    <line x1="8" y1="2" x2="8" y2="6" />
-                                    <line x1="3" y1="10" x2="21" y2="10" />
-                                </svg>
+                                <CalendarTodayIcon aria-hidden="true" />
                                 <span>{event.date}</span>
                             </div>
                             {event.time && (
                                 <div className="event-meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14" />
-                                    </svg>
+                                    <AccessTimeIcon aria-hidden="true" />
                                     <span>{event.time}</span>
                                 </div>
                             )}

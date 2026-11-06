@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { StatCard, PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -28,9 +29,9 @@ export default function Analytics() {
         <div>
             <PageHeader title="View Analytics" subtitle="Track event performance — from MongoDB" />
             <div className="stats-grid">
-                <StatCard icon="🎟️" label="Tickets Sold" value={loading ? '...' : data.totalTicketsSold} color="#f59e0b" />
-                <StatCard icon="💰" label="Total Revenue" value={loading ? '...' : `ETB ${(data.totalRevenue || 0).toLocaleString()}`} color="#10b981" />
-                <StatCard icon="👥" label="Attendance" value={loading ? '...' : data.totalAttendance} color="#0ea5e9" />
+                <StatCard icon="ticket" label="Tickets Sold" value={loading ? '...' : data.totalTicketsSold} color="#f59e0b" />
+                <StatCard icon="payments" label="Total Revenue" value={loading ? '...' : `ETB ${(data.totalRevenue || 0).toLocaleString()}`} color="#10b981" />
+                <StatCard icon="groups" label="Attendance" value={loading ? '...' : data.totalAttendance} color="#0ea5e9" />
             </div>
 
             <SectionBox title="Event Performance">
@@ -60,7 +61,7 @@ export default function Analytics() {
 
             <SectionBox title="Export Report">
                 <div style={{ display: 'flex', gap: 8 }}>
-                    <button className="btn-primary" onClick={exportCSV}>📊 Export CSV</button>
+                    <button className="btn-primary" onClick={exportCSV}><AppIcon name="analytics" /> Export CSV</button>
                 </div>
             </SectionBox>
         </div>

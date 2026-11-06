@@ -447,6 +447,13 @@
     color: #fff;
 }
 
+.modal-close svg,
+.modal-back svg {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
 .modal-event-name {
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
@@ -529,6 +536,11 @@
 .qty-btn:hover {
     background: #8b5cf6;
     border-color: #8b5cf6;
+}
+
+.qty-btn svg {
+    width: 18px;
+    height: 18px;
 }
 
 .qty-num {
@@ -659,6 +671,12 @@
     color: #8b5cf6;
     font-size: 18px;
     font-weight: 700;
+}
+
+.pay-method-check svg {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
 }
 
 .pay-login-note {

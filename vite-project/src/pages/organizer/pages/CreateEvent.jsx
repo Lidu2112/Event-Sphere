@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useRef, useState } from 'react';
 import { apiUrl } from '../../../api/config';
 import { useNavigate } from 'react-router-dom';
@@ -162,12 +163,12 @@ export default function CreateEvent() {
                                     fontSize: 13, color: '#475569', fontWeight: 600,
                                 }}
                             >
-                                🖼️ {uploading ? 'Uploading...' : previewUrl ? 'Change Image' : 'Choose Image'}
+                                <AppIcon name="image" /> {uploading ? 'Uploading...' : previewUrl ? 'Change Image' : 'Choose Image'}
                             </button>
                             {previewUrl && (
                                 <button type="button" onClick={() => { setPreviewUrl(''); setForm(f => ({ ...f, banner: '' })); if (fileRef.current) fileRef.current.value = ''; }}
                                     style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: 18 }} title="Remove">
-                                    ✕
+                                    <AppIcon name="close" />
                                 </button>
                             )}
                         </div>
@@ -178,14 +179,14 @@ export default function CreateEvent() {
                             <div style={{ marginTop: 10, position: 'relative', width: '100%' }}>
                                 <img src={previewUrl} alt="Preview" style={{ width: '100%', maxHeight: 220, objectFit: 'cover', borderRadius: 10, border: '1px solid #e2e8f0', display: 'block' }} />
                                 <span style={{ position: 'absolute', bottom: 8, left: 10, background: '#00000070', color: '#fff', fontSize: 11, padding: '3px 8px', borderRadius: 6 }}>
-                                    {uploading ? '⏳ Uploading...' : '✓ Preview'}
+                                    {uploading ? <><AppIcon name="hourglass" /> Uploading...</> : <><AppIcon name="check" /> Preview</>}
                                 </span>
                             </div>
                         )}
                     </div>
 
                     <button className="btn-primary" type="submit" disabled={saving || uploading} style={{ alignSelf: 'flex-start', marginTop: 4 }}>
-                        {saving ? 'Creating...' : '✅ Create Event'}
+                        {saving ? 'Creating...' : <><AppIcon name="checkCircle" /> Create Event</>}
                     </button>
                 </form>
             </SectionBox>

@@ -1,3 +1,4 @@
+import AppIcon from './AppIcon.jsx';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -70,7 +71,7 @@ export default function DashboardLayout({ children, navigation, roleLabel }) {
                             <Link key={item.path} to={item.path}
                                 className={`ds-nav-item ${isActive ? 'active' : ''}`}
                                 onClick={() => setSidebarOpen(false)}>
-                                <span className="ds-nav-icon">{item.icon}</span>
+                                <span className="ds-nav-icon">{item.icon && <AppIcon name={item.icon} />}</span>
                                 <span className="ds-nav-label">{item.label}</span>
                             </Link>
                         );
@@ -126,7 +127,7 @@ export default function DashboardLayout({ children, navigation, roleLabel }) {
                                             <div key={n.id}
                                                 className={`notif-item ${n.unread ? 'unread' : ''}`}
                                                 onClick={() => markRead(n.id)}>
-                                                <div className="notif-item-icon">{n.icon}</div>
+                                                <div className="notif-item-icon">{n.icon && <AppIcon name={n.icon} />}</div>
                                                 <div className="notif-item-body">
                                                     <p>{n.text}</p>
                                                     <span>{n.time}</span>
@@ -145,7 +146,7 @@ export default function DashboardLayout({ children, navigation, roleLabel }) {
                                 onClick={() => { setProfileOpen(o => !o); setNotifOpen(false); }}>
                                 <div className="dt-avatar">{initials}</div>
                                 <span className="dt-uname">{user?.name || 'Abebe Girma'}</span>
-                                <span style={{ fontSize: 10, color: '#9ca3af' }}>▾</span>
+                                <span style={{ fontSize: 10, color: '#9ca3af' }}><AppIcon name="chevronDown" /></span>
                             </div>
 
                             {profileOpen && (

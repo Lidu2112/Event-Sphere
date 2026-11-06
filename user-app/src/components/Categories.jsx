@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import './Categories.css';
 
 import { apiUrl } from '../api/config';
@@ -10,7 +12,7 @@ const REAL_CATEGORIES = [
     { 
         label: 'Concert & Live Music', 
         subtitle: 'Unforgettable musical nights, live performances, and energetic stage shows captured across our entertainment schedules.',
-        image: 'https://i.pinimg.com/1200x/f6/63/a4/f663a4a0de0f2e0f5e680ca70b956fd8.jpg',
+        image: 'https://as1.ftcdn.net/v2/jpg/21/20/63/38/1000_F_2120633815_NptYzpAbg6W8CRasm4GxxvUitHqITkGP.jpg',
         badge: '1 PHOTO',
         color: '#8b5cf6' 
     },
@@ -99,7 +101,7 @@ export default function Categories() {
                 <div className="cat-header">
                     <h2 className="cat-section-title">Browse by Category</h2>
                     <Link to="/categories" className="cat-view-all-gallery">
-                        View all Category →
+                        View all Category <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />
                     </Link>
                 </div>
 
@@ -114,7 +116,7 @@ export default function Categories() {
                             className="cat-explore-btn"
                             style={{ backgroundColor: currentCat.color }}
                         >
-                            Explore Events →
+                            Explore Events <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />
                         </Link>
                     </div>
 
@@ -132,10 +134,10 @@ export default function Categories() {
                         </div>
                         <div className="cat-arrows">
                             <button className="cat-arrow-btn" onClick={handlePrev} aria-label="Previous Slide">
-                                ←
+                                <ArrowBackIcon aria-hidden="true" style={{ fontSize: 20 }} />
                             </button>
                             <button className="cat-arrow-btn" onClick={handleNext} aria-label="Next Slide">
-                                →
+                                <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 20 }} />
                             </button>
                         </div>
                     </div>

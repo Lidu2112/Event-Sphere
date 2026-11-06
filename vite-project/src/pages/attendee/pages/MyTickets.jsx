@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { apiUrl } from '../../../api/config';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -24,7 +25,7 @@ export default function MyTickets() {
                 <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading tickets...</div>
             ) : tickets.length === 0 ? (
                 <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                    <div style={{ fontSize: 40, marginBottom: 10 }}>🎟️</div>
+                    <div style={{ fontSize: 40, marginBottom: 10 }}><AppIcon name="ticket" /></div>
                     <p style={{ margin: 0 }}>No tickets yet. Buy a ticket from the Browse Events page.</p>
                 </div>
             ) : (
@@ -32,8 +33,8 @@ export default function MyTickets() {
                     {tickets.map((t, i) => (
                         <SectionBox key={i}>
                             <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>{t.eventName}</div>
-                            <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 4 }}>📅 {t.eventDate}</div>
-                            {t.venue && <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 12 }}>📍 {t.venue}</div>}
+                            <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 4 }}><AppIcon name="calendar" /> {t.eventDate}</div>
+                            {t.venue && <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 12 }}><AppIcon name="location" /> {t.venue}</div>}
                             {t.qrCode ? (
                                 <div style={{ background: '#f8fafc', padding: 12, borderRadius: 8, textAlign: 'center', marginBottom: 12 }}>
                                     <img src={t.qrCode} alt="QR" style={{ width: 120, height: 120 }} />

@@ -133,6 +133,8 @@
 
 .about-brand-icon {
     font-size: 16px;
+    width: 16px;
+    height: 16px;
     color: #eb823c;
 }
 
@@ -211,6 +213,8 @@
 }
 
 .heading-icon {
+    width: 18px;
+    height: 18px;
     color: #eb823c;
 }
 
@@ -273,7 +277,14 @@
 
 .title-icon {
     font-size: 11px;
+    width: 11px;
+    height: 11px;
     color: #eb823c;
+}
+
+.about-btn-arrow svg {
+    width: 18px;
+    height: 18px;
 }
 
 .about-feature-desc {

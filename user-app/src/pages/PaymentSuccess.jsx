@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { apiUrl } from '../api/config';
 import { useSearchParams, Link } from 'react-router-dom';
+import CelebrationIcon from '@mui/icons-material/Celebration';
 import './PaymentSuccess.css';
 
 export default function PaymentSuccess() {
@@ -62,7 +63,6 @@ export default function PaymentSuccess() {
     if (state === 'failed') return (
         <div className="ps-page">
             <div className="ps-card ps-failed">
-                <div className="ps-icon">❌</div>
                 <h2>Payment Failed</h2>
                 <p>Your payment could not be processed. No charge has been made.</p>
                 <Link to="/events" className="ps-btn-outline">Browse Events</Link>
@@ -73,7 +73,6 @@ export default function PaymentSuccess() {
     if (state === 'error') return (
         <div className="ps-page">
             <div className="ps-card ps-failed">
-                <div className="ps-icon">⚠️</div>
                 <h2>Something went wrong</h2>
                 <p>We couldn't verify your payment. If you were charged, please contact support.</p>
                 <Link to="/" className="ps-btn-outline">Go Home</Link>
@@ -84,7 +83,7 @@ export default function PaymentSuccess() {
     return (
         <div className="ps-page">
             <div className="ps-card ps-success">
-                <div className="ps-icon">🎉</div>
+                <div className="ps-icon"><CelebrationIcon aria-hidden="true" /></div>
                 <h2>Ticket Confirmed!</h2>
                 <p>Your payment was successful. Your digital ticket is ready below.</p>
 
@@ -93,8 +92,8 @@ export default function PaymentSuccess() {
                     <div className="ps-ticket-header">
                         <div className="ps-ticket-event">{ticket.eventTitle}</div>
                         <div className="ps-ticket-info">
-                            {ticket.eventDate && <span>📅 {ticket.eventDate}</span>}
-                            {ticket.eventVenue && <span>📍 {ticket.eventVenue}</span>}
+                            {ticket.eventDate && <span>{ticket.eventDate}</span>}
+                            {ticket.eventVenue && <span>{ticket.eventVenue}</span>}
                         </div>
                     </div>
 
@@ -109,7 +108,6 @@ export default function PaymentSuccess() {
                     {/* Details */}
                     <div className="ps-ticket-details">
                         <div className="ps-detail-row">
-
                             <span>Ticket ID</span>
                             <strong>{ticket.ticketCode}</strong>
                         </div>
@@ -143,7 +141,7 @@ export default function PaymentSuccess() {
                         </div>
                         <div className="ps-detail-row">
                             <span>Status</span>
-                            <strong style={{ color: '#16a34a' }}>✓ Paid</strong>
+                            <strong style={{ color: '#16a34a' }}>Paid</strong>
                         </div>
                     </div>
 
@@ -154,9 +152,9 @@ export default function PaymentSuccess() {
 
                 <div className="ps-actions">
                     <button className="ps-btn-primary" onClick={downloadQR}>
-                        📥 Download Ticket
+                        Download Ticket
                     </button>
-                    <Link to="/dashboard" className="ps-btn-dashboard">🏠 Go to Dashboard</Link>
+                    <Link to="/dashboard" className="ps-btn-dashboard">Go to Dashboard</Link>
                     <Link to="/events" className="ps-btn-outline">Browse More Events</Link>
                 </div>
             </div>

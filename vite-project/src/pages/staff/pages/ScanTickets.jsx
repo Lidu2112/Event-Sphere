@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -42,13 +43,13 @@ export default function ScanTickets() {
             setTicket(found);
             if (!found.status || found.status !== 'paid') {
                 setStatus('invalid');
-                setMessage('❌ Invalid ticket or unpaid ticket.');
+                setMessage("Invalid ticket or unpaid ticket.");
             } else if (found.checkedIn) {
                 setStatus('already');
-                setMessage(`⚠ Already checked in at ${new Date(found.checkedInAt).toLocaleTimeString()}.`);
+                setMessage(`Already checked in at ${new Date(found.checkedInAt).toLocaleTimeString()}.`);
             } else {
                 setStatus('valid');
-                setMessage('✅ Valid ticket. Ready to check in.');
+                setMessage("Valid ticket. Ready to check in.");
             }
         } catch (err) {
             setStatus('invalid');
@@ -96,7 +97,7 @@ function handleScan(result) {
             });
             setTicket(result.ticket);
             setStatus('checked');
-            setMessage('✅ Check in successful. Entry recorded.');
+            setMessage("Check in successful. Entry recorded.");
             setTicketCode('');
         } catch (err) {
             setStatus('error');
@@ -132,7 +133,7 @@ function handleScan(result) {
                                 fontWeight: 600,
                             }}
                         >
-                            📷 Camera Scanner
+                            <AppIcon name="camera" /> Camera Scanner
                         </button>
                         <button
                             onClick={() => setUseCamera(false)}
@@ -146,7 +147,7 @@ function handleScan(result) {
                                 fontWeight: 600,
                             }}
                         >
-                            ⌨️ Manual Entry
+                            <AppIcon name="keyboard" /> Manual Entry
                         </button>
                     </div>
 
@@ -154,14 +155,14 @@ function handleScan(result) {
                     {useCamera && (
                         <div>
                             <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>
-                                📸 Allow camera access when prompted by the browser.
+                                <AppIcon name="photoCamera" /> Allow camera access when prompted by the browser.
                             </p>
                             <div style={{ borderRadius: 12, overflow: 'hidden', background: '#000', aspectRatio: '4/3', maxWidth: 480, margin: '0 auto' }}>
                                 <Scanner
                                     onScan={handleScan}
                                     onError={(err) => {
                                         console.warn('Scanner error:', err);
-                                        setMessage('⚠️ Camera error: ' + (err?.message || 'Could not access camera. Check browser permissions.'));
+                                        setMessage("Camera error:" + (err?.message || 'Could not access camera. Check browser permissions.'));
                                         setStatus('error');
                                     }}
                                     components={{ audio: false, torch: true }}
@@ -215,7 +216,7 @@ function handleScan(result) {
                             color: status === 'valid' || status === 'checked' ? '#166534' : '#b91c1c',
                             fontWeight: 500,
                         }}>
-                            {message}
+                            {status === 'already' && <AppIcon name="warning" />} {message}
                         </div>
                     )}
 
@@ -228,7 +229,7 @@ function handleScan(result) {
                                     <div style={{ fontSize: 13, color: '#6b7280' }}>{ticket.eventTitle}</div>
                                 </div>
                                 <span className={`status-badge ${ticket.checkedIn ? 'failed' : 'active'}`} style={{ padding: '6px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600 }}>
-                                    {ticket.checkedIn ? '✓ Checked In' : '✓ Valid Ticket'}
+                                    {ticket.checkedIn ? <><AppIcon name="check" /> Checked In</> : <><AppIcon name="check" /> Valid Ticket</>}
                                 </span>
                             </div>
 
@@ -258,7 +259,7 @@ function handleScan(result) {
                                     disabled={loading || ticket.checkedIn}
                                     style={{ flex: 1, opacity: ticket.checkedIn ? 0.5 : 1 }}
                                 >
-                                    {ticket.checkedIn ? '✓ Already Checked In' : '✅ Check In Now'}
+                                    {ticket.checkedIn ? <><AppIcon name="check" /> Already Checked In</> : <><AppIcon name="checkCircle" /> Check In Now</>}
                                 </button>
                                 <button
                                     onClick={handleReset}

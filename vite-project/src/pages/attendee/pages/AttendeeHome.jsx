@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatCard, ActionButton, PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -32,18 +33,18 @@ export default function AttendeeHome() {
         <div>
             <PageHeader title="Attendee Dashboard" subtitle="Browse events and manage your tickets" />
             <div className="stats-grid">
-                <StatCard icon="🎟️" label="My Tickets" value={loading ? '...' : stats.tickets} color="#f59e0b" />
-                <StatCard icon="📅" label="Upcoming Events" value={loading ? '...' : stats.upcoming} color="#0ea5e9" />
-                <StatCard icon="💰" label="Total Spent" value={loading ? '...' : `ETB ${(stats.totalSpent || 0).toLocaleString()}`} color="#10b981" />
-                <StatCard icon="❤️" label="Favorites" value={loading ? '...' : stats.favorites} color="#ec4899" />
+                <StatCard icon="ticket" label="My Tickets" value={loading ? '...' : stats.tickets} color="#f59e0b" />
+                <StatCard icon="calendar" label="Upcoming Events" value={loading ? '...' : stats.upcoming} color="#0ea5e9" />
+                <StatCard icon="payments" label="Total Spent" value={loading ? '...' : `ETB ${(stats.totalSpent || 0).toLocaleString()}`} color="#10b981" />
+                <StatCard icon="favorite" label="Favorites" value={loading ? '...' : stats.favorites} color="#ec4899" />
             </div>
 
             <SectionBox title="Quick Actions">
                 <div className="actions-grid">
-                    <ActionButton icon="🔍" label="Browse Events" color="#f59e0b" onClick={() => navigate('/attendee/browse')} />
-                    <ActionButton icon="🎟️" label="My Tickets" color="#0ea5e9" onClick={() => navigate('/attendee/tickets')} />
-                    <ActionButton icon="📋" label="History" color="#64748b" onClick={() => navigate('/attendee/history')} />
-                    <ActionButton icon="⭐" label="Review" color="#ec4899" onClick={() => navigate('/attendee/reviews')} />
+                    <ActionButton icon="search" label="Browse Events" color="#f59e0b" onClick={() => navigate('/attendee/browse')} />
+                    <ActionButton icon="ticket" label="My Tickets" color="#0ea5e9" onClick={() => navigate('/attendee/tickets')} />
+                    <ActionButton icon="list" label="History" color="#64748b" onClick={() => navigate('/attendee/history')} />
+                    <ActionButton icon="star" label="Review" color="#ec4899" onClick={() => navigate('/attendee/reviews')} />
                 </div>
             </SectionBox>
 
@@ -52,7 +53,7 @@ export default function AttendeeHome() {
                     <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>Loading...</div>
                 ) : tickets.length === 0 ? (
                     <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>
-                        No tickets yet. <button className="btn-sm" onClick={() => navigate('/attendee/browse')}>Browse events →</button>
+                        No tickets yet. <button className="btn-sm" onClick={() => navigate('/attendee/browse')}>Browse events <AppIcon name="arrowForward" /></button>
                     </div>
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

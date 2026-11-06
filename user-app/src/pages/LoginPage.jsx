@@ -5,6 +5,12 @@ import { useAuth } from '../context/AuthContext';
  import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import './AuthPage.css';
+ import EmailIcon from '@mui/icons-material/Email';
+ import PhoneIcon from '@mui/icons-material/Phone';
+ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+ import LockIcon from '@mui/icons-material/Lock';
+ import VisibilityIcon from '@mui/icons-material/Visibility';
+ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export default function LoginPage() {
 
@@ -271,7 +277,7 @@ onSuccess={async (credentialResponse)=>{
 
                         >
 
-                            <i className="fas fa-envelope"></i>
+                            <EmailIcon aria-hidden="true" />
                             Email
 
                         </button>
@@ -298,7 +304,7 @@ onSuccess={async (credentialResponse)=>{
 
                         >
 
-                            <i className="fas fa-phone"></i>
+                            <PhoneIcon aria-hidden="true" />
                             Phone
 
                         </button>
@@ -315,7 +321,7 @@ onSuccess={async (credentialResponse)=>{
 
                     <div className="auth-error">
 
-                        <i className="fas fa-exclamation-circle"></i>
+                        <ReportProblemIcon aria-hidden="true" />
 
                         {error}
 
@@ -352,7 +358,7 @@ onSuccess={async (credentialResponse)=>{
                         <div className="field-wrap">
 
 
-                            <i className="fas fa-envelope field-icon"></i>
+                            <EmailIcon className="field-icon" aria-hidden="true" />
 
 
                             <input
@@ -391,7 +397,7 @@ onSuccess={async (credentialResponse)=>{
                         <div className="field-wrap">
 
 
-                            <i className="fas fa-phone field-icon"></i>
+                            <PhoneIcon className="field-icon" aria-hidden="true" />
 
 
                             <input
@@ -454,7 +460,7 @@ onSuccess={async (credentialResponse)=>{
                         <div className="field-wrap">
 
 
-                            <i className="fas fa-lock field-icon"></i>
+                            <LockIcon className="field-icon" aria-hidden="true" />
 
 
 
@@ -490,6 +496,8 @@ onSuccess={async (credentialResponse)=>{
                             type="button"
 
                             className="show-pass-btn"
+                            aria-label={showPass ? 'Hide password' : 'Show password'}
+                            aria-pressed={showPass}
 
 
                             onClick={()=>
@@ -498,17 +506,7 @@ onSuccess={async (credentialResponse)=>{
 
                             >
 
-                                <i
-                                className={
-                                `fas ${
-                                showPass
-                                ?
-                                'fa-eye-slash'
-                                :
-                                'fa-eye'
-                                }`
-                                }
-                                ></i>
+                                {showPass ? <VisibilityOffIcon aria-hidden="true" /> : <VisibilityIcon aria-hidden="true" />}
 
 
                             </button>

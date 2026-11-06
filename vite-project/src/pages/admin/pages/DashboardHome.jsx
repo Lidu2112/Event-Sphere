@@ -1,25 +1,26 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useState, useEffect } from 'react';
 import { api } from '../../../api/admin';
 import { useSettings } from '../../../context/SettingsContext';
 import './AdminPages.css';
 
 const STAT_DEFS = [
-    { icon: '👥', label: 'Total Users', color: '#6366f1', key: 'totalUsers' },
-    { icon: '✅', label: 'Active Users', color: '#0ea5e9', key: 'activeUsers' },
-    { icon: '🏪', label: 'Vendors', color: '#ec4899', key: 'vendors' },
-    { icon: '⏳', label: 'Pending Organizers', color: '#f59e0b', key: 'pendingOrganizers' },
-    { icon: '🎧', label: 'Open Support', color: '#ef4444', key: 'openSupport' },
+    { icon: "groups", label: 'Total Users', color: '#6366f1', key: 'totalUsers' },
+    { icon: "checkCircle", label: 'Active Users', color: '#0ea5e9', key: 'activeUsers' },
+    { icon: "store", label: 'Vendors', color: '#ec4899', key: 'vendors' },
+    { icon: "hourglass", label: 'Pending Organizers', color: '#f59e0b', key: 'pendingOrganizers' },
+    { icon: "mail", label: 'Open Support', color: '#ef4444', key: 'openSupport' },
 ];
 
 export default function DashboardHome() {
     const { settings } = useSettings();
     const [statsData, setStatsData] = useState(null);
     const [quickStats, setQuickStats] = useState([
-        { label: 'Platform Admins', value: '—', icon: '🛡️' },
-        { label: 'Event Organizers', value: '—', icon: '🎪' },
-        { label: 'Event Staff', value: '—', icon: '👷' },
-        { label: 'Attendees', value: '—', icon: '🎟️' },
-        { label: 'Vendors', value: '—', icon: '🏪' },
+        { label: 'Platform Admins', value: '—', icon: "security" },
+        { label: 'Event Organizers', value: '—', icon: "event" },
+        { label: 'Event Staff', value: '—', icon: "engineering" },
+        { label: 'Attendees', value: '—', icon: "ticket" },
+        { label: 'Vendors', value: '—', icon: "store" },
     ]);
     const [activity, setActivity] = useState([]);
 
@@ -35,17 +36,17 @@ export default function DashboardHome() {
         ]).then(([statsRes, admins, organizers, staff, attendees, vendors, activityRes]) => {
             setStatsData(statsRes.stats);
             setQuickStats([
-                { label: 'Platform Admins', value: String(admins.users?.length || 0), icon: '🛡️' },
-                { label: 'Event Organizers', value: String(organizers.users?.length || 0), icon: '🎪' },
-                { label: 'Event Staff', value: String(staff.users?.length || 0), icon: '👷' },
-                { label: 'Attendees', value: String(attendees.users?.length || 0), icon: '🎟️' },
-                { label: 'Vendors', value: String(vendors.users?.length || 0), icon: '🏪' },
+                { label: 'Platform Admins', value: String(admins.users?.length || 0), icon: "security" },
+                { label: 'Event Organizers', value: String(organizers.users?.length || 0), icon: "event" },
+                { label: 'Event Staff', value: String(staff.users?.length || 0), icon: "engineering" },
+                { label: 'Attendees', value: String(attendees.users?.length || 0), icon: "ticket" },
+                { label: 'Vendors', value: String(vendors.users?.length || 0), icon: "store" },
             ]);
             const normalized = (activityRes.activity || []).map(item => ({
                 user: item.userName || item.user || 'System',
                 action: item.message || item.action || 'Activity recorded',
                 time: item.createdAt ? new Date(item.createdAt).toLocaleString() : 'recently',
-                avatar: item.type === 'support' ? '🎧' : item.type === 'vendor' ? '🏪' : '🧑',
+                avatar: item.type === 'support' ? 'support' : item.type === 'vendor' ? 'store' : 'account',
             }));
             setActivity(normalized.length ? normalized : []);
         }).catch(() => { });
@@ -72,7 +73,7 @@ export default function DashboardHome() {
                     <div key={i} className="stat-card" style={{ borderTopColor: s.color }}>
                         <div className="sc-top">
                             <div className="sc-icon" style={{ background: s.color + '20', color: s.color }}>
-                                {s.icon}
+                                <AppIcon name={s.icon} />
                             </div>
                             {s.change && (
                                 <div className={`sc-change ${s.up ? 'up' : 'down'}`}>{s.change}</div>
@@ -96,7 +97,7 @@ export default function DashboardHome() {
                             <div style={{ color: '#94a3b8', padding: '12px 0' }}>No recent activity yet.</div>
                         ) : activity.map((a, i) => (
                             <div key={i} className="activity-item">
-                                <div className="activity-avatar">{a.avatar}</div>
+                                <div className="activity-avatar"><AppIcon name={a.avatar} /></div>
                                 <div className="activity-content">
                                     <div className="activity-user">{a.user}</div>
                                     <div className="activity-action">{a.action}</div>
@@ -115,7 +116,7 @@ export default function DashboardHome() {
                     <div className="quick-stat-list">
                         {quickStats.map((q, i) => (
                             <div key={i} className="quick-stat-item">
-                                <span className="qs-icon">{q.icon}</span>
+                                <span className="qs-icon"><AppIcon name={q.icon} /></span>
                                 <span className="qs-label">{q.label}</span>
                                 <span className="qs-value">{q.value}</span>
                             </div>

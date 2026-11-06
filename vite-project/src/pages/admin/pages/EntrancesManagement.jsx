@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { api } from '../../../api/admin';
 import './AdminPages.css';
@@ -107,20 +108,20 @@ export default function EntrancesManagement() {
                     <h2 className="page-title">Entrance Monitor</h2>
                     <p className="page-subtitle">Real-time entrance control and check-in monitoring — auto refreshes every 5s</p>
                 </div>
-                <button className="btn-secondary" onClick={loadAll}>🔄 Refresh</button>
+                <button className="btn-secondary" onClick={loadAll}><AppIcon name="refresh" /> Refresh</button>
             </div>
 
             <div className="stats-grid">
                 {[
-                    { icon: '🚪', label: 'Total Entrances', value: entrances.length, color: '#6366f1', bg: '#eef2ff' },
-                    { icon: '🟢', label: 'Open', value: openCount, color: '#10b981', bg: '#dcfce7' },
-                    { icon: '🔴', label: 'Closed', value: closedCount, color: '#ef4444', bg: '#fee2e2' },
-                    { icon: '✅', label: 'Total Checked In', value: totalCheckedIn, color: '#0ea5e9', bg: '#e0f2fe' },
-                    { icon: '👤', label: 'Assigned', value: assignedCount, color: '#f59e0b', bg: '#fef3c7' },
+                    { icon: "door", label: 'Total Entrances', value: entrances.length, color: '#6366f1', bg: '#eef2ff' },
+                    { icon: "checkCircle", label: 'Open', value: openCount, color: '#10b981', bg: '#dcfce7' },
+                    { icon: "close", label: 'Closed', value: closedCount, color: '#ef4444', bg: '#fee2e2' },
+                    { icon: "checkCircle", label: 'Total Checked In', value: totalCheckedIn, color: '#0ea5e9', bg: '#e0f2fe' },
+                    { icon: "", label: 'Assigned', value: assignedCount, color: '#f59e0b', bg: '#fef3c7' },
                 ].map(s => (
                     <div key={s.label} className="stat-card" style={{ borderTopColor: s.color }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
-                            <div className="sc-icon" style={{ background: s.bg, color: s.color }}>{s.icon}</div>
+                            <div className="sc-icon" style={{ background: s.bg, color: s.color }}><AppIcon name={s.icon} /></div>
                         </div>
                         <div className="sc-value">{s.value}</div>
                         <div className="sc-label">{s.label}</div>
@@ -129,9 +130,9 @@ export default function EntrancesManagement() {
             </div>
 
             <div className="filter-tabs">
-                <button className={tab === 'entrances' ? 'active' : ''} onClick={() => setTab('entrances')}>🚪 Entrances</button>
+                <button className={tab === 'entrances' ? 'active' : ''} onClick={() => setTab('entrances')}><AppIcon name="door" /> Entrances</button>
                 <button className={tab === 'history' ? 'active' : ''} onClick={() => { setTab('history'); loadGlobalHistory(); }}>
-                    📋 Check-in History ({globalHistory.length})
+                    <AppIcon name="list" /> Check-in History ({globalHistory.length})
                 </button>
             </div>
 
@@ -164,14 +165,14 @@ export default function EntrancesManagement() {
                                             <td className="td-bold">{entrance.name}</td>
                                             <td>
                                                 <span className={`status-badge ${entrance.status === 'open' ? 'active' : 'failed'}`}>
-                                                    {entrance.status === 'open' ? '🟢 Open' : '🔴 Closed'}
+                                                    {entrance.status === 'open' ? <><AppIcon name="checkCircle" /> Open</> : <><AppIcon name="close" /> Closed</>}
                                                 </span>
                                             </td>
                                             <td>
                                                 {(entrance.assignedStaffName && entrance.assignedStaffName !== 'Unassigned') || entrance.staffEmail ? (
                                                     <div>
                                                         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
-                                                            👤 {entrance.assignedStaffName || entrance.staffName || entrance.staffEmail?.split('@')[0]}
+                                                            <AppIcon name="person" /> {entrance.assignedStaffName || entrance.staffName || entrance.staffEmail?.split('@')[0]}
                                                         </div>
                                                         {entrance.staffEmail && (
                                                             <div style={{ fontSize: 11, color: '#94a3b8' }}>{entrance.staffEmail}</div>
@@ -208,7 +209,7 @@ export default function EntrancesManagement() {
                                                             fontSize: 11, fontWeight: 600,
                                                         }}
                                                     >
-                                                        {entrance.status === 'open' ? '🔒 Close' : '🔓 Open'}
+                                                        {entrance.status === 'open' ? <><AppIcon name="lock" /> Close</> : <><AppIcon name="lockOpen" /> Open</>}
                                                     </button>
                                                     <button
                                                         className="btn-secondary"
@@ -216,7 +217,7 @@ export default function EntrancesManagement() {
                                                         disabled={updatingId === entrance._id}
                                                         style={{ padding: '6px 10px', fontSize: 11 }}
                                                     >
-                                                        👤 Assign
+                                                        <AppIcon name="person" /> Assign
                                                     </button>
                                                     {(entrance.staffId || entrance.staffEmail) && (
                                                         <button
@@ -225,7 +226,7 @@ export default function EntrancesManagement() {
                                                             disabled={updatingId === entrance._id}
                                                             style={{ padding: '6px 10px', fontSize: 11, color: '#ef4444' }}
                                                         >
-                                                            ✕
+                                                            <AppIcon name="close" />
                                                         </button>
                                                     )}
                                                     <button
@@ -233,7 +234,7 @@ export default function EntrancesManagement() {
                                                         onClick={() => openHistory(entrance)}
                                                         style={{ padding: '6px 10px', fontSize: 11 }}
                                                     >
-                                                        📋
+                                                        <AppIcon name="list" />
                                                     </button>
                                                 </div>
                                             </td>
@@ -250,7 +251,7 @@ export default function EntrancesManagement() {
                 <div className="section-box">
                     <div className="box-header">
                         <h3>Global Check-in History</h3>
-                        <button className="btn-secondary" onClick={loadGlobalHistory}>🔄 Reload</button>
+                        <button className="btn-secondary" onClick={loadGlobalHistory}><AppIcon name="refresh" /> Reload</button>
                     </div>
                     {globalHistory.length === 0 ? (
                         <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>No check-ins recorded yet.</div>
@@ -275,7 +276,7 @@ export default function EntrancesManagement() {
                                             <td>{h.eventTitle}</td>
                                             <td>
                                                 <span style={{ background: '#eef2ff', color: '#6366f1', padding: '3px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
-                                                    🚪 {h.entranceName}
+                                                    <AppIcon name="door" /> {h.entranceName}
                                                 </span>
                                             </td>
                                             <td className="td-muted">{h.checkedInByName || 'Staff'}</td>
@@ -350,10 +351,10 @@ export default function EntrancesManagement() {
                     <div className="modal-box" style={{ maxWidth: 620 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
                             <div>
-                                <h3 style={{ margin: 0 }}>📋 {historyModal.entrance.name}</h3>
+                                <h3 style={{ margin: 0 }}><AppIcon name="list" /> {historyModal.entrance.name}</h3>
                                 <p style={{ margin: '4px 0 0', fontSize: 12, color: '#94a3b8' }}>Check-in records and activity log</p>
                             </div>
-                            <button onClick={() => setHistoryModal(null)} className="btn-secondary">✕</button>
+                            <button onClick={() => setHistoryModal(null)} className="btn-secondary"><AppIcon name="close" /></button>
                         </div>
 
                         {historyLoading ? (
@@ -386,7 +387,7 @@ export default function EntrancesManagement() {
                                             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 12px', background: '#f0fdf4', borderRadius: 8, borderLeft: '3px solid #10b981' }}>
                                                 <div>
                                                     <div style={{ fontSize: 13, fontWeight: 600 }}>{c.attendeeName}</div>
-                                                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>🎟️ {c.ticketCode} · {c.eventTitle}</div>
+                                                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}><AppIcon name="ticket" /> {c.ticketCode} · {c.eventTitle}</div>
                                                     <div style={{ fontSize: 11, color: '#94a3b8' }}>by {c.checkedInByName || 'Staff'}</div>
                                                 </div>
                                                 <div style={{ fontSize: 11, color: '#94a3b8', textAlign: 'right' }}>
@@ -407,7 +408,7 @@ export default function EntrancesManagement() {
                                             {historyModal.activityLog.map((a, i) => (
                                                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: '#f8fafc', borderRadius: 8 }}>
                                                     <span style={{ fontSize: 12, color: '#374151' }}>
-                                                        {a.type === 'status-change' ? '🔄' : '👤'} <strong>{a.action}</strong> by {a.changedBy}
+                                                        {a.type === 'status-change' ? <><AppIcon name="refresh" /></> : <><AppIcon name="person" /></>} <strong>{a.action}</strong> by {a.changedBy}
                                                     </span>
                                                     <span style={{ fontSize: 11, color: '#94a3b8', whiteSpace: 'nowrap', marginLeft: 8 }}>
                                                         {a.changedAt ? new Date(a.changedAt).toLocaleTimeString() : '—'}

@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -102,7 +103,7 @@ export default function Portfolio() {
                         <img src={preview.url} alt={preview.caption} style={{ width: '100%', borderRadius: 12, maxHeight: '80vh', objectFit: 'contain' }} />
                         {preview.caption && <p style={{ textAlign: 'center', color: '#fff', marginTop: 10, fontSize: 14 }}>{preview.caption}</p>}
                         <div style={{ textAlign: 'center', marginTop: 8 }}>
-                            <button onClick={() => setPreview(null)} style={{ ...btnSecondary, background: '#ffffff20', color: '#fff', border: '1px solid #ffffff40' }}>✕ Close</button>
+                            <button onClick={() => setPreview(null)} style={{ ...btnSecondary, background: '#ffffff20', color: '#fff', border: '1px solid #ffffff40' }}><AppIcon name="close" /> Close</button>
                         </div>
                     </div>
                 </div>
@@ -113,7 +114,7 @@ export default function Portfolio() {
                     <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading portfolio...</div>
                 ) : items.length === 0 ? (
                     <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                        <div style={{ fontSize: 48, marginBottom: 12 }}>🖼️</div>
+                        <div style={{ fontSize: 48, marginBottom: 12 }}><AppIcon name="image" /></div>
                         <p style={{ fontSize: 15, margin: 0 }}>No portfolio images yet.</p>
                         <p style={{ fontSize: 13, margin: '4px 0 0' }}>Add photos from past events to showcase your work.</p>
                     </div>
@@ -126,14 +127,14 @@ export default function Portfolio() {
                                     <img src={item.url} alt={item.caption || 'Portfolio'} style={imgStyle}
                                         onError={e => { e.target.src = 'https://via.placeholder.com/400x300?text=Image+Not+Found'; }} />
                                     <div style={imgOverlay}>
-                                        <span style={{ color: '#fff', fontSize: 22 }}>🔍</span>
+                                        <span style={{ color: '#fff', fontSize: 22 }}><AppIcon name="search" /></span>
                                     </div>
                                 </div>
                                 <div style={{ padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span style={{ fontSize: 13, color: '#475569', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                         {item.caption || 'No caption'}
                                     </span>
-                                    <button onClick={() => handleDelete(item._id)} style={deleteBtnStyle} title="Remove">🗑️</button>
+                                    <button onClick={() => handleDelete(item._id)} style={deleteBtnStyle} title="Remove"><AppIcon name="delete" /></button>
                                 </div>
                             </div>
                         ))}

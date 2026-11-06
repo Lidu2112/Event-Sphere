@@ -1,3 +1,4 @@
+import AppIcon from '../components/AppIcon.jsx';
 import Topbar from '../components/Topbar';
 import StatCard from '../components/StatCard';
 import QuickAction from '../components/QuickAction';
@@ -21,29 +22,29 @@ function Attendee() {
             <Topbar
                 title="Attendee Dashboard"
                 subtitle="Browse events and manage your tickets"
-                icon="🎟️"
+                icon="ticket"
                 color="#f59e0b"
-                actions={<button className="primary-btn">🔍 Browse Events</button>}
+                actions={<button className="primary-btn"><AppIcon name="search" /> Browse Events</button>}
             />
 
             <div className="dashboard-body">
                 {/* Stats */}
                 <div className="stats-grid">
-                    <StatCard icon="🎟️" label="My Tickets" value="3" trendLabel="upcoming events" color="#f59e0b" />
-                    <StatCard icon="📅" label="Events Attended" value="12" trendLabel="all time" color="#0ea5e9" />
-                    <StatCard icon="💰" label="Total Spent" value="ETB 8,450" trendLabel="lifetime" color="#10b981" />
-                    <StatCard icon="⭐" label="Reviews Given" value="8" trendLabel="thank you!" color="#ec4899" />
+                    <StatCard icon="ticket" label="My Tickets" value="3" trendLabel="upcoming events" color="#f59e0b" />
+                    <StatCard icon="calendar" label="Events Attended" value="12" trendLabel="all time" color="#0ea5e9" />
+                    <StatCard icon="payments" label="Total Spent" value="ETB 8,450" trendLabel="lifetime" color="#10b981" />
+                    <StatCard icon="star" label="Reviews Given" value="8" trendLabel="thank you!" color="#ec4899" />
                 </div>
 
                 {/* Quick Actions */}
                 <div className="section-card">
                     <h3 className="section-title">Quick Actions</h3>
                     <div className="quick-actions-row">
-                        <QuickAction icon="🔍" label="Browse Events" color="#f59e0b" />
-                        <QuickAction icon="🎟️" label="Purchase Tickets" color="#0ea5e9" />
-                        <QuickAction icon="📱" label="Digital Tickets" color="#6366f1" />
-                        <QuickAction icon="📋" label="Purchase History" color="#64748b" />
-                        <QuickAction icon="⭐" label="Submit Review" color="#ec4899" />
+                        <QuickAction icon="search" label="Browse Events" color="#f59e0b" />
+                        <QuickAction icon="ticket" label="Purchase Tickets" color="#0ea5e9" />
+                        <QuickAction icon="phone" label="Digital Tickets" color="#6366f1" />
+                        <QuickAction icon="list" label="Purchase History" color="#64748b" />
+                        <QuickAction icon="star" label="Submit Review" color="#ec4899" />
                     </div>
                 </div>
 

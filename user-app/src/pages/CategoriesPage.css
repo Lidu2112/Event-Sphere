@@ -1,77 +1,377 @@
-.cp-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 16px;
+/* Container */
+.cp-container {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Full Width & Reduced Height Hero Section */
+.cp-hero {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: 0;
     margin-bottom: 40px;
+    padding: 20px 40px; /* Reduced vertical height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-.cp-card {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-top: 3px solid;
-    border-radius: 12px;
-    padding: 20px 14px;
+.cp-hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cp-hero-subtitle {
+    color: #fb923c;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.cp-hero-title {
+    font-size: 34px; /* Slightly adjusted size for compact height */
+    line-height: 1.15;
+    font-weight: 800;
+    margin: 0 0 12px;
+    color: #ffffff;
+}
+
+.cp-highlight {
+    color: #fb923c;
+}
+
+.cp-hero-description {
+    color: #cbd5e1;
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Search Box */
+.cp-search-box {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 4px 18px;
+    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.cp-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.cp-search-icon {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    opacity: 0.6;
+    color: #1e293b;
 }
 
-.cp-card.active {
-    border-top-color: transparent;
-    color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+.cp-search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #1e293b;
+    background: transparent;
 }
 
-.cp-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
+/* Section Header & Grid Content Wrapper */
+.cp-section {
+    max-width: 1280px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+}
+
+.cp-section-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    gap: 16px;
 }
 
-.cp-label {
-    font-size: 14px;
+.cp-section-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+
+.cp-line {
+    height: 2px;
+    width: 40px;
+    background: #f97316;
+}
+
+.cp-section-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-top: 6px;
+    margin-bottom: 32px;
+}
+
+/* Category Grid */
+.cp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.cp-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 12px;
+    border: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.cp-card-img-wrap {
+    width: 100%;
+    height: 100px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+.cp-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.cp-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 6px 4px;
+}
+
+.cp-card-info h3 {
+    margin: 0;
+    font-size: 15px;
     font-weight: 700;
-    color: #1a1d29;
+    color: #1e293b;
 }
 
-.cp-label-white {
-    color: #fff;
+.cp-card-info span {
+    font-size: 12px;
+    color: #94a3b8;
+    display: block;
+    margin-top: 2px;
 }
 
-.cp-count {
-    font-size: 11px;
-    color: #9ca3af;
+.cp-arrow-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
 }
 
-.cp-count-white {
-    color: rgba(255, 255, 255, 0.8);
+.cp-arrow-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Hover & Active States */
+.cp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent-color);
+}
+
+.cp-card:hover .cp-card-img-wrap img {
+    transform: scale(1.08);
+}
+
+.cp-card:hover .cp-arrow-btn {
+    background: var(--accent-color);
+    color: #ffffff;
+}
+
+.cp-card.active {
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.cp-card.active .cp-arrow-btn {
+    background: var(--accent-color);
+    color: #ffffff;
+    transform: rotate(90deg);
+}
+
+/* Events Container */
+.cp-events-container {
+    max-width: 1280px;
+    margin: 40px auto 0;
+    padding: 30px 20px 0;
+    border-top: 1px solid #e2e8f0;
+    animation: fadeIn 0.4s ease forwards;
 }
 
 .cp-events-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .cp-events-header h2 {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 800;
-    color: #1a1d29;
+    margin: 0;
 }
 
-/* reuse ep-card styles from EventsPage.css */
+.cp-event-card-animated {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading Spinner */
+.cp-loading {
+    padding: 60px 0;
+    text-align: center;
+    color: #64748b;
+}
+
+.cp-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #e2e8f0;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Call to Action Banner */
+.cp-cta-banner {
+    max-width: 1280px;
+    margin: 60px auto 0;
+    background: linear-gradient(135deg, #2a0845 0%, #101026 100%);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    gap: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.cp-cta-content h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.cp-cta-content p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.cp-cta-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.cp-btn-primary {
+    background: #f97316;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.cp-btn-primary:hover {
+    background: #ea580c;
+}
+
+.cp-btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.cp-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .cp-hero {
+        padding: 35px 24px;
+    }
+
+    .cp-cta-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .cp-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    
+    .cp-hero-title {
+        font-size: 26px;
+    }
+}

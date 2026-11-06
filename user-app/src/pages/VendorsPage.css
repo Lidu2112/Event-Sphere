@@ -1,43 +1,120 @@
-/* ── Layout & Grid Setup ── */
+/* Layout & Container */
+.vendors-page-wrapper {
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 .page-body {
     max-width: 1280px;
     margin: 0 auto;
     padding: 32px 24px;
 }
-.page-hero{
-    background: #2A1527;
+
+/* Compact Full-Width Hero Background Banner (Matching Image 1 style) */
+.vp-hero {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding: 35px 40px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
-.filter-bar {
+
+.vp-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.filter-bar input,
-.filter-bar select {
-    padding: 10px 16px;
+.vp-hero-subtitle {
+    color: #fb923c;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.vp-hero-text h1 {
+    font-size: 34px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    color: #ffffff;
+}
+
+.vp-hero-text p {
     font-size: 14px;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
+    color: #cbd5e1;
+    margin: 0;
+}
+
+/* Integrated Hero Search Box */
+.vp-hero-search-box {
+    display: flex;
+    align-items: center;
+    color: #1e293b;
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 6px 8px 6px 20px;
+    max-width: 500px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.vp-search-icon {
+    font-size: 15px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+.vp-hero-search-box input {
+    border: none;
     outline: none;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #1e293b;
+    background: transparent;
 }
 
-.filter-bar input {
-    flex: 1;
+.vp-search-btn {
+    background: #6366f1;
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
+.vp-search-btn:hover {
+    background: #4f46e5;
+}
+
+/* Category Filter Pills Bar */
 .vp-pills {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
 }
 
 .ep-pill {
     background: #f1f5f9;
     border: 1px solid #e2e8f0;
     color: #475569;
-    padding: 6px 16px;
+    padding: 8px 18px;
     border-radius: 50px;
     font-size: 13px;
     font-weight: 600;
@@ -49,17 +126,17 @@
 .ep-pill:hover {
     background: #2A1527;
     color: #ffffff;
-    border-color: #6366f1;
+    border-color: #2A1527;
 }
 
-/* ── Multi-Column Responsive Grid ── */
+/* Multi-Column Responsive Grid */
 .vp-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
 }
 
-/* ── Card Styling with Fast & Beautiful Animations ── */
+/* Card Styling with Animations */
 .vp-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -73,11 +150,6 @@
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     animation: fadeInUp 0.5s ease backwards;
 }
-
-.vp-card:nth-child(1) { animation-delay: 0.05s; }
-.vp-card:nth-child(2) { animation-delay: 0.10s; }
-.vp-card:nth-child(3) { animation-delay: 0.15s; }
-.vp-card:nth-child(4) { animation-delay: 0.20s; }
 
 @keyframes fadeInUp {
     from {
@@ -97,6 +169,7 @@
 }
 
 .vp-img-wrap {
+    position: relative;
     width: 100%;
     height: 180px;
     overflow: hidden;
@@ -112,6 +185,19 @@
 
 .vp-card:hover .vp-img-wrap img {
     transform: scale(1.05);
+}
+
+.vp-badge-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
 }
 
 .vp-content {
@@ -190,18 +276,78 @@
     color: #64748b;
 }
 
-/* ── Responsive breakpoints ── */
+/* Bottom CTA Banner matching Image 1 */
+.vp-cta-banner {
+    background: linear-gradient(135deg, #2a0845 0%, #101026 100%);
+    border-radius: 20px;
+    padding: 35px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    margin-top: 60px;
+    gap: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.vp-cta-content h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.vp-cta-content p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.vp-btn-primary {
+    background: #f97316;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.vp-btn-primary:hover {
+    background: #ea580c;
+}
+
+/* Responsive breakpoints */
 @media (max-width: 1024px) {
     .vp-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+@media (max-width: 768px) {
+    .vp-cta-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    .vp-hero-search-box {
+        flex-direction: column;
+        background: transparent;
+        padding: 0;
+        gap: 10px;
+    }
+    .vp-hero-search-box input {
+        background: #ffffff;
+        border-radius: 30px;
+        padding: 12px 20px;
+    }
+    .vp-search-btn {
+        width: 100%;
+    }
+}
+
 @media (max-width: 640px) {
     .vp-grid {
         grid-template-columns: 1fr;
-    }
-    .filter-bar {
-        flex-direction: column;
     }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { attendeeApi } from '../../../api/attendee';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import './SubPage.css';
 
 export default function PurchaseHistory() {
@@ -51,7 +52,7 @@ export default function PurchaseHistory() {
                 <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading purchases...</div>
             ) : filtered.length === 0 ? (
                 <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                    <div style={{ fontSize: 48, marginBottom: 12 }}>🧾</div>
+                    <div style={{ marginBottom: 12 }}><ReceiptLongIcon aria-hidden="true" style={{ fontSize: 48 }} /></div>
                     <p style={{ margin: 0, fontSize: 15 }}>No purchase records found.</p>
                 </div>
             ) : (

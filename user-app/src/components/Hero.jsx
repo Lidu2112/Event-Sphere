@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import './Hero.css';
 
 const SLIDES = [
@@ -94,8 +96,8 @@ export default function Hero() {
             </div>
 
             {/* Slider controls */}
-            <button className="slider-control slider-arrow left" onClick={prev} aria-label="Previous">‹</button>
-            <button className="slider-control slider-arrow right" onClick={next} aria-label="Next">›</button>
+            <button className="slider-control slider-arrow left" onClick={prev} aria-label="Previous"><NavigateBeforeIcon aria-hidden="true" /></button>
+            <button className="slider-control slider-arrow right" onClick={next} aria-label="Next"><NavigateNextIcon aria-hidden="true" /></button>
 
             <div className="slider-dots">
                 {SLIDES.map((_, i) => (

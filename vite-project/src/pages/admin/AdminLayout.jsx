@@ -1,3 +1,4 @@
+import AppIcon from '../../components/AppIcon.jsx';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -118,7 +119,7 @@ export default function AdminLayout({ children }) {
             <div className="admin-main">
                 <header className="admin-topbar">
                     <div className="at-left">
-                        <button className="hamburger" onClick={() => setSidebarOpen(s => !s)}>≡</button>
+                        <button className="hamburger" aria-label={sidebarOpen ? 'Close menu' : 'Open menu'} onClick={() => setSidebarOpen(s => !s)}><AppIcon name="menu" /></button>
                         <div>
                             <h1 className="at-title">{currentNav?.label || 'Dashboard'}</h1>
                             <p className="at-breadcrumb">EventSphere / Admin / {currentNav?.label}</p>
@@ -171,7 +172,7 @@ export default function AdminLayout({ children }) {
                             <div className="at-profile" onClick={() => { setProfileOpen(o => !o); setNotifOpen(false); }}>
                                 <div className="at-avatar">{initials}</div>
                                 <span className="at-name">{user?.name}</span>
-                                <span style={{ fontSize: 11, color: '#94a3b8', marginLeft: 2 }}>▾</span>
+                                <span style={{ fontSize: 11, color: '#94a3b8', marginLeft: 2 }}><AppIcon name="chevronDown" /></span>
                             </div>
 
                             {profileOpen && (

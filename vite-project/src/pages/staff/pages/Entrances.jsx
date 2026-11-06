@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useState, useEffect } from 'react';
 import { PageHeader, SectionBox, StatCard } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -106,10 +107,10 @@ export default function Entrances() {
             <PageHeader title="Manage Entrances" subtitle="Monitor and control event entrances — refreshes every 5 seconds" />
 
             <div className="stats-grid">
-                <StatCard icon="🚪" label="Total Entrances" value={entrances.length} color="#6366f1" />
-                <StatCard icon="🟢" label="Open Entrances" value={activeCount} color="#10b981" />
-                <StatCard icon="👥" label="Total Checked In" value={totalCheckedIn} color="#0ea5e9" />
-                <StatCard icon="👤" label="My Assigned" value={myEntrances.length} color="#f59e0b" />
+                <StatCard icon="door" label="Total Entrances" value={entrances.length} color="#6366f1" />
+                <StatCard icon="checkCircle" label="Open Entrances" value={activeCount} color="#10b981" />
+                <StatCard icon="groups" label="Total Checked In" value={totalCheckedIn} color="#0ea5e9" />
+                <StatCard icon="" label="My Assigned" value={myEntrances.length} color="#f59e0b" />
             </div>
 
             <SectionBox>
@@ -140,13 +141,13 @@ export default function Entrances() {
                                             </td>
                                             <td style={{ padding: '12px 10px' }}>
                                                 <span className={`status-badge ${e.status === 'open' ? 'active' : 'failed'}`}>
-                                                    {e.status === 'open' ? '🟢 Open' : '🔴 Closed'}
+                                                    {e.status === 'open' ? <><AppIcon name="checkCircle" /> Open</> : <><AppIcon name="close" /> Closed</>}
                                                 </span>
                                             </td>
                                             <td style={{ padding: '12px 10px', fontSize: 12, color: isAssigned ? '#0f172a' : '#94a3b8' }}>
                                                 {isAssigned ? (
                                                     <span>
-                                                        👤 {e.staffName || (e.staffEmail ? e.staffEmail.split('@')[0] : 'Staff')}
+                                                        <AppIcon name="person" /> {e.staffName || (e.staffEmail ? e.staffEmail.split('@')[0] : 'Staff')}
                                                         {e.assignedAt && (
                                                             <span style={{ display: 'block', fontSize: 10, color: '#94a3b8', marginTop: 2 }}>
                                                                 Since {new Date(e.assignedAt).toLocaleTimeString()}
@@ -171,7 +172,7 @@ export default function Entrances() {
                                                             fontSize: 11, fontWeight: 600, opacity: busy ? 0.5 : 1,
                                                         }}
                                                     >
-                                                        {e.status === 'open' ? '🔒 Close' : '🔓 Open'}
+                                                        {e.status === 'open' ? <><AppIcon name="lock" /> Close</> : <><AppIcon name="lockOpen" /> Open</>}
                                                     </button>
 
                                                     {/* Assign to Me / Unassign */}
@@ -185,7 +186,7 @@ export default function Entrances() {
                                                                 fontSize: 11, fontWeight: 600, opacity: busy ? 0.5 : 1,
                                                             }}
                                                         >
-                                                            👤 Assign to Me
+                                                            <AppIcon name="person" /> Assign to Me
                                                         </button>
                                                     ) : isMyEntrance ? (
                                                         <button
@@ -197,7 +198,7 @@ export default function Entrances() {
                                                                 fontSize: 11, fontWeight: 600, opacity: busy ? 0.5 : 1,
                                                             }}
                                                         >
-                                                            ✕ Unassign
+                                                            <AppIcon name="close" /> Unassign
                                                         </button>
                                                     ) : (
                                                         <span style={{ fontSize: 11, color: '#94a3b8', padding: '6px 4px' }}>Assigned to other</span>
@@ -212,7 +213,7 @@ export default function Entrances() {
                                                             fontSize: 11, fontWeight: 600,
                                                         }}
                                                     >
-                                                        📋 History
+                                                        <AppIcon name="list" /> History
                                                     </button>
                                                 </div>
                                             </td>
@@ -242,13 +243,13 @@ export default function Entrances() {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                             <div>
                                 <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1e293b', margin: 0 }}>
-                                    📋 {historyEntrance.entrance.name} — History
+                                    <AppIcon name="list" /> {historyEntrance.entrance.name} — History
                                 </h3>
                                 <p style={{ fontSize: 12, color: '#94a3b8', margin: '4px 0 0' }}>Check-in records and activity log</p>
                             </div>
                             <button onClick={() => setHistoryEntrance(null)}
                                 style={{ background: '#f1f5f9', border: 'none', borderRadius: 8, padding: '8px 12px', cursor: 'pointer', fontWeight: 700 }}>
-                                ✕ Close
+                                <AppIcon name="close" /> Close
                             </button>
                         </div>
 
@@ -272,7 +273,7 @@ export default function Entrances() {
                                                     <div>
                                                         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>{c.attendeeName}</div>
                                                         <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>
-                                                            🎟️ {c.ticketCode} · {c.eventTitle}
+                                                            <AppIcon name="ticket" /> {c.ticketCode} · {c.eventTitle}
                                                         </div>
                                                         <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 1 }}>
                                                             Staff: {c.checkedInByName || 'Staff'}
@@ -298,7 +299,7 @@ export default function Entrances() {
                                             {historyEntrance.activityLog.slice(0, 20).map((a, i) => (
                                                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: '#f8fafc', borderRadius: 8 }}>
                                                     <span style={{ fontSize: 12, color: '#374151' }}>
-                                                        {a.type === 'status-change' ? '🔄' : '👤'} {a.action} by {a.changedBy}
+                                                        {a.type === 'status-change' ? <><AppIcon name="refresh" /></> : <><AppIcon name="person" /></>} {a.action} by {a.changedBy}
                                                     </span>
                                                     <span style={{ fontSize: 11, color: '#94a3b8' }}>
                                                         {a.changedAt ? new Date(a.changedAt).toLocaleTimeString() : '—'}

@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useState, useEffect, useRef } from 'react';
 import { PageHeader, SectionBox, StatCard } from '../../../components/SharedComponents';
 import { staffApi } from '../../../api/staff';
@@ -69,10 +70,10 @@ export default function CheckIn() {
 
             {/* Summary Stats — all from MongoDB */}
             <div className="stats-grid">
-                <StatCard icon="🎟️" label="Total Registered" value={stats.totalTickets} color="#6366f1" />
-                <StatCard icon="✅" label="Checked In" value={stats.checkedInCount} color="#10b981" />
-                <StatCard icon="⏳" label="Remaining" value={stats.pendingCount} color="#f59e0b" />
-                <StatCard icon="📊" label="Attendance Rate" value={`${stats.attendanceRate}%`} color="#0ea5e9" />
+                <StatCard icon="ticket" label="Total Registered" value={stats.totalTickets} color="#6366f1" />
+                <StatCard icon="checkCircle" label="Checked In" value={stats.checkedInCount} color="#10b981" />
+                <StatCard icon="hourglass" label="Remaining" value={stats.pendingCount} color="#f59e0b" />
+                <StatCard icon="analytics" label="Attendance Rate" value={`${stats.attendanceRate}%`} color="#0ea5e9" />
             </div>
 
             <SectionBox>
@@ -80,7 +81,7 @@ export default function CheckIn() {
                 <div style={{ display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap', alignItems: 'center' }}>
                     <input
                         type="text"
-                        placeholder="🔍  Search by name, ticket ID, QR code, or event..."
+                        placeholder="Search by name, ticket ID, QR code, or event..."
                         value={filter}
                         onChange={e => setFilter(e.target.value)}
                         style={{ flex: 1, minWidth: 260, padding: '10px 14px', borderRadius: 8, border: '1.5px solid #e2e8f0', fontSize: 13, outline: 'none' }}
@@ -97,7 +98,7 @@ export default function CheckIn() {
                             opacity: refreshing ? 0.7 : 1,
                         }}
                     >
-                        <span style={refreshing ? { display: 'inline-block', animation: 'spin 0.7s linear infinite' } : {}}>🔄</span>
+                        <span style={refreshing ? { display: 'inline-block', animation: 'spin 0.7s linear infinite' } : {}}><AppIcon name="refresh" /></span>
                         {refreshing ? 'Refreshing...' : 'Refresh'}
                     </button>
                 </div>
@@ -105,19 +106,19 @@ export default function CheckIn() {
                 {/* Error */}
                 {error && (
                     <div style={{ padding: '10px 14px', background: '#fee2e2', color: '#dc2626', borderRadius: 8, fontSize: 13, marginBottom: 16 }}>
-                        ⚠️ {error}
+                        <AppIcon name="warning" /> {error}
                     </div>
                 )}
 
                 {/* Table */}
                 {loading ? (
                     <div style={{ padding: 48, textAlign: 'center', color: '#94a3b8' }}>
-                        <div style={{ fontSize: 32, marginBottom: 12 }}>⏳</div>
+                        <div style={{ fontSize: 32, marginBottom: 12 }}><AppIcon name="hourglass" /></div>
                         Loading check-in records from MongoDB...
                     </div>
                 ) : filtered.length === 0 ? (
                     <div style={{ padding: 48, textAlign: 'center', color: '#94a3b8' }}>
-                        <div style={{ fontSize: 32, marginBottom: 12 }}>📋</div>
+                        <div style={{ fontSize: 32, marginBottom: 12 }}><AppIcon name="list" /></div>
                         {filter ? 'No records match your search' : 'No attendees have checked in yet'}
                     </div>
                 ) : (

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { attendeeApi } from '../../../api/attendee';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './SubPage.css';
 
 import { apiUrl } from '../../../api/config';
@@ -17,7 +20,13 @@ async function apiReq(method, path, body) {
 }
 
 function Stars({ rating }) {
-    return <span style={{ color: '#f59e0b', fontSize: 18 }}>{'★'.repeat(rating)}{'☆'.repeat(5 - rating)}</span>;
+    return (
+        <span style={{ color: '#f59e0b', fontSize: 18, display: 'inline-flex', alignItems: 'center' }}>
+            {[1, 2, 3, 4, 5].map(star => star <= rating
+                ? <StarIcon key={star} aria-hidden="true" style={{ fontSize: 18 }} />
+                : <StarBorderIcon key={star} aria-hidden="true" style={{ fontSize: 18 }} />)}
+        </span>
+    );
 }
 
 export default function ReviewsRatings() {
@@ -66,7 +75,7 @@ export default function ReviewsRatings() {
             const r = await apiReq('GET', `/attendee/reviews?userEmail=${encodeURIComponent(user.email)}`);
             setMyReviews(r.reviews || []);
             setSelected(null); setRating(0); setComment('');
-            setMsg('✅ Review submitted! Thank you.');
+            setMsg('Review submitted! Thank you.');
             setTimeout(() => setMsg(''), 3000);
         } catch (err) {
             setMsg(err.message || 'Failed to submit review');
@@ -85,9 +94,10 @@ export default function ReviewsRatings() {
             {msg && (
                 <div style={{
                     padding: '10px 16px', borderRadius: 8, marginBottom: 16,
-                    background: msg.startsWith('✅') ? '#dcfce7' : '#fee2e2',
-                    color: msg.startsWith('✅') ? '#16a34a' : '#dc2626', fontSize: 14
+                    background: msg === 'Review submitted! Thank you.' ? '#dcfce7' : '#fee2e2',
+                    color: msg === 'Review submitted! Thank you.' ? '#16a34a' : '#dc2626', fontSize: 14
                 }}>
+                    {msg === 'Review submitted! Thank you.' && <CheckCircleIcon aria-hidden="true" style={{ fontSize: 18, verticalAlign: 'middle' }} />}
                     {msg}
                 </div>
             )}
@@ -104,7 +114,7 @@ export default function ReviewsRatings() {
                                     <span>{b.eventDate}</span>
                                 </div>
                                 <button className="sp-review-btn" onClick={() => { setSelected(b); setRating(0); setComment(''); setMsg(''); }}>
-                                    ⭐ Write Review
+                                    <StarIcon aria-hidden="true" style={{ fontSize: 18, verticalAlign: 'middle' }} /> Write Review
                                 </button>
                             </div>
                         ))}
@@ -122,10 +132,19 @@ export default function ReviewsRatings() {
                                 {[1, 2, 3, 4, 5].map(s => (
                                     <span key={s}
                                         className={`sp-star ${s <= (hover || rating) ? 'active' : ''}`}
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label={`Rate ${s} out of 5 stars`}
                                         onClick={() => setRating(s)}
+                                        onKeyDown={e => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                setRating(s);
+                                            }
+                                        }}
                                         onMouseEnter={() => setHover(s)}
                                         onMouseLeave={() => setHover(0)}
-                                    >★</span>
+                                    ><StarIcon aria-hidden="true" style={{ fontSize: 18 }} /></span>
                                 ))}
                             </div>
                             <textarea value={comment} onChange={e => setComment(e.target.value)}
@@ -149,7 +168,7 @@ export default function ReviewsRatings() {
                     <div style={{ padding: 30, textAlign: 'center', color: '#94a3b8' }}>Loading reviews...</div>
                 ) : myReviews.length === 0 ? (
                     <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>
-                        <div style={{ fontSize: 40, marginBottom: 8 }}>⭐</div>
+                        <div style={{ marginBottom: 8 }}><StarIcon aria-hidden="true" style={{ fontSize: 40 }} /></div>
                         <p style={{ margin: 0, fontSize: 14 }}>No reviews yet. Complete a booking to leave a review.</p>
                     </div>
                 ) : (

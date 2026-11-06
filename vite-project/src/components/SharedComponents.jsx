@@ -1,11 +1,12 @@
+import AppIcon from './AppIcon.jsx';
 import './SharedComponents.css';
 
 export function StatCard({ icon, label, value, trend, color }) {
     return (
         <div className="scard" style={{ borderTopColor: color }}>
             <div className="scard-top">
-                <div className="scard-icon" style={{ background: color + '20', color }}>{icon}</div>
-                {trend && <div className={`scard-trend ${trend > 0 ? 'up' : 'down'}`}>{trend > 0 ? '↑' : '↓'} {Math.abs(trend)}%</div>}
+                <div className="scard-icon" style={{ background: color + '20', color }}><AppIcon name={icon} /></div>
+                {trend && <div className={`scard-trend ${trend > 0 ? 'up' : 'down'}`}>{trend > 0 ? <><AppIcon name="arrowUp" /></> : <><AppIcon name="arrowDown" /></>} {Math.abs(trend)}%</div>}
             </div>
             <div className="scard-value">{value}</div>
             <div className="scard-label">{label}</div>
@@ -16,7 +17,7 @@ export function StatCard({ icon, label, value, trend, color }) {
 export function ActionButton({ icon, label, onClick, color = '#6366f1' }) {
     return (
         <button className="action-btn-card" onClick={onClick} style={{ borderColor: color + '30', background: color + '12', color }}>
-            <span className="ab-icon">{icon}</span>
+            <span className="ab-icon"><AppIcon name={icon} /></span>
             <span className="ab-label">{label}</span>
         </button>
     );

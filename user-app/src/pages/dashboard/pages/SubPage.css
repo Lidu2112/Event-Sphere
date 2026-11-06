@@ -174,6 +174,11 @@
     flex-shrink: 0;
 }
 
+.sp-ticket-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
 .sp-ticket-info {
     flex: 1;
     min-width: 0;
@@ -202,6 +207,12 @@
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+.sp-ticket-meta span svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 .sp-ticket-id {

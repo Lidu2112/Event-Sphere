@@ -1,3 +1,4 @@
+import AppIcon from './components/AppIcon.jsx';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
@@ -27,7 +28,7 @@ function ProtectedRoute({ children, allowedRole }) {
     return () => window.removeEventListener('popstate', handlePop);
   }, [navigate]);
 
-  if (loading) return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', fontSize: 24 }}>⏳</div>;
+  if (loading) return <div role="status" aria-label="Loading" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', fontSize: 24 }}><AppIcon name="hourglass" /></div>;
   if (!user) return <Navigate to="/login" replace />;
 
   const isAdmin = user.role === 'platform-admin';

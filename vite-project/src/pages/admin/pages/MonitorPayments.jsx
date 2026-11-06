@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { exportExcel, exportPDF } from '../../../utils/export';
 import { api } from '../../../api/admin';
@@ -58,7 +59,7 @@ export default function MonitorPayments() {
                     <p className="page-subtitle">Real ticket transactions from MongoDB</p>
                 </div>
                 <div style={{ position: 'relative' }}>
-                    <button className="btn-primary" onClick={() => setExportMenu(m => !m)}>Export ▾</button>
+                    <button className="btn-primary" onClick={() => setExportMenu(m => !m)}>Export <AppIcon name="chevronDown" /></button>
                     {exportMenu && (
                         <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 6, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, boxShadow: '0 8px 24px rgba(0,0,0,.1)', zIndex: 50, minWidth: 160 }}>
                             <button onClick={() => handleExport('pdf')} style={{ display: 'block', width: '100%', padding: '10px 16px', background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: 13 }}>Export as PDF</button>
@@ -71,7 +72,7 @@ export default function MonitorPayments() {
             <div className="payment-summary">
                 {summaryCards.map((s, i) => (
                     <div key={i} className="payment-summary-card" style={{ borderLeftColor: s.color }}>
-                        <div className="psc-icon" style={{ background: s.color + '20', color: s.color }}>{s.icon}</div>
+                        <div className="psc-icon" style={{ background: s.color + '20', color: s.color }}><AppIcon name={s.icon} /></div>
                         <div><div className="psc-label">{s.label}</div><div className="psc-value">{s.value}</div></div>
                     </div>
                 ))}

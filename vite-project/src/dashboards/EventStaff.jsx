@@ -1,3 +1,4 @@
+import AppIcon from '../components/AppIcon.jsx';
 import Topbar from '../components/Topbar';
 import StatCard from '../components/StatCard';
 import QuickAction from '../components/QuickAction';
@@ -22,28 +23,28 @@ function EventStaff() {
             <Topbar
                 title="Event Staff Dashboard"
                 subtitle="Manage your assigned events and check-ins"
-                icon="👷"
+                icon="engineering"
                 color="#10b981"
-                actions={<button className="primary-btn">📱 Scan QR Code</button>}
+                actions={<button className="primary-btn"><AppIcon name="phone" /> Scan QR Code</button>}
             />
 
             <div className="dashboard-body">
                 {/* Stats */}
                 <div className="stats-grid">
-                    <StatCard icon="🎪" label="Assigned Events" value="3" trendLabel="upcoming" color="#10b981" />
-                    <StatCard icon="✅" label="Total Check-ins" value="284" trend={45} trendLabel="today" color="#0ea5e9" />
-                    <StatCard icon="👥" label="Attendees Checked" value="1,249" trendLabel="all time" color="#f59e0b" />
-                    <StatCard icon="🚪" label="Active Entrances" value="4" trendLabel="monitoring" color="#6366f1" />
+                    <StatCard icon="event" label="Assigned Events" value="3" trendLabel="upcoming" color="#10b981" />
+                    <StatCard icon="checkCircle" label="Total Check-ins" value="284" trend={45} trendLabel="today" color="#0ea5e9" />
+                    <StatCard icon="groups" label="Attendees Checked" value="1,249" trendLabel="all time" color="#f59e0b" />
+                    <StatCard icon="door" label="Active Entrances" value="4" trendLabel="monitoring" color="#6366f1" />
                 </div>
 
                 {/* Quick Actions */}
                 <div className="section-card">
                     <h3 className="section-title">Quick Actions</h3>
                     <div className="quick-actions-row">
-                        <QuickAction icon="📱" label="Scan Tickets" color="#10b981" />
-                        <QuickAction icon="✅" label="Check-in" color="#0ea5e9" />
-                        <QuickAction icon="📋" label="Attendee List" color="#6366f1" />
-                        <QuickAction icon="🚪" label="Manage Entrances" color="#64748b" />
+                        <QuickAction icon="phone" label="Scan Tickets" color="#10b981" />
+                        <QuickAction icon="checkCircle" label="Check-in" color="#0ea5e9" />
+                        <QuickAction icon="list" label="Attendee List" color="#6366f1" />
+                        <QuickAction icon="door" label="Manage Entrances" color="#64748b" />
                     </div>
                 </div>
 

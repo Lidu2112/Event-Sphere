@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useRef, useState } from 'react';
 import { apiUrl } from '../../../api/config';
 import { PageHeader } from '../../../components/SharedComponents';
@@ -162,7 +163,7 @@ export default function MyEvents() {
                 <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>Loading events...</div>
             ) : displayed.length === 0 ? (
                 <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                    <div style={{ fontSize: 40, marginBottom: 10 }}>🎪</div>
+                    <div style={{ fontSize: 40, marginBottom: 10 }}><AppIcon name="event" /></div>
                     <p style={{ margin: 0 }}>No events found.</p>
                 </div>
             ) : (
@@ -194,7 +195,7 @@ export default function MyEvents() {
                                         color: '#fff', fontSize: 10, fontWeight: 700,
                                         padding: '3px 8px', borderRadius: 20,
                                     }}>
-                                        {published ? '✓ Published' : 'Draft'}
+                                        {published ? <><AppIcon name="check" /> Published</> : 'Draft'}
                                     </div>
                                 )}
 
@@ -213,26 +214,26 @@ export default function MyEvents() {
                                 <div style={{ padding: '16px 18px 18px', flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
                                     <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: '#111827', lineHeight: 1.4 }}>{ev.title}</h3>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
-                                        <div style={{ fontSize: 13, color: '#6b7280', display: 'flex', gap: 6 }}><span>📍</span><span>{venue}</span></div>
-                                        <div style={{ fontSize: 13, color: '#6b7280', display: 'flex', gap: 6 }}><span>📅</span><span>{ev.date}</span></div>
+                                        <div style={{ fontSize: 13, color: '#6b7280', display: 'flex', gap: 6 }}><span><AppIcon name="location" /></span><span>{venue}</span></div>
+                                        <div style={{ fontSize: 13, color: '#6b7280', display: 'flex', gap: 6 }}><span><AppIcon name="calendar" /></span><span>{ev.date}</span></div>
                                     </div>
 
                                     <div style={{ paddingTop: 12, borderTop: '1px solid #f3f4f6' }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                             <span style={{ fontWeight: 700, fontSize: 17, color: '#111827' }}>{price}</span>
-                                            {!mine && <span style={{ color: '#6366f1', fontWeight: 700 }}>→</span>}
+                                            {!mine && <span style={{ color: '#6366f1', fontWeight: 700 }}><AppIcon name="arrowForward" /></span>}
                                         </div>
 
                                         {mine && (
                                             <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
                                                 <button onClick={() => openEdit(ev)} style={{ flex: 1, padding: '7px 0', borderRadius: 8, border: '1px solid #e2e8f0', background: '#f8fafc', color: '#374151', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
-                                                    ✏️ Edit
+                                                    <AppIcon name="edit" /> Edit
                                                 </button>
                                                 <button onClick={() => handleTogglePublish(ev)} style={{ flex: 1, padding: '7px 0', borderRadius: 8, border: 'none', background: published ? '#fef3c7' : '#dcfce7', color: published ? '#92400e' : '#166534', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
-                                                    {published ? '⊘ Unpublish' : '✓ Publish'}
+                                                    {published ? <><AppIcon name="block" /> Unpublish</> : <><AppIcon name="check" /> Publish</>}
                                                 </button>
                                                 <button onClick={() => handleDelete(ev)} style={{ padding: '7px 12px', borderRadius: 8, border: 'none', background: '#fee2e2', color: '#b91c1c', fontSize: 13, cursor: 'pointer' }}>
-                                                    🗑
+                                                    <AppIcon name="delete" />
                                                 </button>
                                             </div>
                                         )}
@@ -252,7 +253,7 @@ export default function MyEvents() {
                         onClick={e => e.stopPropagation()}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
                             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700 }}>Edit Event</h3>
-                            <button onClick={() => setEditingEvent(null)} style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#9ca3af' }}>✕</button>
+                            <button onClick={() => setEditingEvent(null)} style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#9ca3af' }}><AppIcon name="close" /></button>
                         </div>
                         <form onSubmit={handleSave} style={{ display: 'grid', gap: 12 }}>
                             <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Title *" required style={inp} />
@@ -276,7 +277,7 @@ export default function MyEvents() {
                                 <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" style={{ display: 'none' }} onChange={handleEditFileChange} disabled={uploading} />
                                 <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading}
                                     style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: '#f1f5f9', border: '1.5px dashed #cbd5e1', borderRadius: 8, cursor: uploading ? 'not-allowed' : 'pointer', fontSize: 13, color: '#475569', fontWeight: 600 }}>
-                                    🖼️ {uploading ? 'Uploading...' : editPreview ? 'Change Image' : 'Choose Image'}
+                                    <AppIcon name="image" /> {uploading ? 'Uploading...' : editPreview ? 'Change Image' : 'Choose Image'}
                                 </button>
                                 {editPreview && (
                                     <img src={editPreview} alt="preview" style={{ marginTop: 8, width: '100%', maxHeight: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e2e8f0', display: 'block' }} />

@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -122,21 +123,21 @@ export default function BookingRequests() {
                                                 <div style={{ display: 'flex', gap: 4 }}>
                                                     {/* View Detail */}
                                                     <button onClick={() => setDetail(r)} style={{ padding: '4px 8px', background: '#eef2ff', color: '#6366f1', border: 'none', borderRadius: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-                                                        👁️ View
+                                                        <AppIcon name="visibility" /> View
                                                     </button>
                                                     {r.status === 'pending' && (
                                                         <>
                                                             <button disabled={updating === r._id} onClick={() => updateStatus(r._id, 'accepted')} style={{ padding: '4px 8px', background: '#dcfce7', color: '#16a34a', border: 'none', borderRadius: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-                                                                ✅ Accept
+                                                                <AppIcon name="checkCircle" /> Accept
                                                             </button>
                                                             <button disabled={updating === r._id} onClick={() => updateStatus(r._id, 'rejected')} style={{ padding: '4px 8px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-                                                                ❌ Reject
+                                                                <AppIcon name="close" /> Reject
                                                             </button>
                                                         </>
                                                     )}
                                                     {r.status === 'accepted' && (
                                                         <button disabled={updating === r._id} onClick={() => updateStatus(r._id, 'completed')} style={{ padding: '4px 8px', background: '#dbeafe', color: '#1d4ed8', border: 'none', borderRadius: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-                                                            🏁 Complete
+                                                            <AppIcon name="flag" /> Complete
                                                         </button>
                                                     )}
                                                 </div>
@@ -201,15 +202,15 @@ export default function BookingRequests() {
                                     <button className="btn-sm" onClick={() => setDetail(null)}>Close</button>
                                     {detail.status === 'pending' && (
                                         <>
-                                            <button onClick={() => updateStatus(detail._id, 'accepted')} style={{ padding: '8px 14px', background: '#dcfce7', color: '#16a34a', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}>✅ Accept</button>
-                                            <button onClick={() => updateStatus(detail._id, 'rejected')} style={{ padding: '8px 14px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}>❌ Reject</button>
+                                            <button onClick={() => updateStatus(detail._id, 'accepted')} style={{ padding: '8px 14px', background: '#dcfce7', color: '#16a34a', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}><AppIcon name="checkCircle" /> Accept</button>
+                                            <button onClick={() => updateStatus(detail._id, 'rejected')} style={{ padding: '8px 14px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}><AppIcon name="close" /> Reject</button>
                                         </>
                                     )}
                                     {detail.status === 'accepted' && (
-                                        <button onClick={() => markCompleted(detail._id)} style={{ padding: '8px 14px', background: '#dbeafe', color: '#1d4ed8', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}>🏁 Complete</button>
+                                        <button onClick={() => markCompleted(detail._id)} style={{ padding: '8px 14px', background: '#dbeafe', color: '#1d4ed8', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}><AppIcon name="flag" /> Complete</button>
                                     )}
                                     {detail.status === 'completed' && detail.paymentStatus !== 'paid' && (
-                                        <button onClick={() => markPaid(detail._id)} style={{ padding: '8px 14px', background: '#dcfce7', color: '#16a34a', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}>💳 Mark Paid</button>
+                                        <button onClick={() => markPaid(detail._id)} style={{ padding: '8px 14px', background: '#dcfce7', color: '#16a34a', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontSize: 12 }}><AppIcon name="creditCard" /> Mark Paid</button>
                                     )}
                                 </div>
                             </div>

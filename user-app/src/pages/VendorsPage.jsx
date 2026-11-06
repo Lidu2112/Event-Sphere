@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
 import { apiUrl, imageUrl } from '../api/config';
+import SearchIcon from "@mui/icons-material/Search";
+import StarIcon from '@mui/icons-material/Star';
 import './Page.css';
 import './VendorsPage.css';
 
@@ -33,30 +35,44 @@ export default function VendorsPage() {
 
     return (
         <div className="vendors-page-wrapper">
-            <div className="page-hero">
-                <div className="page-hero-inner">
-                    <h1>{t(lang, 'vp_title')}</h1>
-                    <p>{t(lang, 'vp_subtitle')}</p>
+            {/* Hero Section matching Image 1 style (Compact full-width banner with search bar) */}
+            <div 
+                className="page-hero vp-hero"
+                style={{
+                    backgroundImage: `linear-gradient(90deg, rgba(30, 15, 28, 0.94) 0%, rgba(30, 15, 28, 0.8) 50%, rgba(30, 15, 28, 0.5) 100%), 
+                    url(https://as1.ftcdn.net/v2/jpg/21/20/63/38/1000_F_2120633815_NptYzpAbg6W8CRasm4GxxvUitHqITkGP.jpg)`
+                }}
+            >
+                <div className="vp-hero-inner">
+                    <div className="vp-hero-text">
+                        <span className="vp-hero-subtitle">— Our Trusted Partners</span>
+                        <h1>{t(lang, 'vp_title') || 'Event Vendors'}</h1>
+                        <p>{t(lang, 'vp_subtitle') || 'Find the best service providers for your events'}</p>
+                    </div>
+
+                    {/* Integrated Search Bar in Hero */}
+                    <div className="vp-hero-search-box">
+                        <SearchIcon />
+                        <input
+                            type="text"
+                            placeholder={t(lang, 'vp_search') || 'Search vendors...'}
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                        />
+                        <button className="vp-search-btn">Search</button>
+                    </div>
                 </div>
             </div>
 
             <div className="page-body">
-                <div className="filter-bar">
-                    <input
-                        type="text"
-                        placeholder={t(lang, 'vp_search')}
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                    />
-                    <select value={category} onChange={e => setCategory(e.target.value)}>
-                        {cats.map(c => <option key={c}>{c}</option>)}
-                    </select>
-                </div>
-
+                {/* Category Filter Pills Bar */}
                 <div className="vp-pills">
                     {cats.map(c => (
-                        <button key={c} className={`ep-pill ${category === c ? 'active' : ''}`}
-                            onClick={() => setCategory(c)}>
+                        <button 
+                            key={c} 
+                            className={`ep-pill ${category === c ? 'active' : ''}`}
+                            onClick={() => setCategory(c)}
+                        >
                             {c}
                         </button>
                     ))}
@@ -84,6 +100,7 @@ export default function VendorsPage() {
                                             e.currentTarget.src = '/images/default-vendor.svg';
                                         }}
                                     />
+                                    <span className="vp-badge-tag">{s.category || 'Verified'}</span>
                                 </div>
                                 <div className="vp-content">
                                     <div className="vp-cat">{s.category}</div>
@@ -95,8 +112,8 @@ export default function VendorsPage() {
                                     </p>
                                     <div className="vp-footer">
                                         <div className="vp-rating">
-                                            ⭐ <strong>{s.rating || '0.0'}</strong>
-                                            <span>({s.bookings || 0} {t(lang, 'vp_bookings')})</span>
+                                            <StarIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /> <strong>{s.rating || '0.0'}</strong>
+                                            <span>({s.bookings || 0} {t(lang, 'vp_bookings') || 'reviews'})</span>
                                         </div>
                                         <span className="vp-price">ETB {Number(s.price || 0).toLocaleString()}</span>
                                     </div>
@@ -105,6 +122,17 @@ export default function VendorsPage() {
                         ))}
                     </div>
                 )}
+
+                {/* Bottom Call-To-Action Banner matching Image 1 */}
+                {/* <div className="vp-cta-banner">
+                    <div className="vp-cta-content">
+                        <h2>Become a Vendor on EventSphere</h2>
+                        <p>Showcase your services and grow your business with us.</p>
+                    </div>
+                    <div className="vp-cta-actions">
+                        <Link to="/register-vendor" className="vp-btn-primary">Register as Vendor →</Link>
+                    </div>
+                </div> */}
             </div>
         </div>
     );

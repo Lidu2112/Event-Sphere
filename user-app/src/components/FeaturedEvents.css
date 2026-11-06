@@ -128,7 +128,7 @@
   padding: 8px 10px;
 }
 
-.fsb-field i {
+.fsb-field > svg {
   color: var(--fe-text-muted);
   font-size: 15px;
   flex-shrink: 0;
@@ -299,6 +299,11 @@
   transform: scale(1.1);
 }
 
+.featured-card-heart svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Card Content Area */
 .featured-card-content {
   padding: 22px;
@@ -343,7 +348,7 @@
   font-weight: 500;
 }
 
-.featured-card-details i {
+.featured-card-details svg {
   color: #94a3b8;
   font-size: 14px;
   width: 16px;

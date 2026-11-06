@@ -1,6 +1,13 @@
 import React from 'react';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
+import ExploreIcon from '@mui/icons-material/Explore';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import EventIcon from '@mui/icons-material/Event';
+import BoltIcon from '@mui/icons-material/Bolt';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import './About.css';
 
 export default function About() {
@@ -11,25 +18,25 @@ export default function About() {
       num: '1',
       title: 'Event Discovery',
       desc: 'Explore and discover exciting events across different categories, locations, and interests.',
-      icon: 'fas fa-compass'
+      icon: ExploreIcon
     },
     {
       num: '2',
       title: 'Easy Ticket Booking',
       desc: 'Purchase event tickets securely and conveniently through a simple online booking process.',
-      icon: 'fas fa-ticket-alt'
+      icon: ConfirmationNumberIcon
     },
     {
       num: '3',
       title: 'Vendor Marketplace',
       desc: 'Connect event organizers with trusted vendors and service providers for successful events.',
-      icon: 'fas fa-store'
+      icon: StorefrontIcon
     },
     {
       num: '4',
       title: 'Smart Event Management',
       desc: 'Manage events, staff, payments, and attendee check-ins efficiently from one platform.',
-      icon: 'fas fa-tasks'
+      icon: TaskAltIcon
     }
   ];
 
@@ -45,7 +52,7 @@ export default function About() {
           <div className="about-image-col">
             <div className="about-main-img-wrap float-animated">
               <div className="about-floating-brand">
-                <i className="fas fa-calendar-star about-brand-icon"></i>
+                <EventIcon className="about-brand-icon" aria-hidden="true" />
                 <span className="about-brand-text">EventSphere</span>
               </div>
               
@@ -70,7 +77,7 @@ export default function About() {
 
             {/* "What Makes EventSphere Special?" Heading */}
             <h3 className="about-features-heading">
-              <i className="fas fa-bolt heading-icon"></i>
+              <BoltIcon className="heading-icon" aria-hidden="true" />
               What Makes EventSphere Special?
             </h3>
 
@@ -83,7 +90,7 @@ export default function About() {
                   </div>
                   <div className="about-feature-content">
                     <h4 className="about-feature-title">
-                      <i className={`${item.icon} title-icon`}></i>
+                      <item.icon className="title-icon" aria-hidden="true" />
                       {item.title}
                     </h4>
                     <p className="about-feature-desc">{item.desc}</p>
@@ -94,7 +101,7 @@ export default function About() {
 
             <a href="/about" className="about-btn">
               <span>Read more about who we are</span>
-              <span className="about-btn-arrow">→</span>
+              <span className="about-btn-arrow"><ArrowForwardIcon aria-hidden="true" /></span>
             </a>
           </div>
 

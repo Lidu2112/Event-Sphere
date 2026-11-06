@@ -6,14 +6,20 @@ import MyQRCodes from './pages/MyQRCodes';
 import PurchaseHistory from './pages/PurchaseHistory';
 import ReviewsRatings from './pages/ReviewsRatings';
 import Profile from './pages/Profile';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import StarIcon from '@mui/icons-material/Star';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 import './AttendeeDashboard.css';
 
 const NAV_ITEMS = [
-    { to: '/attendee/tickets', icon: '🎟️', label: 'My Tickets' },
-    { to: '/attendee/qrcodes', icon: '📱', label: 'My QR Codes' },
-    { to: '/attendee/history', icon: '📋', label: 'Purchase History' },
-    { to: '/attendee/reviews', icon: '⭐', label: 'Reviews & Ratings' },
-    { to: '/attendee/profile', icon: '👤', label: 'Profile Settings' },
+    { to: '/attendee/tickets', icon: ConfirmationNumberIcon, label: 'My Tickets' },
+    { to: '/attendee/qrcodes', icon: QrCode2Icon, label: 'My QR Codes' },
+    { to: '/attendee/history', icon: ReceiptLongIcon, label: 'Purchase History' },
+    { to: '/attendee/reviews', icon: StarIcon, label: 'Reviews & Ratings' },
+    { to: '/attendee/profile', icon: PersonIcon, label: 'Profile Settings' },
 ];
 
 export default function AttendeeDashboard() {
@@ -37,7 +43,7 @@ export default function AttendeeDashboard() {
                             to={item.to}
                             className={({ isActive }) => `ad-nav-link${isActive ? ' active' : ''}`}
                         >
-                            <span className="ad-nav-icon">{item.icon}</span>
+                            <span className="ad-nav-icon"><item.icon aria-hidden="true" /></span>
                             {item.label}
                         </NavLink>
                     ))}
@@ -48,7 +54,7 @@ export default function AttendeeDashboard() {
                         {user?.name || user?.email || 'Attendee'}
                     </div>
                     <button className="ad-logout-btn" onClick={() => { logout(); navigate('/'); }}>
-                        🚪 Logout
+                        <LogoutIcon aria-hidden="true" style={{ fontSize: 18 }} /> Logout
                     </button>
                 </div>
             </aside>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { attendeeApi } from '../../../api/attendee';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import SaveIcon from '@mui/icons-material/Save';
+import LockIcon from '@mui/icons-material/Lock';
 import './SubPage.css';
 
 export default function ProfileSettings() {
@@ -41,7 +44,7 @@ export default function ProfileSettings() {
         try {
             const d = await attendeeApi.updateProfile({ userId, ...form });
             saveSession({ ...user, name: d.user.name, email: d.user.email, phone: d.user.phone }, token);
-            setMsg({ text: '✅ Profile saved successfully!', ok: true });
+            setMsg({ text: 'Profile saved successfully!', ok: true });
         } catch (err) {
             setMsg({ text: err.message, ok: false });
         } finally {
@@ -57,7 +60,7 @@ export default function ProfileSettings() {
         setSavingPwd(true);
         try {
             await attendeeApi.changePassword({ userId, currentPassword: passwords.current, newPassword: passwords.newPass });
-            setPwdMsg({ text: '✅ Password updated successfully!', ok: true });
+            setPwdMsg({ text: 'Password updated successfully!', ok: true });
             setPasswords({ current: '', newPass: '', confirm: '' });
         } catch (err) {
             setPwdMsg({ text: err.message, ok: false });
@@ -124,13 +127,14 @@ export default function ProfileSettings() {
                             background: msg.ok ? '#dcfce7' : '#fee2e2',
                             color: msg.ok ? '#16a34a' : '#dc2626', fontSize: 13
                         }}>
+                            {msg.ok && <CheckCircleIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />}
                             {msg.text}
                         </div>
                     )}
 
                     <div className="sp-form-actions">
                         <button type="submit" className="sp-save-btn" disabled={saving}>
-                            {saving ? 'Saving...' : '💾 Save Changes'}
+                            {saving ? 'Saving...' : <><SaveIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /> Save Changes</>}
                         </button>
                     </div>
                 </form>
@@ -163,12 +167,13 @@ export default function ProfileSettings() {
                             background: pwdMsg.ok ? '#dcfce7' : '#fee2e2',
                             color: pwdMsg.ok ? '#16a34a' : '#dc2626', fontSize: 13
                         }}>
+                            {pwdMsg.ok && <CheckCircleIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />}
                             {pwdMsg.text}
                         </div>
                     )}
                     <div className="sp-form-actions">
                         <button type="submit" className="sp-save-btn" disabled={savingPwd}>
-                            {savingPwd ? 'Updating...' : '🔒 Update Password'}
+                            {savingPwd ? 'Updating...' : <><LockIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} /> Update Password</>}
                         </button>
                     </div>
                 </form>

@@ -54,6 +54,13 @@
     font-weight: 500;
 }
 
+.vd-service svg,
+.vd-stat-val svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
 /* Sidebar */
 .vd-contact-box {
     background: #fff;

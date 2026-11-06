@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { exportExcel, exportPDF, previewHTML } from '../../../utils/export';
 import { api } from '../../../api/admin';
@@ -114,7 +115,7 @@ export default function ViewReports() {
             <div className="reports-grid">
                 {reports.map((r, i) => (
                     <div key={i} className="report-card">
-                        <div className="report-icon">{r.icon}</div>
+                        <div className="report-icon"><AppIcon name={r.icon} /></div>
                         <div className="report-content">
                             <div className="report-title">{r.title}</div>
                             <div className="report-desc">{r.desc}</div>

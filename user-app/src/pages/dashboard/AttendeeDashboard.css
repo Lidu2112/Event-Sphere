@@ -83,6 +83,12 @@
     text-align: center;
 }
 
+.ad-nav-link .ad-nav-icon svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
 .ad-sidebar-footer {
     margin-top: auto;
     padding: 16px 20px 0;

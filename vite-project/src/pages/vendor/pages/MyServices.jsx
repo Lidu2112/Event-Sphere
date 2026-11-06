@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { apiUrl } from '../../../api/config';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -88,7 +89,7 @@ export default function MyServices() {
                 <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading from MongoDB...</div>
             ) : services.length === 0 ? (
                 <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>
-                    No services yet. <button onClick={openAdd} style={{ color: '#ec4899', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700 }}>Add your first service →</button>
+                    No services yet. <button onClick={openAdd} style={{ color: '#ec4899', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700 }}>Add your first service <AppIcon name="arrowForward" /></button>
                 </div>
             ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
@@ -116,7 +117,7 @@ export default function MyServices() {
                                     </span>
                                 </div>
                                 <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-                                    {[['📦', s.bookings ?? 0, 'Bookings'], [`ETB ${(s.revenue || 0).toLocaleString()}`, null, 'Revenue'], [s.rating ?? 'N/A', null, 'Rating']].map(([v, , l], i) => (
+                                    {[[<><AppIcon name="inventory" /></>, s.bookings ?? 0, 'Bookings'], [`ETB ${(s.revenue || 0).toLocaleString()}`, null, 'Revenue'], [s.rating ?? 'N/A', null, 'Rating']].map(([v, , l], i) => (
                                         <div key={i} style={{ flex: 1, background: '#f8fafc', padding: '8px 6px', borderRadius: 8, textAlign: 'center' }}>
                                             <div style={{ fontSize: 13, fontWeight: 700 }}>{v}</div>
                                             <div style={{ fontSize: 10, color: '#94a3b8' }}>{l}</div>
@@ -127,8 +128,8 @@ export default function MyServices() {
                                     ETB {Number(s.price).toLocaleString()} {s.priceUnit}
                                 </div>
                                 <div style={{ display: 'flex', gap: 6, marginTop: 'auto' }}>
-                                    <button className="btn-sm" onClick={() => openEdit(s)}>✏️ Edit</button>
-                                    <button className="btn-sm" onClick={() => handleDelete(s._id)} style={{ color: '#ef4444' }}>🗑️ Delete</button>
+                                    <button className="btn-sm" onClick={() => openEdit(s)}><AppIcon name="edit" /> Edit</button>
+                                    <button className="btn-sm" onClick={() => handleDelete(s._id)} style={{ color: '#ef4444' }}><AppIcon name="delete" /> Delete</button>
                                 </div>
                             </div>
                         </SectionBox>

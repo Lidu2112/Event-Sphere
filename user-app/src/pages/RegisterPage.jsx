@@ -5,6 +5,15 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './AuthPage.css';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import PersonIcon from '@mui/icons-material/Person';
+import LockIcon from '@mui/icons-material/Lock';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export default function RegisterPage() {
     const { saveSession } = useAuth();
@@ -200,20 +209,20 @@ onError={()=>{
                     {/* Tab switcher */}
                     <div className="auth-tabs">
                         <button className={tab === 'email' ? 'active' : ''} onClick={() => { setTab('email'); setError(''); }}>
-                            <i className="fas fa-envelope"></i> Email
+                            <EmailIcon aria-hidden="true" /> Email
                         </button>
                         <button className={tab === 'phone' ? 'active' : ''} onClick={() => { setTab('phone'); setError(''); }}>
-                            <i className="fas fa-phone"></i> Phone
+                            <PhoneIcon aria-hidden="true" /> Phone
                         </button>
                     </div>
 
-                    {error && <div className="auth-error"><i className="fas fa-exclamation-circle"></i> {error}</div>}
+                    {error && <div className="auth-error"><ReportProblemIcon aria-hidden="true" /> {error}</div>}
 
                     <form onSubmit={handleSubmit} className="auth-form">
                         <div className="form-field">
                             <label>Full Name</label>
                             <div className="field-wrap">
-                                <i className="fas fa-user field-icon"></i>
+                                <PersonIcon className="field-icon" aria-hidden="true" />
                                 <input
                                     type="text"
                                     placeholder="Abebe Girma"
@@ -228,7 +237,7 @@ onError={()=>{
                             <div className="form-field">
                                 <label>Email Address</label>
                                 <div className="field-wrap">
-                                    <i className="fas fa-envelope field-icon"></i>
+                                    <EmailIcon className="field-icon" aria-hidden="true" />
                                     <input
                                         type="email"
                                         placeholder="you@example.com"
@@ -242,7 +251,7 @@ onError={()=>{
                             <div className="form-field">
                                 <label>Phone Number</label>
                                 <div className="field-wrap">
-                                    <i className="fas fa-phone field-icon"></i>
+                                    <PhoneIcon className="field-icon" aria-hidden="true" />
                                     <input
                                         type="tel"
                                         placeholder="+251 91 000 0000"
@@ -257,7 +266,7 @@ onError={()=>{
                         <div className="form-field">
                             <label>Password</label>
                             <div className="field-wrap">
-                                <i className="fas fa-lock field-icon"></i>
+                                <LockIcon className="field-icon" aria-hidden="true" />
                                 <input
                                     type={showPass ? 'text' : 'password'}
                                     placeholder="Min. 8 characters"
@@ -265,8 +274,8 @@ onError={()=>{
                                     onChange={e => { setPassword(e.target.value); setError(''); }}
                                     autoComplete="new-password"
                                 />
-                                <button type="button" className="show-pass-btn" onClick={() => setShowPass(s => !s)}>
-                                    <i className={`fas ${showPass ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                                <button type="button" className="show-pass-btn" aria-label={showPass ? 'Hide password' : 'Show password'} aria-pressed={showPass} onClick={() => setShowPass(s => !s)}>
+                                    {showPass ? <VisibilityOffIcon aria-hidden="true" /> : <VisibilityIcon aria-hidden="true" />}
                                 </button>
                             </div>
                             {password && (
@@ -288,7 +297,7 @@ onError={()=>{
                         <div className="form-field">
                             <label>Confirm Password</label>
                             <div className="field-wrap">
-                                <i className="fas fa-lock field-icon"></i>
+                                <LockIcon className="field-icon" aria-hidden="true" />
                                 <input
                                     type={showPass ? 'text' : 'password'}
                                     placeholder="Repeat your password"
@@ -297,9 +306,10 @@ onError={()=>{
                                     autoComplete="new-password"
                                 />
                                 {confirm && (
-                                    <span className="confirm-check">
-                                        <i className={`fas ${confirm === password ? 'fa-check-circle' : 'fa-times-circle'}`}
-                                            style={{ color: confirm === password ? '#10b981' : '#ef4444' }}></i>
+                                    <span className="confirm-check" role="img" aria-label={confirm === password ? 'Passwords match' : 'Passwords do not match'}>
+                                        {confirm === password
+                                            ? <CheckCircleIcon aria-hidden="true" style={{ color: '#10b981' }} />
+                                            : <CancelIcon aria-hidden="true" style={{ color: '#ef4444' }} />}
                                     </span>
                                 )}
                             </div>

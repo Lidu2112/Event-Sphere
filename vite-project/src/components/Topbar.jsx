@@ -1,3 +1,4 @@
+import AppIcon from './AppIcon.jsx';
 import './Topbar.css';
 
 function Topbar({ title, subtitle, icon, color, actions }) {
@@ -5,7 +6,7 @@ function Topbar({ title, subtitle, icon, color, actions }) {
         <div className="topbar">
             <div className="topbar-left">
                 <div className="topbar-icon" style={{ background: color + '20', color: color }}>
-                    {icon}
+                    <AppIcon name={icon} />
                 </div>
                 <div>
                     <h1 className="topbar-title">{title}</h1>
@@ -14,11 +15,11 @@ function Topbar({ title, subtitle, icon, color, actions }) {
             </div>
             <div className="topbar-right">
                 <div className="topbar-search">
-                    <span className="search-icon">🔍</span>
-                    <input type="text" placeholder="Search..." />
+                    <span className="search-icon"><AppIcon name="search" /></span>
+                    <input type="text" placeholder="Search..." aria-label="Search" />
                 </div>
-                <button className="notif-btn">
-                    🔔
+                <button className="notif-btn" aria-label="Notifications">
+                    <AppIcon name="notifications" />
                     <span className="notif-badge">3</span>
                 </button>
                 {actions && actions}

@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { StatCard, PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -51,22 +52,26 @@ export default function Payments() {
 
             {/* Stats from real DB data */}
             <div className="stats-grid">
-                <StatCard icon="💰" label="Total Revenue" value={`ETB ${totalRevenue.toLocaleString()}`} color="#6366f1" />
-                <StatCard icon="✅" label="Paid Out" value={`ETB ${totalPaid.toLocaleString()}`} color="#10b981" />
-                <StatCard icon="⏳" label="Pending" value={`ETB ${totalPending.toLocaleString()}`} color="#f59e0b" />
-                <StatCard icon="📊" label="Total Bookings" value={bookings.length} color="#0ea5e9" />
+                <StatCard icon="payments" label="Total Revenue" value={`ETB ${totalRevenue.toLocaleString()}`} color="#6366f1" />
+                <StatCard icon="checkCircle" label="Paid Out" value={`ETB ${totalPaid.toLocaleString()}`} color="#10b981" />
+                <StatCard icon="hourglass" label="Pending" value={`ETB ${totalPending.toLocaleString()}`} color="#f59e0b" />
+                <StatCard icon="analytics" label="Total Bookings" value={bookings.length} color="#0ea5e9" />
             </div>
 
             <SectionBox>
                 {/* Filters */}
                 <div style={{ display: 'flex', gap: 10, marginBottom: 18, flexWrap: 'wrap', alignItems: 'center' }}>
-                    <input
-                        type="text"
-                        placeholder="🔍  Search by event, service, or client..."
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        style={{ flex: 1, minWidth: 220, padding: '9px 12px', border: '1.5px solid #e2e8f0', borderRadius: 8, fontSize: 13, outline: 'none' }}
-                    />
+                    <div style={{ position: 'relative', flex: 1, minWidth: 220 }}>
+                        <AppIcon name="search" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+                        <input
+                            type="text"
+                            placeholder="Search by event, service, or client..."
+                            aria-label="Search payments"
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                            style={{ width: '100%', padding: '9px 12px 9px 34px', border: '1.5px solid #e2e8f0', borderRadius: 8, fontSize: 13, outline: 'none' }}
+                        />
+                    </div>
                     <select
                         value={statusFilter}
                         onChange={e => setStatusFilter(e.target.value)}
@@ -120,14 +125,14 @@ export default function Payments() {
                                             </td>
                                             <td style={{ padding: '12px 10px' }}>
                                                 <span style={{ padding: '3px 8px', borderRadius: 12, fontSize: 10, fontWeight: 700, background: pSt.bg, color: pSt.color }}>
-                                                    {p.paymentStatus === 'paid' ? '✓ Paid' : 'Pending'}
+                                                    {p.paymentStatus === 'paid' ? <><AppIcon name="check" /> Paid</> : 'Pending'}
                                                 </span>
                                             </td>
                                             <td style={{ padding: '12px 10px' }}>
                                                 <button
                                                     onClick={() => setDetail(p)}
                                                     style={{ padding: '4px 10px', background: '#eef2ff', color: '#6366f1', border: 'none', borderRadius: 6, fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-                                                    👁️ Details
+                                                    <AppIcon name="visibility" /> Details
                                                 </button>
                                             </td>
                                         </tr>

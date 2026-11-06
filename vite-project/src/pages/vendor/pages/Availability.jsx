@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -78,7 +79,7 @@ export default function Availability() {
                         className="btn-primary"
                         style={{ background: saved ? '#10b981' : undefined }}
                     >
-                        {saving ? '⏳ Saving...' : saved ? '✅ Saved!' : '💾 Save Availability'}
+                        {saving ? <><AppIcon name="hourglass" /> Saving...</> : saved ? <><AppIcon name="checkCircle" /> Saved!</> : <><AppIcon name="save" /> Save Availability</>}
                     </button>
                 }
             />
@@ -146,7 +147,7 @@ export default function Availability() {
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
                                     <div style={{ fontSize: 12, fontWeight: 700, color: '#374151' }}>{b.eventDate}</div>
-                                    <div style={{ fontSize: 11, color: '#10b981', marginTop: 2 }}>✓ Accepted</div>
+                                    <div style={{ fontSize: 11, color: '#10b981', marginTop: 2 }}><AppIcon name="check" /> Accepted</div>
                                 </div>
                             </div>
                         ))}

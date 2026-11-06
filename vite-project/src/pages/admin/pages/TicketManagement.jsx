@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { api } from '../../../api/admin';
 import './AdminPages.css';
@@ -99,7 +100,7 @@ export default function TicketManagement() {
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
                 <input
                     className="table-search"
-                    placeholder="🔍 Search ticket code, buyer, or event..."
+                    placeholder="Search ticket code, buyer, or event..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     style={{ flex: 1, minWidth: 220 }}
@@ -146,10 +147,10 @@ export default function TicketManagement() {
                                 <td>{ticket.checkedIn ? 'Yes' : 'No'}</td>
                                 <td>
                                     <div className="action-btns">
-                                        <button className="action-btn" title="View" onClick={() => setSelectedTicket(ticket)}>👁️</button>
-                                        <button className="action-btn" title="Refund" onClick={() => handleRefund(ticket)} disabled={actionLoading || ticket.status === 'refunded' || ticket.status === 'cancelled'}>💸</button>
-                                        <button className="action-btn" title="Cancel" onClick={() => handleCancel(ticket)} disabled={actionLoading || ticket.status === 'cancelled'}>❌</button>
-                                        <button className="action-btn" title="Download" onClick={() => handleDownload(ticket)}>⬇️</button>
+                                        <button className="action-btn" title="View" onClick={() => setSelectedTicket(ticket)}><AppIcon name="visibility" /></button>
+                                        <button className="action-btn" title="Refund" onClick={() => handleRefund(ticket)} disabled={actionLoading || ticket.status === 'refunded' || ticket.status === 'cancelled'}><AppIcon name="payments" /></button>
+                                        <button className="action-btn" title="Cancel" onClick={() => handleCancel(ticket)} disabled={actionLoading || ticket.status === 'cancelled'}><AppIcon name="close" /></button>
+                                        <button className="action-btn" title="Download" onClick={() => handleDownload(ticket)}><AppIcon name="arrowDown" />️</button>
                                     </div>
                                 </td>
                             </tr>

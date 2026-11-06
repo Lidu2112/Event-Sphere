@@ -22,6 +22,11 @@
     margin-bottom: 16px;
 }
 
+.ps-icon svg {
+    width: 56px;
+    height: 56px;
+}
+
 .ps-card h2 {
     font-size: 24px;
     font-weight: 800;

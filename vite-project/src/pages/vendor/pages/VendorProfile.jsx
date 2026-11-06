@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
 import { useAuth } from '../../../context/AuthContext';
@@ -39,7 +40,7 @@ export default function VendorProfile() {
         setSaving(true);
         try {
             await vendorApi.saveProfile({ ...form, vendorEmail: email, vendorId });
-            setMsg({ text: '✅ Profile saved successfully!', ok: true });
+            setMsg({ text: "Profile saved successfully!", ok: true, icon: 'checkCircle' });
         } catch (err) {
             setMsg({ text: err.message, ok: false });
         } finally {
@@ -101,13 +102,13 @@ export default function VendorProfile() {
                         padding: '10px 16px', borderRadius: 8, marginBottom: 12,
                         background: msg.ok ? '#dcfce7' : '#fee2e2', color: msg.ok ? '#16a34a' : '#dc2626', fontSize: 14
                     }}>
-                        {msg.text}
+                        {msg.icon && <AppIcon name={msg.icon} />} {msg.text}
                     </div>
                 )}
 
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 32 }}>
                     <button type="submit" className="btn-primary" disabled={saving} style={{ minWidth: 140 }}>
-                        {saving ? 'Saving...' : '💾 Save Profile'}
+                        {saving ? 'Saving...' : <><AppIcon name="save" /> Save Profile</>}
                     </button>
                 </div>
             </form>

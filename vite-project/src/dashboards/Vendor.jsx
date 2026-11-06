@@ -1,3 +1,4 @@
+import AppIcon from '../components/AppIcon.jsx';
 import Topbar from '../components/Topbar';
 import StatCard from '../components/StatCard';
 import QuickAction from '../components/QuickAction';
@@ -23,7 +24,7 @@ function Vendor() {
             <Topbar
                 title="Vendor Dashboard"
                 subtitle="Manage your services and bookings"
-                icon="🏪"
+                icon="store"
                 color="#ec4899"
                 actions={<button className="primary-btn">+ Add Service</button>}
             />
@@ -31,24 +32,24 @@ function Vendor() {
             <div className="dashboard-body">
                 {/* Stats */}
                 <div className="stats-grid">
-                    <StatCard icon="🏪" label="Active Services" value="3" trendLabel="offerings" color="#ec4899" />
-                    <StatCard icon="📩" label="Booking Requests" value="7" trend={12} trendLabel="this month" color="#f59e0b" />
-                    <StatCard icon="✅" label="Completed Bookings" value="25" trend={15} color="#10b981" />
-                    <StatCard icon="💰" label="Total Revenue" value="ETB 57K" trend={28} trendLabel="lifetime" color="#10b981" />
-                    <StatCard icon="⭐" label="Average Rating" value="4.8" trendLabel="from clients" color="#f59e0b" />
-                    <StatCard icon="📅" label="Availability" value="90%" trendLabel="this month" color="#0ea5e9" />
+                    <StatCard icon="store" label="Active Services" value="3" trendLabel="offerings" color="#ec4899" />
+                    <StatCard icon="mail" label="Booking Requests" value="7" trend={12} trendLabel="this month" color="#f59e0b" />
+                    <StatCard icon="checkCircle" label="Completed Bookings" value="25" trend={15} color="#10b981" />
+                    <StatCard icon="payments" label="Total Revenue" value="ETB 57K" trend={28} trendLabel="lifetime" color="#10b981" />
+                    <StatCard icon="star" label="Average Rating" value="4.8" trendLabel="from clients" color="#f59e0b" />
+                    <StatCard icon="calendar" label="Availability" value="90%" trendLabel="this month" color="#0ea5e9" />
                 </div>
 
                 {/* Quick Actions */}
                 <div className="section-card">
                     <h3 className="section-title">Quick Actions</h3>
                     <div className="quick-actions-row">
-                        <QuickAction icon="➕" label="Add Service" color="#ec4899" />
-                        <QuickAction icon="📩" label="View Requests" color="#f59e0b" />
-                        <QuickAction icon="✅" label="Accept Booking" color="#10b981" />
-                        <QuickAction icon="❌" label="Reject Booking" color="#ef4444" />
-                        <QuickAction icon="📅" label="Manage Availability" color="#0ea5e9" />
-                        <QuickAction icon="💰" label="View Payments" color="#10b981" />
+                        <QuickAction icon="add" label="Add Service" color="#ec4899" />
+                        <QuickAction icon="mail" label="View Requests" color="#f59e0b" />
+                        <QuickAction icon="checkCircle" label="Accept Booking" color="#10b981" />
+                        <QuickAction icon="close" label="Reject Booking" color="#ef4444" />
+                        <QuickAction icon="calendar" label="Manage Availability" color="#0ea5e9" />
+                        <QuickAction icon="payments" label="View Payments" color="#10b981" />
                     </div>
                 </div>
 
@@ -75,7 +76,7 @@ function Vendor() {
                                         <td className="text-bold">{s.name}</td>
                                         <td>{s.bookings}</td>
                                         <td className="text-bold" style={{ color: '#10b981' }}>{s.revenue}</td>
-                                        <td>{s.rating > 0 ? `⭐ ${s.rating}` : '-'}</td>
+                                        <td>{s.rating > 0 ? <><AppIcon name="star" /> {s.rating}</> : '-'}</td>
                                         <td><span className={`status-badge ${s.status}`}>{s.status}</span></td>
                                     </tr>
                                 ))}

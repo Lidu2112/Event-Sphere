@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatCard, PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -25,12 +26,12 @@ export default function VendorHome() {
     }, [email]);
 
     const ACTIONS = [
-        { icon: '🪪', label: 'My Profile', color: '#8b5cf6', path: '/vendor/profile' },
-        { icon: '➕', label: 'Add Service', color: '#ec4899', path: '/vendor/services' },
-        { icon: '📩', label: 'Requests', color: '#f59e0b', path: '/vendor/bookings' },
-        { icon: '🖼️', label: 'Portfolio', color: '#0ea5e9', path: '/vendor/portfolio' },
-        { icon: '⭐', label: 'Reviews', color: '#f59e0b', path: '/vendor/reviews' },
-        { icon: '💰', label: 'Payments', color: '#10b981', path: '/vendor/payments' },
+        { icon: "badge", label: 'My Profile', color: '#8b5cf6', path: '/vendor/profile' },
+        { icon: "add", label: 'Add Service', color: '#ec4899', path: '/vendor/services' },
+        { icon: "mail", label: 'Requests', color: '#f59e0b', path: '/vendor/bookings' },
+        { icon: "image", label: 'Portfolio', color: '#0ea5e9', path: '/vendor/portfolio' },
+        { icon: "star", label: 'Reviews', color: '#f59e0b', path: '/vendor/reviews' },
+        { icon: "payments", label: 'Payments', color: '#10b981', path: '/vendor/payments' },
     ];
 
     return (
@@ -38,10 +39,10 @@ export default function VendorHome() {
             <PageHeader title="Vendor Dashboard" subtitle="Manage your services and track bookings" />
 
             <div className="stats-grid">
-                <StatCard icon="🏪" label="Active Services" value={stats.activeServices} color="#ec4899" />
-                <StatCard icon="📩" label="New Requests" value={stats.newRequests} color="#f59e0b" />
-                <StatCard icon="✅" label="Completed Bookings" value={stats.completedBookings} color="#10b981" />
-                <StatCard icon="💰" label="Total Revenue" value={`ETB ${(stats.totalRevenue || 0).toLocaleString()}`} color="#10b981" />
+                <StatCard icon="store" label="Active Services" value={stats.activeServices} color="#ec4899" />
+                <StatCard icon="mail" label="New Requests" value={stats.newRequests} color="#f59e0b" />
+                <StatCard icon="checkCircle" label="Completed Bookings" value={stats.completedBookings} color="#10b981" />
+                <StatCard icon="payments" label="Total Revenue" value={`ETB ${(stats.totalRevenue || 0).toLocaleString()}`} color="#10b981" />
             </div>
 
             {/* Quick Actions — each navigates to the correct page */}
@@ -61,7 +62,7 @@ export default function VendorHome() {
                             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,.1)'; }}
                             onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
                         >
-                            <span style={{ fontSize: 22 }}>{a.icon}</span>
+                            <span style={{ fontSize: 22 }}><AppIcon name={a.icon} /></span>
                             {a.label}
                         </button>
                     ))}

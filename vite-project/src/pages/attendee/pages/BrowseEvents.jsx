@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { apiUrl } from '../../../api/config';
 import { PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -89,7 +90,7 @@ export default function BrowseEvents() {
                             )}
                         </div>
                         <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '10px' }}>
-                            📅 {event.date} • 📍 {event.location}
+                            <AppIcon name="calendar" /> {event.date} • <AppIcon name="location" /> {event.location}
                         </div>
                         <div style={{ fontSize: '12px', color: '#475569', marginBottom: '8px' }}>{event.description || 'Upcoming event'}</div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { attendeeApi } from '../../../api/attendee';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
+import EventIcon from '@mui/icons-material/Event';
+import PlaceIcon from '@mui/icons-material/Place';
 import '../AttendeeDashboard.css';
 import './SubPage.css';
 
@@ -38,7 +41,7 @@ export default function MyQRCodes() {
                 <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading QR codes...</div>
             ) : tickets.length === 0 ? (
                 <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                    <div style={{ fontSize: 48, marginBottom: 12 }}>📱</div>
+                    <div style={{ marginBottom: 12 }}><QrCode2Icon aria-hidden="true" style={{ fontSize: 48 }} /></div>
                     <p style={{ margin: 0, fontSize: 15 }}>No QR codes yet.</p>
                     <p style={{ margin: '4px 0 0', fontSize: 13 }}>QR codes are generated after ticket confirmation.</p>
                 </div>
@@ -51,8 +54,8 @@ export default function MyQRCodes() {
                                 <div className="sp-qr-top">
                                     <div>
                                         <h3 style={{ margin: '0 0 4px', fontSize: 15 }}>{t.eventName || t.event}</h3>
-                                        <p style={{ margin: '0 0 2px', fontSize: 13, color: '#64748b' }}>📅 {t.eventDate}</p>
-                                        {t.venue && <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>📍 {t.venue}</p>}
+                                        <p style={{ margin: '0 0 2px', fontSize: 13, color: '#64748b' }}><EventIcon aria-hidden="true" style={{ fontSize: 14, verticalAlign: 'middle' }} /> {t.eventDate}</p>
+                                        {t.venue && <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}><PlaceIcon aria-hidden="true" style={{ fontSize: 14, verticalAlign: 'middle' }} /> {t.venue}</p>}
                                     </div>
                                 </div>
                                 <div className="sp-qr-code">

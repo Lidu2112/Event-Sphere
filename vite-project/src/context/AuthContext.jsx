@@ -18,10 +18,10 @@ const ROLE_MAP = {
 
 // Demo fallback accounts (shown in login hints, used if backend is unreachable)
 export const DEMO_ACCOUNTS = [
-    { email: 'admin@eventsphere.com', phone: '+251911000001', password: 'Admin@123', role: 'platform-admin', name: 'Abebe Girma', avatar: '🛡️' },
-    { email: 'organizer@eventsphere.com', phone: '+251911000002', password: 'Org@123', role: 'event-organizer', name: 'Selam Tadesse', avatar: '🎪' },
-    { email: 'staff@eventsphere.com', phone: '+251911000003', password: 'Staff@123', role: 'event-staff', name: 'Dawit Bekele', avatar: '👷' },
-    { email: 'vendor@eventsphere.com', phone: '+251911000005', password: 'Vendor@123', role: 'vendor', name: 'Beza Haile', avatar: '🏪' },
+    { email: 'admin@eventsphere.com', phone: '+251911000001', password: 'Admin@123', role: 'platform-admin', name: 'Abebe Girma', avatar: "security" },
+    { email: 'organizer@eventsphere.com', phone: '+251911000002', password: 'Org@123', role: 'event-organizer', name: 'Selam Tadesse', avatar: "event" },
+    { email: 'staff@eventsphere.com', phone: '+251911000003', password: 'Staff@123', role: 'event-staff', name: 'Dawit Bekele', avatar: "engineering" },
+    { email: 'vendor@eventsphere.com', phone: '+251911000005', password: 'Vendor@123', role: 'vendor', name: 'Beza Haile', avatar: "store" },
 ];
 
 export function AuthProvider({ children }) {

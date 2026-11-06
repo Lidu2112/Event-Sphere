@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faArrowRight, faStore, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import StarIcon from '@mui/icons-material/Star';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
 import { apiUrl, imageUrl } from '../api/config';
@@ -76,7 +78,7 @@ export default function Vendors() {
         return (
             <section className="vd-section">
                 <div className="vd-container vd-state-center">
-                    <FontAwesomeIcon icon={faSpinner} spin className="vd-spinner" />
+                    <AutorenewIcon className="vd-spinner" aria-hidden="true" />
                     <p>{t(lang, 'vendors_loading')}</p>
                 </div>
             </section>
@@ -91,7 +93,7 @@ export default function Vendors() {
                 <div className="vd-header">
                     <div></div>
                     <Link to="/vendors" className="vd-view-all">
-                        {t(lang, 'vendors_view_all')} <FontAwesomeIcon icon={faArrowRight} />
+                        {t(lang, 'vendors_view_all')} <ArrowForwardIcon aria-hidden="true" />
                     </Link>
                 </div>
 
@@ -117,7 +119,7 @@ export default function Vendors() {
                 {/* Vendor Grid */}
                 {filteredServices.length === 0 ? (
                     <div className="vd-empty-card">
-                        <FontAwesomeIcon icon={faStore} size="2x" />
+                        <StorefrontIcon aria-hidden="true" style={{ fontSize: 48 }} />
                         <p>{t(lang, 'vendors_empty')}</p>
                     </div>
                 ) : (
@@ -164,7 +166,7 @@ export default function Vendors() {
 
                                     <div className="vc-meta">
                                         <div className="vc-rating">
-                                            <FontAwesomeIcon icon={faStar} className="star-icon" />
+                                            <StarIcon className="star-icon" aria-hidden="true" />
                                             <strong>{service.rating || '0.0'}</strong>
                                             <span className="vc-reviews">
                                                 ({service.reviews?.length || 0})

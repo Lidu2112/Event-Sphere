@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { attendeeApi } from '../../../api/attendee';
+// import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+// import EventIcon from '@mui/icons-material/Event';
+import PlaceIcon from '@mui/icons-material/Place';
+// import SellIcon from '@mui/icons-material/Sell';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
 import '../AttendeeDashboard.css';
 import './SubPage.css';
 
@@ -53,20 +59,20 @@ export default function MyTickets() {
                 <div style={{ padding: 40, textAlign: 'center', color: '#94a3b8' }}>Loading tickets...</div>
             ) : displayed.length === 0 ? (
                 <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-                    <div style={{ fontSize: 48, marginBottom: 12 }}>🎟️</div>
+                    {/* <div style={{ marginBottom: 12 }}><ConfirmationNumberIcon aria-hidden="true" style={{ fontSize: 48 }} /></div> */}
                     <p style={{ margin: 0, fontSize: 15 }}>No tickets found.</p>
                 </div>
             ) : (
                 <div className="sp-ticket-list">
                     {displayed.map((t, i) => (
                         <div key={i} className="sp-ticket">
-                            <div className="sp-ticket-icon">🎟️</div>
+                            {/* <div className="sp-ticket-icon"><ConfirmationNumberIcon aria-hidden="true" /></div> */}
                             <div className="sp-ticket-info">
                                 <h3>{t.eventName || t.event || 'Event Ticket'}</h3>
                                 <div className="sp-ticket-meta">
-                                    {t.eventDate && <span>📅 {t.eventDate}</span>}
-                                    {(t.venue || t.location) && <span>📍 {t.venue || t.location}</span>}
-                                    {t.ticketType && <span>🎫 {t.ticketType}</span>}
+                                    {t.eventDate && <span><CalendarTodayIcon aria-hidden="true" />{t.eventDate}</span>}
+                                    {(t.venue || t.location) && <span><PlaceIcon aria-hidden="true" /> {t.venue || t.location}</span>}
+                                    {/* {t.ticketType && <span><SellIcon aria-hidden="true" /> {t.ticketType}</span>} */}
                                 </div>
                                 <span className="sp-ticket-id">{t.ticketId}</span>
                             </div>
@@ -74,7 +80,7 @@ export default function MyTickets() {
                                 <div className="sp-ticket-qr">
                                     {t.qrCode
                                         ? <img src={t.qrCode} alt="QR Code" />
-                                        : <div className="sp-ticket-qr-placeholder">📱</div>
+                                        : <div className="sp-ticket-qr-placeholder"><QrCode2Icon aria-hidden="true" /></div>
                                     }
                                 </div>
                                 <span className={`sp-status ${t.status || 'confirmed'}`}>{t.status || 'confirmed'}</span>

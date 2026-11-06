@@ -1,3 +1,4 @@
+import AppIcon from '../../../components/AppIcon.jsx';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatCard, ActionButton, PageHeader, SectionBox } from '../../../components/SharedComponents';
@@ -32,21 +33,21 @@ export default function OrganizerHome() {
             <PageHeader title="Event Organizer Dashboard" subtitle="Manage your events and track performance" />
 
             <div className="stats-grid">
-                <StatCard icon="🎪" label="Total Events" value={stats.totalEvents} color="#0ea5e9" />
-                <StatCard icon="🎟️" label="Tickets Sold" value={stats.ticketsSold} color="#f59e0b" />
-                <StatCard icon="👥" label="Attendees" value={stats.totalAttendees} color="#10b981" />
-                <StatCard icon="💰" label="Revenue" value={`ETB ${(stats.revenue || 0).toLocaleString()}`} color="#10b981" />
-                <StatCard icon="👷" label="Staff" value={stats.staffMembers} color="#64748b" />
-                <StatCard icon="⭐" label="Avg Rating" value={stats.averageRating} color="#f59e0b" />
+                <StatCard icon="event" label="Total Events" value={stats.totalEvents} color="#0ea5e9" />
+                <StatCard icon="ticket" label="Tickets Sold" value={stats.ticketsSold} color="#f59e0b" />
+                <StatCard icon="groups" label="Attendees" value={stats.totalAttendees} color="#10b981" />
+                <StatCard icon="payments" label="Revenue" value={`ETB ${(stats.revenue || 0).toLocaleString()}`} color="#10b981" />
+                <StatCard icon="engineering" label="Staff" value={stats.staffMembers} color="#64748b" />
+                <StatCard icon="star" label="Avg Rating" value={stats.averageRating} color="#f59e0b" />
             </div>
 
             <SectionBox title="Quick Actions">
                 <div className="actions-grid">
-                    <ActionButton icon="➕" label="Create Event" color="#0ea5e9" onClick={() => navigate('/organizer/create')} />
-                    <ActionButton icon="🎟️" label="Sell Tickets" color="#f59e0b" onClick={() => navigate('/organizer/tickets')} />
-                    <ActionButton icon="👥" label="Attendees" color="#10b981" onClick={() => navigate('/organizer/attendees')} />
-                    <ActionButton icon="👷" label="Invite Staff" color="#64748b" onClick={() => navigate('/organizer/staff')} />
-                    <ActionButton icon="📊" label="Analytics" color="#6366f1" onClick={() => navigate('/organizer/analytics')} />
+                    <ActionButton icon="add" label="Create Event" color="#0ea5e9" onClick={() => navigate('/organizer/create')} />
+                    <ActionButton icon="ticket" label="Sell Tickets" color="#f59e0b" onClick={() => navigate('/organizer/tickets')} />
+                    <ActionButton icon="groups" label="Attendees" color="#10b981" onClick={() => navigate('/organizer/attendees')} />
+                    <ActionButton icon="engineering" label="Invite Staff" color="#64748b" onClick={() => navigate('/organizer/staff')} />
+                    <ActionButton icon="analytics" label="Analytics" color="#6366f1" onClick={() => navigate('/organizer/analytics')} />
                 </div>
             </SectionBox>
 
@@ -55,7 +56,7 @@ export default function OrganizerHome() {
                     <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>Loading...</div>
                 ) : events.length === 0 ? (
                     <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>
-                        No events yet. <button className="btn-sm" onClick={() => navigate('/organizer/create')}>Create your first event →</button>
+                        No events yet. <button className="btn-sm" onClick={() => navigate('/organizer/create')}>Create your first event <AppIcon name="arrowForward" /></button>
                     </div>
                 ) : (
                     <div style={{ overflowX: 'auto' }}>

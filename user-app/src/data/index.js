@@ -1,3 +1,12 @@
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import PaletteIcon from '@mui/icons-material/Palette';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import ComputerIcon from '@mui/icons-material/Computer';
+import SchoolIcon from '@mui/icons-material/School';
+import DiamondIcon from '@mui/icons-material/Diamond';
+
 export const events = [
     {
         id: 1,
@@ -172,12 +181,12 @@ export const vendors = [
 ];
 
 export const categories = [
-    { icon: '🎵', label: 'Music', color: '#8b5cf6', count: 24 },
-    { icon: '💼', label: 'Business', color: '#0ea5e9', count: 18 },
-    { icon: '⚽', label: 'Sports', color: '#10b981', count: 15 },
-    { icon: '🎨', label: 'Art', color: '#f59e0b', count: 12 },
-    { icon: '🍔', label: 'Food', color: '#ef4444', count: 20 },
-    { icon: '💻', label: 'Technology', color: '#06b6d4', count: 10 },
-    { icon: '🎓', label: 'Education', color: '#6366f1', count: 8 },
-    { icon: '💍', label: 'Wedding', color: '#ec4899', count: 14 },
+    { icon: MusicNoteIcon, label: 'Music', color: '#8b5cf6', count: 24 },
+    { icon: BusinessCenterIcon, label: 'Business', color: '#0ea5e9', count: 18 },
+    { icon: SportsSoccerIcon, label: 'Sports', color: '#10b981', count: 15 },
+    { icon: PaletteIcon, label: 'Art', color: '#f59e0b', count: 12 },
+    { icon: RestaurantIcon, label: 'Food', color: '#ef4444', count: 20 },
+    { icon: ComputerIcon, label: 'Technology', color: '#06b6d4', count: 10 },
+    { icon: SchoolIcon, label: 'Education', color: '#6366f1', count: 8 },
+    { icon: DiamondIcon, label: 'Wedding', color: '#ec4899', count: 14 },
 ];

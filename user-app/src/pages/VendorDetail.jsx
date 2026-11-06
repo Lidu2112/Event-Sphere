@@ -4,6 +4,11 @@ import './Page.css';
 import './VendorDetail.css';
 
 import { apiUrl, imageUrl } from '../api/config';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import StarIcon from '@mui/icons-material/Star';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import MessageIcon from '@mui/icons-material/Message';
 
 const API_URL = apiUrl('/api');
 
@@ -136,18 +141,22 @@ export default function VendorDetail() {
         return (
             <div className="not-found">
                 <h2>{error || 'Service not found'}</h2>
-                <Link to="/vendors" className="btn-purple">← Back to Vendors</Link>
+                <Link to="/vendors" className="btn-purple"><ArrowBackIcon aria-hidden="true" /> Back to Vendors</Link>
             </div>
         );
     }
 
     return (
         <div>
-            <div className="page-hero">
-                <div className="page-hero-inner">
-                    <div className="page-breadcrumb">
-                        <Link to="/">Home</Link> / <Link to="/vendors">Vendors</Link> / {service.name}
-                    </div>
+            {/* Hero Section with Full-Width Background Image URL & Gradient Overlay */}
+            <div 
+                className="page-hero vd-hero"
+                style={{
+                    backgroundImage: `linear-gradient(90deg, rgba(30, 15, 28, 0.94) 0%, rgba(30, 15, 28, 0.8) 50%, rgba(30, 15, 28, 0.5) 100%), 
+                    url(https://as1.ftcdn.net/v2/jpg/21/20/63/38/1000_F_2120633815_NptYzpAbg6W8CRasm4GxxvUitHqITkGP.jpg)`
+                }}
+            >
+                <div className="page-hero-inner vd-hero-inner">
                     <h1>{service.name}</h1>
                     <p>{service.category} · {service.status?.toUpperCase() || 'SERVICE'}</p>
                 </div>
@@ -180,12 +189,12 @@ export default function VendorDetail() {
                     <div className="vd-section">
                         <h3>Service Details</h3>
                         <div className="vd-services">
-                            <div className="vd-service">✓ Price: ETB {Number(service.price || 0).toLocaleString()}</div>
-                            <div className="vd-service">✓ Unit: {service.priceUnit || 'per event'}</div>
-                            <div className="vd-service">✓ Status: {service.status || 'active'}</div>
-                            <div className="vd-service">✓ Bookings: {service.bookings || 0}</div>
-                            <div className="vd-service">✓ Revenue: ETB {Number(service.revenue || 0).toLocaleString()}</div>
-                            <div className="vd-service">✓ Rating: {service.rating || 0}</div>
+                            <div className="vd-service"><CheckCircleIcon aria-hidden="true" /> Price: ETB {Number(service.price || 0).toLocaleString()}</div>
+                            <div className="vd-service"><CheckCircleIcon aria-hidden="true" /> Unit: {service.priceUnit || 'per event'}</div>
+                            <div className="vd-service"><CheckCircleIcon aria-hidden="true" /> Status: {service.status || 'active'}</div>
+                            <div className="vd-service"><CheckCircleIcon aria-hidden="true" /> Bookings: {service.bookings || 0}</div>
+                            <div className="vd-service"><CheckCircleIcon aria-hidden="true" /> Revenue: ETB {Number(service.revenue || 0).toLocaleString()}</div>
+                            <div className="vd-service"><CheckCircleIcon aria-hidden="true" /> Rating: {service.rating || 0}</div>
                         </div>
                     </div>
                 </div>
@@ -204,7 +213,7 @@ export default function VendorDetail() {
 
                         <div className="vd-stats">
                             <div className="vd-stat">
-                                <div className="vd-stat-val">⭐ {service.rating || 0}</div>
+                                <div className="vd-stat-val"><StarIcon aria-hidden="true" /> {service.rating || 0}</div>
                                 <div className="vd-stat-lbl">Rating</div>
                             </div>
                             <div className="vd-stat">
@@ -224,14 +233,14 @@ export default function VendorDetail() {
                             onClick={() => setShowBookingModal(true)}
                             style={{ background: '#8b5cf6', border: 'none', width: '100%', justifyContent: 'center', padding: '13px', cursor: 'pointer' }}
                         >
-                            📩 Request Booking
+                            <EventAvailableIcon aria-hidden="true" style={{ fontSize: 18 }} /> Request Booking
                         </button>
                         <button 
                             className="btn-outline" 
                             onClick={() => setShowReviewModal(true)}
                             style={{ width: '100%', justifyContent: 'center', marginTop: '10px', cursor: 'pointer' }}
                         >
-                            💬 Send Message
+                            <MessageIcon aria-hidden="true" style={{ fontSize: 18 }} /> Send Message
                         </button>
                     </div>
                 </div>
@@ -311,11 +320,11 @@ export default function VendorDetail() {
                                     onChange={(e) => setReviewRating(e.target.value)}
                                     className="vd-select"
                                 >
-                                    <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
-                                    <option value="4">⭐⭐⭐⭐ (4/5)</option>
-                                    <option value="3">⭐⭐⭐ (3/5)</option>
-                                    <option value="2">⭐⭐ (2/5)</option>
-                                    <option value="1">⭐ (1/5)</option>
+                                    <option value="5">5 stars (5/5)</option>
+                                    <option value="4">4 stars (4/5)</option>
+                                    <option value="3">3 stars (3/5)</option>
+                                    <option value="2">2 stars (2/5)</option>
+                                    <option value="1">1 star (1/5)</option>
                                 </select>
                             </div>
                             <div className="vd-form-group">

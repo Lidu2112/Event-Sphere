@@ -3,6 +3,16 @@ import { apiUrl, imageUrl } from '../api/config';
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import { t } from '../data/translations';
+import SearchIcon from '@mui/icons-material/Search';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import PlaceIcon from '@mui/icons-material/Place';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FestivalIcon from '@mui/icons-material/Festival';
+import WifiOffIcon from '@mui/icons-material/WifiOff';
+import Loader from './Loader/Loader';
 import './FeaturedEvents.css';
 
 const CATEGORY_COLORS = {
@@ -16,6 +26,7 @@ export default function FeaturedEvents() {
     const { lang } = useLang();
     const [allEvents, setAllEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // Search fields
     const [searchName, setSearchName] = useState('');
@@ -24,8 +35,15 @@ export default function FeaturedEvents() {
     const [searchDate, setSearchDate] = useState('');
 
     useEffect(() => {
+        setLoading(true);
+        setError(null);
         fetch(apiUrl('/api/events'))
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Failed to fetch events');
+                }
+                return res.json();
+            })
             .then(data => {
                 const dbEvents = (data.events || [])
                     .filter(e => e.source === 'db')
@@ -40,9 +58,14 @@ export default function FeaturedEvents() {
                         categoryColor: e.badgeColor || CATEGORY_COLORS[e.badge] || CATEGORY_COLORS[e.category] || '#6366f1',
                     }));
                 setAllEvents(dbEvents);
+                setLoading(false);
             })
-            .catch(() => setAllEvents([]))
-            .finally(() => setLoading(false));
+            .catch((err) => {
+                console.error(err);
+                setError('Connection error. Please check your internet connection.');
+                setAllEvents([]);
+                setLoading(false);
+            });
     }, []);
 
     // Derive unique categories for dropdown
@@ -76,7 +99,7 @@ export default function FeaturedEvents() {
                     {/* Embedded Search bar */}
                     <div className="featured-search-bar">
                         <div className="fsb-field">
-                            <i className="fas fa-search" style={{ fontSize: '16px' }}></i>
+                            <SearchIcon aria-hidden="true" style={{ fontSize: 16 }} />
                             <input
                                 type="text"
                                 placeholder={t(lang, 'featured_search_name')}
@@ -87,14 +110,14 @@ export default function FeaturedEvents() {
 
                         <div className="fsb-divider" />
                         <div className="fsb-field">
-                            <i className="fas fa-tag" style={{ fontSize: '14px' }}></i>
+                            {/* <LocalOfferIcon aria-hidden="true" style={{ fontSize: 14 }} /> */}
                             <select value={searchCategory} onChange={e => setSearchCategory(e.target.value)}>
                                 {categories.map(c => <option key={c} value={c === 'All' ? '' : c}>{c}</option>)}
                             </select>
                         </div>
                         <div className="fsb-divider" />
                         <div className="fsb-field">
-                            <i className="fas fa-map-marker-alt" style={{ fontSize: '14px' }}></i>
+                            {/* <PlaceIcon aria-hidden="true" style={{ fontSize: 14 }} /> */}
                             <input
                                 type="text"
                                 placeholder={t(lang, 'featured_search_city')}
@@ -104,7 +127,7 @@ export default function FeaturedEvents() {
                         </div>
                         <div className="fsb-divider" />
                         <div className="fsb-field">
-                            <i className="fas fa-calendar-alt" style={{ fontSize: '14px' }}></i>
+                            {/* <CalendarTodayIcon aria-hidden="true" style={{ fontSize: 14 }} /> */}
                             <input
                                 type="date"
                                 value={searchDate}
@@ -117,17 +140,24 @@ export default function FeaturedEvents() {
                     </div>
 
                     <Link to="/events" className="featured-view-all">
-                        {t(lang, 'featured_view_all')}
+                        {t(lang, 'featured_view_all')} <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />
                     </Link>
                 </div>
 
                 {loading ? (
-                    <div style={{ padding: '40px 0', textAlign: 'center', color: '#64748b', fontSize: 14 }}>
-                        {t(lang, 'featured_loading')}
+                    <Loader />
+                ) : error ? (
+                    <div style={{ padding: '60px 0', textAlign: 'center', color: '#64748b' }}>
+                        <div style={{ marginBottom: 12 }}>
+                            <WifiOffIcon aria-hidden="true" style={{ fontSize: 40, color: '#ef4444' }} />
+                        </div>
+                        <p style={{ margin: 0, fontSize: 15, fontWeight: 500, color: '#1e293b' }}>
+                            {error}
+                        </p>
                     </div>
                 ) : filtered.length === 0 ? (
                     <div style={{ padding: '60px 0', textAlign: 'center', color: '#64748b' }}>
-                        <div style={{ fontSize: 40, marginBottom: 12 }}>🎪</div>
+                        <div style={{ marginBottom: 12 }}><FestivalIcon aria-hidden="true" style={{ fontSize: 40 }} /></div>
                         <p style={{ margin: 0, fontSize: 15 }}>
                             {allEvents.length === 0 ? t(lang, 'featured_no_events') : t(lang, 'featured_no_match')}
                         </p>
@@ -155,32 +185,35 @@ export default function FeaturedEvents() {
                                             className="featured-card-category"
                                             style={{ background: event.categoryColor }}
                                         >
-                                            <i className="fas fa-music" style={{ fontSize: '10px' }}></i> {event.category}
+                                            {(event.category === 'Concert' || event.category === 'Music') && (
+                                                <MusicNoteIcon aria-hidden="true" style={{ fontSize: 10 }} />
+                                            )} 
+                                            {event.category}
                                         </span>
                                         <button 
                                             className="featured-card-heart" 
-                                            onClick={(e) => { e.preventDefault(); /* Favorite toggle handler if needed */ }}
+                                            onClick={(e) => { e.preventDefault(); }}
                                             aria-label="Save Event"
                                         >
-                                            <i className="far fa-heart"></i>
+                                            <FavoriteBorderIcon aria-hidden="true" />
                                         </button>
                                     </div>
                                     <div className="featured-card-content">
                                         <h3 className="featured-card-title">{event.title}</h3>
                                         <div className="featured-card-details">
                                             <div className="featured-card-location">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <PlaceIcon aria-hidden="true" />
                                                 <span>{event.location}</span>
                                             </div>
                                             <div className="featured-card-date">
-                                                <i className="far fa-calendar-alt"></i>
+                                                <CalendarTodayIcon aria-hidden="true" />
                                                 <span>{event.date}</span>
                                             </div>
                                         </div>
                                         <div className="featured-card-footer">
                                             <span className="featured-card-price">{event.price}</span>
                                             <span className="featured-card-btn">
-                                                Get Ticket →
+                                                Get Ticket <ArrowForwardIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle' }} />
                                             </span>
                                         </div>
                                     </div>

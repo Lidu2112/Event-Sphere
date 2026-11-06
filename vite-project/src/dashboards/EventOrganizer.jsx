@@ -1,3 +1,4 @@
+import AppIcon from '../components/AppIcon.jsx';
 import Topbar from '../components/Topbar';
 import StatCard from '../components/StatCard';
 import QuickAction from '../components/QuickAction';
@@ -16,7 +17,7 @@ function EventOrganizer() {
             <Topbar
                 title="Event Organizer Dashboard"
                 subtitle="Create and manage your events"
-                icon="🎪"
+                icon="event"
                 color="#0ea5e9"
                 actions={<button className="primary-btn">+ Create Event</button>}
             />
@@ -24,24 +25,24 @@ function EventOrganizer() {
             <div className="dashboard-body">
                 {/* Stats */}
                 <div className="stats-grid">
-                    <StatCard icon="🎪" label="Total Events" value="12" trend={3} trendLabel="this quarter" color="#0ea5e9" />
-                    <StatCard icon="🎟️" label="Tickets Sold" value="3,452" trend={15} trendLabel="this month" color="#f59e0b" />
-                    <StatCard icon="👥" label="Total Attendees" value="2,450" trend={12} color="#10b981" />
-                    <StatCard icon="💰" label="Revenue" value="ETB 229K" trend={25} trendLabel="lifetime" color="#10b981" />
-                    <StatCard icon="👷" label="Staff Members" value="8" trend={2} color="#64748b" />
-                    <StatCard icon="📊" label="Avg Rating" value="4.7" trendLabel="from reviews" color="#f59e0b" />
+                    <StatCard icon="event" label="Total Events" value="12" trend={3} trendLabel="this quarter" color="#0ea5e9" />
+                    <StatCard icon="ticket" label="Tickets Sold" value="3,452" trend={15} trendLabel="this month" color="#f59e0b" />
+                    <StatCard icon="groups" label="Total Attendees" value="2,450" trend={12} color="#10b981" />
+                    <StatCard icon="payments" label="Revenue" value="ETB 229K" trend={25} trendLabel="lifetime" color="#10b981" />
+                    <StatCard icon="engineering" label="Staff Members" value="8" trend={2} color="#64748b" />
+                    <StatCard icon="analytics" label="Avg Rating" value="4.7" trendLabel="from reviews" color="#f59e0b" />
                 </div>
 
                 {/* Quick Actions */}
                 <div className="section-card">
                     <h3 className="section-title">Quick Actions</h3>
                     <div className="quick-actions-row">
-                        <QuickAction icon="➕" label="Create Event" color="#0ea5e9" />
-                        <QuickAction icon="🎟️" label="Sell Tickets" color="#f59e0b" />
-                        <QuickAction icon="👥" label="Manage Attendees" color="#10b981" />
-                        <QuickAction icon="👷" label="Invite Staff" color="#64748b" />
-                        <QuickAction icon="📊" label="View Analytics" color="#6366f1" />
-                        <QuickAction icon="🏪" label="Manage Vendors" color="#ec4899" />
+                        <QuickAction icon="add" label="Create Event" color="#0ea5e9" />
+                        <QuickAction icon="ticket" label="Sell Tickets" color="#f59e0b" />
+                        <QuickAction icon="groups" label="Manage Attendees" color="#10b981" />
+                        <QuickAction icon="engineering" label="Invite Staff" color="#64748b" />
+                        <QuickAction icon="analytics" label="View Analytics" color="#6366f1" />
+                        <QuickAction icon="store" label="Manage Vendors" color="#ec4899" />
                     </div>
                 </div>
 
@@ -71,8 +72,8 @@ function EventOrganizer() {
                                     <td className="text-bold" style={{ color: '#10b981' }}>{e.revenue}</td>
                                     <td><span className={`status-badge ${e.status}`}>{e.status}</span></td>
                                     <td>
-                                        <button className="action-icon-btn">✏️</button>
-                                        <button className="action-icon-btn">📊</button>
+                                        <button className="action-icon-btn" aria-label="Edit event"><AppIcon name="edit" /></button>
+                                        <button className="action-icon-btn" aria-label="View event analytics"><AppIcon name="analytics" /></button>
                                     </td>
                                 </tr>
                             ))}

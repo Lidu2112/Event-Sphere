@@ -31,18 +31,18 @@ export default function StaffHome() {
             <PageHeader title="Event Staff Dashboard" subtitle="Manage check-ins and monitor event entrances" />
 
             <div className="stats-grid">
-                <StatCard icon="🎟️" label="Total Tickets" value={loading ? '...' : stats.totalTickets} color="#0ea5e9" />
-                <StatCard icon="✅" label="Checked In" value={loading ? '...' : stats.checkedInCount} color="#10b981" />
-                <StatCard icon="⏳" label="Pending" value={loading ? '...' : stats.pendingCount} color="#f59e0b" />
-                <StatCard icon="🚪" label="Active Entrances" value={loading ? '...' : activeEntrances} color="#6366f1" />
+                <StatCard icon="ticket" label="Total Tickets" value={loading ? '...' : stats.totalTickets} color="#0ea5e9" />
+                <StatCard icon="checkCircle" label="Checked In" value={loading ? '...' : stats.checkedInCount} color="#10b981" />
+                <StatCard icon="hourglass" label="Pending" value={loading ? '...' : stats.pendingCount} color="#f59e0b" />
+                <StatCard icon="door" label="Active Entrances" value={loading ? '...' : activeEntrances} color="#6366f1" />
             </div>
 
             <SectionBox title="Quick Actions">
                 <div className="actions-grid">
-                    <ActionButton icon="📱" label="Scan Tickets" color="#10b981" onClick={() => navigate('/staff/scan')} />
-                    <ActionButton icon="✅" label="Check-in" color="#0ea5e9" onClick={() => navigate('/staff/checkin')} />
-                    <ActionButton icon="📋" label="Attendees" color="#6366f1" onClick={() => navigate('/staff/attendees')} />
-                    <ActionButton icon="🚪" label="Entrances" color="#64748b" onClick={() => navigate('/staff/entrances')} />
+                    <ActionButton icon="phone" label="Scan Tickets" color="#10b981" onClick={() => navigate('/staff/scan')} />
+                    <ActionButton icon="checkCircle" label="Check-in" color="#0ea5e9" onClick={() => navigate('/staff/checkin')} />
+                    <ActionButton icon="list" label="Attendees" color="#6366f1" onClick={() => navigate('/staff/attendees')} />
+                    <ActionButton icon="door" label="Entrances" color="#64748b" onClick={() => navigate('/staff/entrances')} />
                 </div>
             </SectionBox>
 
