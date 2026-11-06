@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
 import { apiUrl } from '../api/config';
 import { useSearchParams, Link } from 'react-router-dom';
+import CancelIcon from '@mui/icons-material/Cancel';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CelebrationIcon from '@mui/icons-material/Celebration';
+import EventIcon from '@mui/icons-material/Event';
 import PlaceIcon from '@mui/icons-material/Place';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DownloadIcon from '@mui/icons-material/Download';
+import HomeIcon from '@mui/icons-material/Home';
 import './PaymentSuccess.css';
 
 export default function PaymentSuccess() {
@@ -64,6 +70,7 @@ export default function PaymentSuccess() {
     if (state === 'failed') return (
         <div className="ps-page">
             <div className="ps-card ps-failed">
+                <div className="ps-icon"><CancelIcon aria-hidden="true" /></div>
                 <h2>Payment Failed</h2>
                 <p>Your payment could not be processed. No charge has been made.</p>
                 <Link to="/events" className="ps-btn-outline">Browse Events</Link>
@@ -74,6 +81,7 @@ export default function PaymentSuccess() {
     if (state === 'error') return (
         <div className="ps-page">
             <div className="ps-card ps-failed">
+                <div className="ps-icon"><WarningAmberIcon aria-hidden="true" /></div>
                 <h2>Something went wrong</h2>
                 <p>We couldn't verify your payment. If you were charged, please contact support.</p>
                 <Link to="/" className="ps-btn-outline">Go Home</Link>
@@ -93,13 +101,8 @@ export default function PaymentSuccess() {
                     <div className="ps-ticket-header">
                         <div className="ps-ticket-event">{ticket.eventTitle}</div>
                         <div className="ps-ticket-info">
-                            {ticket.eventDate && <span>{ticket.eventDate}</span>}
-                            {ticket.eventVenue && (
-                                <span>
-                                    <PlaceIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle', marginRight: '4px' }} />
-                                    {ticket.eventVenue}
-                                </span>
-                            )}
+                            {ticket.eventDate && <span><EventIcon aria-hidden="true" style={{ fontSize: 16 }} /> {ticket.eventDate}</span>}
+                            {ticket.eventVenue && <span><PlaceIcon aria-hidden="true" style={{ fontSize: 16 }} /> {ticket.eventVenue}</span>}
                         </div>
                     </div>
 
@@ -114,6 +117,7 @@ export default function PaymentSuccess() {
                     {/* Details */}
                     <div className="ps-ticket-details">
                         <div className="ps-detail-row">
+
                             <span>Ticket ID</span>
                             <strong>{ticket.ticketCode}</strong>
                         </div>
@@ -147,7 +151,7 @@ export default function PaymentSuccess() {
                         </div>
                         <div className="ps-detail-row">
                             <span>Status</span>
-                            <strong style={{ color: '#16a34a' }}>Paid</strong>
+                            <strong style={{ color: '#16a34a' }}> Paid</strong>
                         </div>
                     </div>
 
@@ -158,9 +162,9 @@ export default function PaymentSuccess() {
 
                 <div className="ps-actions">
                     <button className="ps-btn-primary" onClick={downloadQR}>
-                        Download Ticket
+                         Download Ticket
                     </button>
-                    <Link to="/dashboard" className="ps-btn-dashboard">Go to Dashboard</Link>
+                    <Link to="/dashboard" className="ps-btn-dashboard"> Go to Dashboard</Link>
                     <Link to="/events" className="ps-btn-outline">Browse More Events</Link>
                 </div>
             </div>
