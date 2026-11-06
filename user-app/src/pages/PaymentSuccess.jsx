@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { apiUrl } from '../api/config';
 import { useSearchParams, Link } from 'react-router-dom';
 import CelebrationIcon from '@mui/icons-material/Celebration';
+import PlaceIcon from '@mui/icons-material/Place';
 import './PaymentSuccess.css';
 
 export default function PaymentSuccess() {
@@ -93,7 +94,12 @@ export default function PaymentSuccess() {
                         <div className="ps-ticket-event">{ticket.eventTitle}</div>
                         <div className="ps-ticket-info">
                             {ticket.eventDate && <span>{ticket.eventDate}</span>}
-                            {ticket.eventVenue && <span>{ticket.eventVenue}</span>}
+                            {ticket.eventVenue && (
+                                <span>
+                                    <PlaceIcon aria-hidden="true" style={{ fontSize: 16, verticalAlign: 'middle', marginRight: '4px' }} />
+                                    {ticket.eventVenue}
+                                </span>
+                            )}
                         </div>
                     </div>
 

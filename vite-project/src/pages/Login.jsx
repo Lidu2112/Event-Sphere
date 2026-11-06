@@ -8,20 +8,15 @@ const ROLE_ROUTES = {
     'platform-admin': '/admin',
     'event-organizer': '/organizer',
     'event-staff': '/staff',
+    'attendee': '/attendee',
     'vendor': '/vendor',
-};
-
-const ROLE_LABELS = {
-    'platform-admin': 'Platform Administrator',
-    'event-organizer': 'Event Organizer',
-    'event-staff': 'Event Staff',
-    'vendor': 'Vendor',
 };
 
 const ROLE_COLORS = {
     'platform-admin': '#6366f1',
     'event-organizer': '#0ea5e9',
     'event-staff': '#10b981',
+    'attendee': '#f59e0b',
     'vendor': '#ec4899',
 };
 

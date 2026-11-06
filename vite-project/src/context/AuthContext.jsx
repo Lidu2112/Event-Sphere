@@ -21,6 +21,7 @@ export const DEMO_ACCOUNTS = [
     { email: 'admin@eventsphere.com', phone: '+251911000001', password: 'Admin@123', role: 'platform-admin', name: 'Abebe Girma', avatar: "security" },
     { email: 'organizer@eventsphere.com', phone: '+251911000002', password: 'Org@123', role: 'event-organizer', name: 'Selam Tadesse', avatar: "event" },
     { email: 'staff@eventsphere.com', phone: '+251911000003', password: 'Staff@123', role: 'event-staff', name: 'Dawit Bekele', avatar: "engineering" },
+    { email: 'attendee@eventsphere.com', phone: '+251911000004', password: 'Attend@123', role: 'attendee', name: 'Marta Kebede', avatar: "person" },
     { email: 'vendor@eventsphere.com', phone: '+251911000005', password: 'Vendor@123', role: 'vendor', name: 'Beza Haile', avatar: "store" },
 ];
 
@@ -133,6 +134,12 @@ export function AuthProvider({ children }) {
             saveUser(u);
             return { ok: true, role: mappedRole };
         } catch {
+            const email = typeof payload === 'string' ? payload : payload?.email;
+            const match = DEMO_ACCOUNTS.find(a => a.email === email?.trim().toLowerCase());
+            if (match) {
+                saveUser({ ...match, provider: 'google' });
+                return { ok: true, role: match.role };
+            }
             setError('Unable to connect to server.');
             return { ok: false };
         }

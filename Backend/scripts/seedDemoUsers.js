@@ -5,6 +5,7 @@ const demo = [
   { name: 'Abebe Girma', email: 'admin@eventsphere.com', password: 'Admin@123', role: 'platform-admin' },
   { name: 'Selam Tadesse', email: 'organizer@eventsphere.com', password: 'Org@123', role: 'event-organizer' },
   { name: 'Dawit Bekele', email: 'staff@eventsphere.com', password: 'Staff@123', role: 'event-staff' },
+  { name: 'Marta Kebede', email: 'attendee@eventsphere.com', password: 'Attend@123', role: 'attendee' },
   { name: 'Beza Haile', email: 'vendor@eventsphere.com', password: 'Vendor@123', role: 'vendor' },
 ];
 
