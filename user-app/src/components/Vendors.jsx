@@ -11,7 +11,6 @@ import './Vendors.css';
 
 const API_URL = apiUrl('/api');
 
-// Categories matching reference
 const DEFAULT_CATEGORIES = [
     'All Categories',
     'Photography',
@@ -34,13 +33,11 @@ export default function Vendors() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch services
                 const servicesRes = await fetch(`${API_URL}/vendor/services`);
                 const servicesData = await servicesRes.json();
                 const fetchedServices = servicesData.services || [];
                 setServices(fetchedServices);
 
-                // Dynamically build category list from database items
                 const dbCategories = Array.from(
                     new Set(fetchedServices.map(s => s.category).filter(Boolean))
                 );
@@ -61,7 +58,6 @@ export default function Vendors() {
         fetchData();
     }, []);
 
-    // Filter logic supporting precise and loose matching
     const filteredServices = selectedCategory === 'All Categories'
         ? services
         : services.filter(s => {
@@ -88,8 +84,6 @@ export default function Vendors() {
     return (
         <section className="vd-section" id="vendors">
             <div className="vd-container">
-
-                {/* Header Row ("Popular Vendors" title removed, keeping View All link aligned) */}
                 <div className="vd-header">
                     <div></div>
                     <Link to="/vendors" className="vd-view-all">
@@ -97,7 +91,6 @@ export default function Vendors() {
                     </Link>
                 </div>
 
-                {/* Category Dropdown Filter */}
                 <div className="vd-filter-wrapper">
                     <label htmlFor="vd-category-select" className="vd-filter-label">
                         {t(lang, 'vendors_category')}
@@ -116,7 +109,6 @@ export default function Vendors() {
                     </select>
                 </div>
 
-                {/* Vendor Grid */}
                 {filteredServices.length === 0 ? (
                     <div className="vd-empty-card">
                         <StorefrontIcon aria-hidden="true" style={{ fontSize: 48 }} />
@@ -154,8 +146,6 @@ export default function Vendors() {
 
                                 <div className="vc-info">
                                     <div className="vc-name">{service.name}</div>
-
-                                    {/* Vendor Description */}
                                     <p className="vc-description">
                                         {service.description
                                             ? (service.description.length > 90
@@ -182,7 +172,6 @@ export default function Vendors() {
                         ))}
                     </div>
                 )}
-
             </div>
         </section>
     );

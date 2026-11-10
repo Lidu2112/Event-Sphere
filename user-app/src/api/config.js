@@ -1,4 +1,3 @@
-
 const API_BASE_URL = (
     import.meta.env.VITE_API_BASE_URL ||
     (import.meta.env.PROD
@@ -16,22 +15,26 @@ export function imageUrl(path) {
     if (!path) return "";
 
     let normalizedPath = String(path).trim().replace(/\\/g, "/");
-    const localImageUrl = normalizedPath.match(
-        /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?(\/[^?#]*)?([?#].*)?$/i
-    );
-
-    if (localImageUrl) {
-        normalizedPath = `${localImageUrl[1] || "/"}${localImageUrl[2] || ""}`;
-    } else if (/^(?:https?:)?\/\//i.test(normalizedPath) || /^(?:data|blob):/i.test(normalizedPath)) {
-        return normalizedPath;
+    
+    // Handle full external URLs (Cloudinary, S3, etc.) or Data/Blob URIs
+    if (/^(?:https?:)?\/\//i.test(normalizedPath) || /^(?:data|blob):/i.test(normalizedPath)) {
+        // Strip out local host domain if stored with localhost during dev
+        const localMatch = normalizedPath.match(
+            /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?(\/[^?#]*)?([?#].*)?$/i
+        );
+        if (localMatch) {
+            normalizedPath = `${localMatch[1] || "/"}${localMatch[2] || ""}`;
+        } else {
+            return normalizedPath;
+        }
     }
 
+    // Ensure relative paths correctly point to backend uploads or routes
     const uploadsPath = normalizedPath.match(/(?:^|\/)uploads\/(.+)$/i);
-    if (!uploadsPath) return apiUrl(normalizedPath);
+    if (uploadsPath) {
+        return apiUrl(`/uploads/${uploadsPath[1]}`);
+    }
 
-    const uploadPath = `/uploads/${uploadsPath[1]}`;
-    const eventBanner = uploadsPath[1].match(/^banner_[^/]+$/i);
-    if (eventBanner) return `/images/events/${eventBanner[0]}`;
-
-    return apiUrl(uploadPath);
+    // If it's already a full relative path starting with / or api
+    return apiUrl(normalizedPath);
 }

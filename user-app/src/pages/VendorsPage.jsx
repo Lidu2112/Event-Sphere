@@ -35,7 +35,6 @@ export default function VendorsPage() {
 
     return (
         <div className="vendors-page-wrapper">
-            {/* Hero Section matching Image 1 style (Compact full-width banner with search bar) */}
             <div 
                 className="page-hero vp-hero"
                 style={{
@@ -50,7 +49,6 @@ export default function VendorsPage() {
                         <p>{t(lang, 'vp_subtitle') || 'Find the best service providers for your events'}</p>
                     </div>
 
-                    {/* Integrated Search Bar in Hero */}
                     <div className="vp-hero-search-box">
                         <SearchIcon />
                         <input
@@ -65,7 +63,6 @@ export default function VendorsPage() {
             </div>
 
             <div className="page-body">
-                {/* Category Filter Pills Bar */}
                 <div className="vp-pills">
                     {cats.map(c => (
                         <button 
@@ -122,17 +119,6 @@ export default function VendorsPage() {
                         ))}
                     </div>
                 )}
-
-                {/* Bottom Call-To-Action Banner matching Image 1 */}
-                {/* <div className="vp-cta-banner">
-                    <div className="vp-cta-content">
-                        <h2>Become a Vendor on EventSphere</h2>
-                        <p>Showcase your services and grow your business with us.</p>
-                    </div>
-                    <div className="vp-cta-actions">
-                        <Link to="/register-vendor" className="vp-btn-primary">Register as Vendor →</Link>
-                    </div>
-                </div> */}
             </div>
         </div>
     );
