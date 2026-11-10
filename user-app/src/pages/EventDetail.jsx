@@ -102,7 +102,6 @@ function PaymentModal({ event, selection, user, onClose, onBack }) {
             if (data.success && data.checkout_url) {
                 window.location.href = data.checkout_url;
             } else {
-                // Show the real Chapa error detail if available
                 const detail = data.detail
                     ? (typeof data.detail === 'object'
                         ? (data.detail.message || JSON.stringify(data.detail))
@@ -184,14 +183,12 @@ export default function EventDetail() {
         setLoading(true);
         const numId = Number(id);
 
-        // Integer IDs 1-6 → use local static data (no API call needed)
         if (Number.isInteger(numId) && numId >= 1 && numId <= 6) {
             setEvent(STATIC_EVENTS?.[numId] || null);
             setLoading(false);
             return;
         }
 
-        // All other IDs (MongoDB ObjectIds, static 's1'-'s6') → fetch from API
         fetch(apiUrl(`/api/events/${id}`))
             .then(r => r.json())
             .then(data => {
@@ -204,6 +201,15 @@ export default function EventDetail() {
             .catch(() => setEvent(null))
             .finally(() => setLoading(false));
     }, [id]);
+
+    // Secure Buy Button Handler
+    const handleBuyClick = () => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
+        setStep('tickets');
+    };
 
     if (loading) return (
         <div className="event-details-loading">
@@ -297,7 +303,7 @@ export default function EventDetail() {
                             )}
                         </div>
 
-                        <button className="book-ticket-btn" onClick={() => setStep('tickets')}>
+                        <button className="book-ticket-btn" onClick={handleBuyClick}>
                             Buy Ticket
                         </button>
                     </div>

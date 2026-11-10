@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Page.css';
 import './VendorDetail.css';
 
@@ -14,6 +15,9 @@ const API_URL = apiUrl('/api');
 
 export default function VendorDetail() {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { user } = useAuth();
+
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -51,6 +55,16 @@ export default function VendorDetail() {
             })
             .finally(() => setLoading(false));
     }, [id]);
+
+    // Secure Request Booking Click Handler
+    const handleBookingClick = () => {
+        const token = localStorage.getItem('token');
+        if (!user && !token) {
+            navigate('/login');
+            return;
+        }
+        setShowBookingModal(true);
+    };
 
     // Handle Request Booking Submission
     const handleRequestBookingSubmit = async (e) => {
@@ -230,7 +244,7 @@ export default function VendorDetail() {
 
                         <button 
                             className="btn-purple" 
-                            onClick={() => setShowBookingModal(true)}
+                            onClick={handleBookingClick}
                             style={{ background: '#8b5cf6', border: 'none', width: '100%', justifyContent: 'center', padding: '13px', cursor: 'pointer' }}
                         >
                             <EventAvailableIcon aria-hidden="true" style={{ fontSize: 18 }} /> Request Booking
