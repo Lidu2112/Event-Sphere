@@ -7,7 +7,9 @@ const cors = require("cors");
 const compression = require("compression");
 const helmet = require("helmet");
 const path = require("path");
-const uploadDirectory = require("./utils/uploadDirectory");
+const uploadDirectory = path.resolve(
+    process.env.UPLOADS_DIR || path.join(__dirname, "uploads")
+);
 
 const { initializeDatabase } = require("./config/database");
 
