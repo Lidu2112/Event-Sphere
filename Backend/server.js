@@ -7,6 +7,7 @@ const cors = require("cors");
 const compression = require("compression");
 const helmet = require("helmet");
 const path = require("path");
+const uploadDirectory = require("./utils/uploadDirectory");
 
 const { initializeDatabase } = require("./config/database");
 
@@ -116,7 +117,7 @@ app.use(
 app.use(
     "/uploads",
     express.static(
-        path.join(__dirname, "uploads"),
+        uploadDirectory,
         {
             maxAge: "7d",
             etag: true

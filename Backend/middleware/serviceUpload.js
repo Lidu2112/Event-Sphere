@@ -3,8 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const uploadDirectory = require('../utils/uploadDirectory');
 
-const uploadDir = 'uploads/services';
+const uploadDir = path.join(uploadDirectory, 'services');
 
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
